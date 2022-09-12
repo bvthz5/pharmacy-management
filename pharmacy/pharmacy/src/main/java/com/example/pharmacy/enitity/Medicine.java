@@ -42,6 +42,8 @@ private String brand;
 
 @ManyToOne(optional = false, fetch = FetchType.LAZY)
 private User user;
+@ManyToOne(optional = false, fetch = FetchType.LAZY)
+private Company company;
 
 
 public Medicine() {
@@ -51,8 +53,9 @@ public Medicine(Integer medicineId) {
     this.medicineId=medicineId;
 }
 
-public Medicine(MedicineForm form,Integer userId) {
+public Medicine(MedicineForm form,Integer userId, Integer companyId) {
     this.user=new User(userId);
+    this.company= new Company(companyId);
     this.medicinename=form.getMedicinename();
     this.category=form.getCategory();
     this.brand=form.getBrand();
@@ -71,7 +74,6 @@ public Medicine(MedicineForm form,Integer userId) {
 
 
 
-
 public Medicine update(MedicineForm form) {
     this.medicinename=form.getMedicinename();
     this.category=form.getCategory();
@@ -85,6 +87,13 @@ public Medicine update(MedicineForm form) {
     // this.interest_rate=form.getInterestRate();
     this.expectedSale=form.getExpectedSale();
     return this;
+}
+
+public Company getCompany() {
+    return company;
+}
+public void setCompany(Company company) {
+    this.company = company;
 }
 public Integer getMedicineId() {
     return medicineId;
@@ -152,6 +161,7 @@ public User getUser() {
 public void setUser(User user) {
     this.user = user;
 }
+
 
     
 }
