@@ -53,9 +53,9 @@ public Medicine(Integer medicineId) {
     this.medicineId=medicineId;
 }
 
-public Medicine(MedicineForm form,Integer userId, Integer companyId) {
+public Medicine(MedicineForm form,Integer userId) {
     this.user=new User(userId);
-    this.company= new Company(companyId);
+    this.company=new Company( form.getCompanyId());
     this.medicinename=form.getMedicinename();
     this.category=form.getCategory();
     this.brand=form.getBrand();

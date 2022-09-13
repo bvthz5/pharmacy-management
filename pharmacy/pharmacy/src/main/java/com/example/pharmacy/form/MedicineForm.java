@@ -15,6 +15,8 @@ public class MedicineForm {
     private Float costPrice;
     // private String interest_rate;
     private String expectedSale;
+    private Integer companyId;
+    
     public String getMedicinename() {
         return medicinename;
     }
@@ -66,6 +68,12 @@ public class MedicineForm {
     }
     public void setCostPrice(Float costPrice) {
         this.costPrice = costPrice;
+    }
+    public Integer getCompanyId() {
+        return companyId;
+    }
+    public void setCompanyId(Integer companyId) {
+        this.companyId = companyId;
     }
    
   

@@ -34,7 +34,7 @@ public class MedicineServiceImpl implements MedicineService {
     @Override
     public MedicineDetailView add(MedicineForm form){
     //System.out.println("jkgsdjgjksdb->"+form.getMedicinename());
-        return new MedicineDetailView(medicineRepository.save(new Medicine(form,SecurityUtil.getCurrentUserId(),1)));
+        return new MedicineDetailView(medicineRepository.save(new Medicine(form,SecurityUtil.getCurrentUserId())));
     }
 
     @Override
