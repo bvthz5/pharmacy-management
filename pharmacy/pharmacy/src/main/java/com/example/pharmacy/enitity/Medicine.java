@@ -1,7 +1,7 @@
 package com.example.pharmacy.enitity;
 
 import java.util.Date;
-
+import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -42,6 +42,10 @@ private String brand;
 
 // @ManyToOne(optional = false, fetch = FetchType.LAZY)
 // private User user;
+
+@ManyToOne( cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+private Sales sales;
+
 @ManyToOne(optional = false, fetch = FetchType.LAZY)
 private Company company;
 

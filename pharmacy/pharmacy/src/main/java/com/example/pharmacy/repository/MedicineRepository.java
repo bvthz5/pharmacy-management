@@ -25,7 +25,10 @@ public interface MedicineRepository extends Repository<Medicine, Integer>{
 	@Transactional
 	@Query(value = "update medicine set status=0 where medicine_id=:medicineId",nativeQuery = true)
 	public void deleteMedicine(@Param("medicineId")Integer medicineId);
-
+    @Modifying
+   	@Transactional
+   	@Query(value = "update medicine set quantity=quantity-:quantity where medicine_id=:medicineId and quantity>=:quantity",nativeQuery = true)
+   	public Integer editStock(Integer quantity,Integer medicineId);
      void deleteBymedicineId(Integer medicineId);
 
     // sCollection<MedicineListView> findByUserUserId(Integer userId);
