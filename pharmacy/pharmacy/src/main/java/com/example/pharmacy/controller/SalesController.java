@@ -24,7 +24,7 @@ import com.example.pharmacy.view.SalesListView;
 @RequestMapping("/sales")
 public class SalesController {
 
-    // @Autowired
+     @Autowired
     SalesService salesService;
 
     @GetMapping

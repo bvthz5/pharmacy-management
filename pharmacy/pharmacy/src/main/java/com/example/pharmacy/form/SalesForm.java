@@ -5,7 +5,7 @@ import java.util.Date;
 public class SalesForm {
     
     private Integer salesQuantity;
-    // private Date salesDate;
+    private Date salesDate;
     private Float totalAmount;
     
     public Integer getSalesQuantity() {
@@ -14,12 +14,12 @@ public class SalesForm {
     public void setSalesQuantity(Integer salesQuantity) {
         this.salesQuantity = salesQuantity;
     }
-    // public Date getSalesDate() {
-    //     return salesDate;
-    // }
-    // public void setSalesDate(Date salesDate) {
-    //     this.salesDate = salesDate;
-    // }
+    public Date getSalesDate() {
+        return salesDate;
+    }
+    public void setSalesDate(Date salesDate) {
+        this.salesDate = salesDate;
+    }
     public Float getTotalAmount() {
         return totalAmount;
     }

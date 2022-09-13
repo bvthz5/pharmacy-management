@@ -36,7 +36,7 @@ public class Sales {
     private byte status;
     private Float totalAmount;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn
     private Medicine medicine;
 
@@ -117,12 +117,14 @@ public class Sales {
         this.company = company;
     }
 
-    public Sales(SalesForm form,Integer medicineId) {
-                // this.user=new User(userId);
+    public Sales(SalesForm form,Integer medicineId,Integer userId,Integer companyId) {
+                 this.user=new User(userId);
                 this.medicine=new Medicine(medicineId);
-                // this.company=new Company(companyId);
+                 this.company=new Company(companyId);
         this.salesQuantity = form.getSalesQuantity();
-        this.salesDate = form.getSalesDate();
+        // this.salesDate = form.getSalesDate();
+        // this.totalAmount = form.getTotalAmount();
+        this.salesDate = new Date();
         this.totalAmount = form.getTotalAmount();
         // this.medicine = medicine;
         // this.user = user;
