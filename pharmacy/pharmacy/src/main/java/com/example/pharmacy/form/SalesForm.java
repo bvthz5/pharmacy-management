@@ -4,9 +4,23 @@ import java.util.Date;
 
 public class SalesForm {
     
-    private Integer salesQuantity;
+    public int getCompanyId() {
+		return companyId;
+	}
+	public void setCompanyId(Integer companyId) {
+		this.companyId = companyId;
+	}
+	public int getMedicineId() {
+		return medicineId;
+	}
+	public void setMedicineId(Integer medicineId) {
+		this.medicineId = medicineId;
+	}
+	private Integer salesQuantity;
     private Date salesDate;
     private Float totalAmount;
+    private  Integer companyId;
+    private Integer medicineId;
     
     public Integer getSalesQuantity() {
         return salesQuantity;

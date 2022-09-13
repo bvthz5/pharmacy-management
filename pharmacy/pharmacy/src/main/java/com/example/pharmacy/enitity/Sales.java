@@ -117,10 +117,10 @@ public class Sales {
         this.company = company;
     }
 
-    public Sales(SalesForm form,Integer medicineId,Integer userId,Integer companyId) {
+    public Sales(SalesForm form,Integer userId) {
                  this.user=new User(userId);
-                this.medicine=new Medicine(medicineId);
-                 this.company=new Company(companyId);
+                this.medicine=new Medicine(form.getMedicineId());
+                 this.company=new Company(form.getCompanyId());
         this.salesQuantity = form.getSalesQuantity();
         // this.salesDate = form.getSalesDate();
         // this.totalAmount = form.getTotalAmount();
