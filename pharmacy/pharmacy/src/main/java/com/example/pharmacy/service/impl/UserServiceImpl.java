@@ -12,7 +12,10 @@ import com.example.pharmacy.exception.BadRequestException;
 import com.example.pharmacy.form.LoginForm;
 import com.example.pharmacy.repository.UserRepository;
 import com.example.pharmacy.security.config.SecurityConfig;
+import com.example.pharmacy.security.util.InvalidTokenException;
+import com.example.pharmacy.security.util.TokenExpiredException;
 import com.example.pharmacy.security.util.TokenGenerator;
+import com.example.pharmacy.security.util.TokenGenerator.Status;
 import com.example.pharmacy.security.util.TokenGenerator.Token;
 import com.example.pharmacy.service.UserService;
 import com.example.pharmacy.view.LoginView;
@@ -44,7 +47,36 @@ public class UserServiceImpl implements UserService{
         Token refreshToken = tokenGenerator.create(PURPOSE_REFRESH_TOKEN, id + user.getPassword(), securityConfig.getRefreshTokenExpiry());
         return new LoginView(user, accessToken, refreshToken);
     }
+    @Override
+    public LoginView refresh(String refreshToken) throws BadRequestException {
+        Status status;
+        try {
+            status = tokenGenerator.verify(PURPOSE_REFRESH_TOKEN, refreshToken);
+        } catch (InvalidTokenException e) {
+            throw new BadRequestException("Invalid token", e);
+        } catch (TokenExpiredException e) {
+            throw new BadRequestException("Token expired", e);
+        }
 
+        int userId;
+        try {
+            userId = Integer.parseInt(status.data.substring(0, 10));
+        } catch (NumberFormatException e) {
+            throw new BadRequestException("Invalid token", e);
+        }
+
+        String password = status.data.substring(10);
+
+        User user = userRepository.findByUserIdAndPassword(userId, password).orElseThrow(UserServiceImpl::badRequestException);
+
+        String id = String.format("%010d", user.getUserId());
+        Token accessToken = tokenGenerator.create(PURPOSE_ACCESS_TOKEN, id, securityConfig.getAccessTokenExpiry());
+        return new LoginView(
+                user,
+                new LoginView.TokenView(accessToken.value, accessToken.expiry),
+                new LoginView.TokenView(refreshToken, status.expiry)
+        );
+    }
     private static BadRequestException badRequestException() {
         return new BadRequestException("Invalid credentials");
     }
