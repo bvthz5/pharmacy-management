@@ -22,17 +22,17 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public Collection<CompanyListView> list(){
-        return companyRepository.findByUserUserIdAndStatus(SecurityUtil.getCurrentUserId(),Company.Status.ACTIVE.value);
+        return companyRepository.findByStatus(Company.Status.ACTIVE.value);
     }
 
     @Override
     public CompanyDetailView add(CompanyForm form){
-        return new CompanyDetailView(companyRepository.save(new Company(form, SecurityUtil.getCurrentUserId())));
+        return new CompanyDetailView(companyRepository.save(new Company(form)));
     }
 
     @Override
     public CompanyDetailView get(Integer companyId) throws NotFoundException {
-        return companyRepository.findByCompanyIdAndUserUserIdAndStatus(SecurityUtil.getCurrentUserId(), companyId, Company.Status.ACTIVE.value)
+        return companyRepository.findByCompanyIdAndStatus( companyId, Company.Status.ACTIVE.value)
         .map((company)->{
             return new CompanyDetailView(company);
         }).orElseThrow(NotFoundException::new);
@@ -40,7 +40,7 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public CompanyDetailView update(Integer companyId, CompanyForm form) throws NotFoundException {
-        return companyRepository.findByCompanyIdAndUserUserIdAndStatus(SecurityUtil.getCurrentUserId(), companyId, Company.Status.ACTIVE.value)
+        return companyRepository.findByCompanyIdAndStatus( companyId, Company.Status.ACTIVE.value)
         .map((company) -> {
             return new CompanyDetailView(companyRepository.save(company.update(form)));
         }).orElseThrow(NotFoundException::new);

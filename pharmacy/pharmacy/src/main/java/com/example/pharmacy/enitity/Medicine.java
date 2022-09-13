@@ -36,12 +36,12 @@ private String brand;
  private Integer quantity;
  private Float costPrice;
 //  private String interest_rate;
- private String expectedSale;
+//  private String expectedSale;
 
  private byte status;
 
-@ManyToOne(optional = false, fetch = FetchType.LAZY)
-private User user;
+// @ManyToOne(optional = false, fetch = FetchType.LAZY)
+// private User user;
 @ManyToOne(optional = false, fetch = FetchType.LAZY)
 private Company company;
 
@@ -53,8 +53,8 @@ public Medicine(Integer medicineId) {
     this.medicineId=medicineId;
 }
 
-public Medicine(MedicineForm form,Integer userId) {
-    this.user=new User(userId);
+public Medicine(MedicineForm form) {
+    // this.user=new User(userId);
     this.company=new Company( form.getCompanyId());
     this.medicinename=form.getMedicinename();
     this.category=form.getCategory();
@@ -66,7 +66,7 @@ public Medicine(MedicineForm form,Integer userId) {
     this.quantity=form.getQuantity();
     this.costPrice=form.getCostPrice();
     // this.interest_rate=form.getInterestRate();
-    this.expectedSale=form.getExpectedSale();
+    // this.expectedSale=form.getExpectedSale();
  
     this.status = Status.ACTIVE.value;
     
@@ -85,7 +85,7 @@ public Medicine update(MedicineForm form) {
     this.quantity=form.getQuantity();
     this.costPrice=form.getCostPrice();
     // this.interest_rate=form.getInterestRate();
-    this.expectedSale=form.getExpectedSale();
+    // this.expectedSale=form.getExpectedSale();
     return this;
 }
 
@@ -143,24 +143,24 @@ public Float getCostPrice() {
 public void setCostPrice(Float costPrice) {
     this.costPrice = costPrice;
 }
-public String getExpectedSale() {
-    return expectedSale;
-}
-public void setExpectedSale(String expectedSale) {
-    this.expectedSale = expectedSale;
-}
+// public String getExpectedSale() {
+//     return expectedSale;
+// }
+// public void setExpectedSale(String expectedSale) {
+//     this.expectedSale = expectedSale;
+// }
 public byte getStatus() {
     return status;
 }
 public void setStatus(byte status) {
     this.status = status;
 }
-public User getUser() {
-    return user;
-}
-public void setUser(User user) {
-    this.user = user;
-}
+// public User getUser() {
+//     return user;
+// }
+// public void setUser(User user) {
+//     this.user = user;
+// }
 
 
     

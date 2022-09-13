@@ -15,8 +15,8 @@ public class MedicineDetailView extends MedicineListView{
 				// medicine.getDosage(),
 				// medicine.getRegDate(),
 				medicine.getQuantity(),
-				medicine.getCostPrice(),
-				medicine.getExpectedSale()
+				medicine.getCostPrice()
+				// medicine.getExpectedSale()
 
 
 				

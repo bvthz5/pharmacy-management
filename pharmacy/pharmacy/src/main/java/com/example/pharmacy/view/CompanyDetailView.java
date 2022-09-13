@@ -9,8 +9,8 @@ public class CompanyDetailView  extends CompanyListView {
 				company.getName(),
 				company.getAddress(),
 				company.getPhone(), 
-				company.getDescription(),
-				company.getType()
+				company.getDescription()
+				// company.getType()
 				
 				);
 	}

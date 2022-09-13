@@ -28,12 +28,12 @@ public class Company {
      private String address;
      private String phone;
      private String description;
-     private String type;
+    //  private String type;
      private byte status;
 	
 	
-	@ManyToOne(optional = false, fetch = FetchType.LAZY)
-	private User user;
+	// @ManyToOne(optional = false, fetch = FetchType.LAZY)
+	// private User user;
 	
 	public Company() {
 		
@@ -42,13 +42,13 @@ public class Company {
 		this.companyId=companyId;
 	}
 	
-	public Company(CompanyForm form,Integer userId) {
-		this.user=new User(userId);
+	public Company(CompanyForm form) {
+		// this.user=new User(userId);
 		this.name=form.getName();
 		this.address=form.getAddress();
 		this.phone=form.getPhone();
 		this.description=form.getDescription();
-		this.type=form.getType();
+		// this.type=form.getType();
 		
 		this.status = Status.ACTIVE.value;
 		
@@ -92,12 +92,12 @@ public class Company {
 		this.description = description;
 	}
     //
-	public String getType() {
-		return type;
-	}
-	public void setType(String type) {
-		this.type = type;
-	}
+	// public String getType() {
+	// 	return type;
+	// }
+	// public void setType(String type) {
+	// 	this.type = type;
+	// }
     //
 	
 	public byte getStatus() {
@@ -108,18 +108,18 @@ public class Company {
         this.status = status;
     }
 	//
-	public User getUser() {
-		return user;
-	}
-	public void setUser(User user) {
-		this.user = user;
-	}
+	// public User getUser() {
+	// 	return user;
+	// }
+	// public void setUser(User user) {
+	// 	this.user = user;
+	// }
 	public Company update(CompanyForm form) {
 		this.name=form.getName();
 		this.address=form.getAddress();
 		this.phone=form.getPhone();
 		this.description=form.getDescription();
-		this.type=form.getType();
+		// this.type=form.getType();
 		return this;
 	}
 }
