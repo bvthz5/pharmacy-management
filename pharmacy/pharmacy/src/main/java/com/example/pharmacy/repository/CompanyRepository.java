@@ -22,6 +22,7 @@ public interface CompanyRepository extends Repository<Company, Integer> {
     Optional<Company>findByCompanyIdAndStatus(Integer company_id, byte value); 
 
     @Modifying
+    @Transactional
 	@Query(value = "update company set status=0 where company_id=:companyId",nativeQuery = true)
 	public void deleteCompany(@Param("companyId")Integer companyId);
 
