@@ -14,7 +14,7 @@ public class MedicineForm {
     private Integer quantity;
     private Float costPrice;
     // private String interest_rate;
-    private String expectedSale;
+    // private String expectedSale;
     private Integer companyId;
     
     public String getMedicinename() {
@@ -57,12 +57,12 @@ public class MedicineForm {
     public void setExpiryDate(Date expiryDate) {
         this.expiryDate = expiryDate;
     }
-    public String getExpectedSale() {
-        return expectedSale;
-    }
-    public void setExpectedSale(String expectedSale) {
-        this.expectedSale = expectedSale;
-    }
+    // public String getExpectedSale() {
+    //     return expectedSale;
+    // }
+    // public void setExpectedSale(String expectedSale) {
+    //     this.expectedSale = expectedSale;
+    // }
     public Float getCostPrice() {
         return costPrice;
     }

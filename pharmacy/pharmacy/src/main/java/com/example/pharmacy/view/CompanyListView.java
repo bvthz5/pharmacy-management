@@ -7,7 +7,7 @@ public class CompanyListView {
     private final String address;
     private final String phone;
     private final String description;
-    private final String type;
+    // private final String type;
 
     public int getCompanyId() {
         return companyId;
@@ -29,17 +29,17 @@ public class CompanyListView {
         return description;
     }
  
-    public String getType() {
-        return type;
-    }
+    // public String getType() {
+    //     return type;
+    // }
 
-    public CompanyListView(int companyId, String name, String address, String phone, String description, String type) {
+    public CompanyListView(int companyId, String name, String address, String phone, String description) {
         this.companyId = companyId;
         this.name = name;
         this.address = address;
         this.phone = phone;
         this.description = description;
-        this.type = type;
+        // this.type = type;
 
     }
 }

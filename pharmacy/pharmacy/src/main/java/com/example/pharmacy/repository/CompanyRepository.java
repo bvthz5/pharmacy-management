@@ -15,21 +15,21 @@ import com.example.pharmacy.view.CompanyListView;
 
 public interface CompanyRepository extends Repository<Company, Integer> {
 
-    Collection<CompanyListView>findByUserUserIdAndStatus(Integer currentUserId, byte value);
+    Collection<CompanyListView>findByStatus( byte value);
 
     Company save(Company company);
 
-    Optional<Company>findByCompanyIdAndUserUserIdAndStatus(Integer company_id, Integer currentUserId, byte value); 
+    Optional<Company>findByCompanyIdAndStatus(Integer company_id, byte value); 
 
     @Modifying
 	@Query(value = "update company set status=0 where company_id=:companyId",nativeQuery = true)
 	public void deleteCompany(@Param("companyId")Integer companyId);
 
-    void deleteByUserUserId(Integer userId);
+    void deleteByCompanyId(Integer companyId);
 
      //Collection<CompanyListView> findAllByUserUserId(Integer userId);
 	
-	 Optional<Company>findByCompanyIdAndUserUserId(Integer companyId, Integer userId);
+	 Optional<Company>findByCompanyId(Integer companyId);
 
     
 }

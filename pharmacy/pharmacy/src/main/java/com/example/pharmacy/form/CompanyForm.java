@@ -10,7 +10,7 @@ public class CompanyForm {
 
 	private String description;
 	
-	private String type;
+	// private String type;
 
 	private byte status;
     
@@ -74,16 +74,16 @@ public class CompanyForm {
     /**
      * @return String return the type
      */
-    public String getType() {
-        return type;
-    }
+    // public String getType() {
+    //     return type;
+    // }
 
     /**
      * @param type the type to set
      */
-    public void setType(String type) {
-        this.type = type;
-    }
+    // public void setType(String type) {
+    //     this.type = type;
+    // }
 
     /**
      * @return byte return the status
