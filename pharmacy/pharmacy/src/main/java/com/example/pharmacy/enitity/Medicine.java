@@ -43,7 +43,7 @@ private String brand;
 // @ManyToOne(optional = false, fetch = FetchType.LAZY)
 // private User user;
 
-@OneToOne(mappedBy = "medicine", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+@OneToOne(mappedBy = "medicine", cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
 private Sales sales;
 
 @ManyToOne(optional = false, fetch = FetchType.LAZY)

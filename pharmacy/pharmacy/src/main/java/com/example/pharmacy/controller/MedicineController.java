@@ -54,8 +54,5 @@ public class MedicineController {
     public void delete(@PathVariable("medicineId") Integer medicineId){
     	medicineService.delete(medicineId);
     }
-
-
-
     
 }

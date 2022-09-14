@@ -17,25 +17,21 @@
     {
       "name": "app.security.access-token-expiry",
       "type": "java.time.Duration",
-      "description": "Duration for access token expiry",
       "sourceType": "com.example.pharmacy.security.config.SecurityConfig"
     },
     {
       "name": "app.security.refresh-token-expiry",
       "type": "java.time.Duration",
-      "description": "Duration for refresh token expiry",
       "sourceType": "com.example.pharmacy.security.config.SecurityConfig"
     },
     {
       "name": "app.security.token-generator-password",
       "type": "java.lang.String",
-      "description": "Password for the token generator - cannot be null and must be exactly 16 ASCII characters",
       "sourceType": "com.example.pharmacy.security.config.SecurityConfig"
     },
     {
       "name": "app.security.token-generator-salt",
       "type": "java.lang.String",
-      "description": "Salt for the token generator - cannot be null and must be exactly 16 digit hexadecimal",
       "sourceType": "com.example.pharmacy.security.config.SecurityConfig"
     }
   ],

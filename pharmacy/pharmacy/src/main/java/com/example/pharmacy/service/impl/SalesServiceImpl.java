@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 // import org.apache.catalina.security.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
+import org.springframework.stereotype.Service;
 
 import com.example.pharmacy.enitity.Sales;
 import com.example.pharmacy.form.SalesForm;
@@ -15,6 +16,7 @@ import com.example.pharmacy.service.SalesService;
 import com.example.pharmacy.view.SalesDetailView;
 import com.example.pharmacy.view.SalesListView;
 
+@Service
 public class SalesServiceImpl implements SalesService {
 
     @Autowired
@@ -32,7 +34,7 @@ public class SalesServiceImpl implements SalesService {
     @Override
     public SalesDetailView add(SalesForm form){
     //System.out.println("jkgsdjgjksdb->"+form.getMedicinename());
-        return new SalesDetailView(salesRepository.save(new Sales(form, SecurityUtil.getCurrentUserId())));
+        return new SalesDetailView(salesRepository.save(new Sales(form,SecurityUtil.getCurrentUserId())));
     }
 
     @Override

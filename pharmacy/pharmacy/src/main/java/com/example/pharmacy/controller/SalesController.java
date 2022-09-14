@@ -13,18 +13,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.example.pharmacy.form.SalesForm;
-import com.example.pharmacy.service.SalesService;
+// import com.example.pharmacy.service.SalesService;
 import com.example.pharmacy.view.SalesDetailView;
 import com.example.pharmacy.view.SalesListView;
-// import com.example.pharmacy.service.SalesService;
+import com.example.pharmacy.service.SalesService;
 
 @RestController
 @RequestMapping("/sales")
 public class SalesController {
 
-    // @Autowired
+    @Autowired
     SalesService salesService;
 
     @GetMapping
@@ -33,7 +32,7 @@ public class SalesController {
         
     }
 
-    @PostMapping("/add")
+    @PostMapping
     public SalesDetailView add(@Valid @RequestBody SalesForm form)
     {
         return salesService.add(form);
@@ -41,9 +40,11 @@ public class SalesController {
 
     @GetMapping("/{salesId}")
     public SalesDetailView get(@PathVariable("salesId")Integer salesId) throws NotFoundException
-{
+    {
+
     return salesService.get(salesId);
-}    
+
+    }    
     
     
 }
