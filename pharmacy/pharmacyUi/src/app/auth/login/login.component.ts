@@ -21,18 +21,16 @@ export class LoginComponent implements OnInit {
 
 
   login() {
+    this.loginForm.markAllAsTouched()
     if (this.loginForm.valid ) {
       this.service.loginUser(this.loginForm.value).subscribe({
         next:(res:any)=>{
           alert("login Success"),
           console.log(res);
           this.router.navigateByUrl("dashBoard")
-          
+
         }
       })
-    }
-    else{
-      alert("Enter a valid form")
     }
   }
 
