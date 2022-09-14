@@ -10,4 +10,6 @@ import com.example.pharmacy.view.LoginView;
 
 public interface UserService {
     LoginView login(@Valid LoginForm form, Errors errors) throws BadRequestException;
+    LoginView refresh(String refreshToken) throws BadRequestException;
+
 }

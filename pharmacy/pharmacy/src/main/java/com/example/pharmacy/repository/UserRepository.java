@@ -8,5 +8,7 @@ import com.example.pharmacy.enitity.User;
 
 public interface UserRepository extends Repository<User, Integer> {
     Optional<User> findByEmail(String email);   
+    Optional<User> findByUserIdAndPassword(Integer userId, String password);
+
     
 }
