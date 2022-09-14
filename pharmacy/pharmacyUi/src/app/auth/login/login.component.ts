@@ -28,6 +28,8 @@ export class LoginComponent implements OnInit {
           alert("login Success"),
           console.log(res);
           this.router.navigateByUrl("dashBoard")
+          console.log("===============");
+
 
         }
       })
