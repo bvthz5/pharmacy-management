@@ -6,28 +6,39 @@
             class="img-fluid" alt="Sample image">
         </div>
         <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-          <form>
+          <form [formGroup]="loginForm" (ngSubmit)="login()">
   
             <!-- Email input -->
             <div class="form-outline mb-4">
                 <label class="form-label" for="form3Example3">Email address</label>
               <input type="email" id="form3Example3" class="form-control form-control-lg"
-                placeholder="Enter a valid email address" />
-             
+                placeholder="Enter a valid email address" formControlName="email"[ngClass]="{'is-invalid': loginForm.controls['email'].touched&& loginForm.controls['email'].errors}"/>
+                <div *ngIf="loginForm.controls['email'].touched">
+                    <div class="error" *ngIf="loginForm.controls['email']?.errors">Enter a valid email address</div>
+                </div>
             </div>
   
             <!-- Password input -->
             <div class="form-outline mb-3">
                 <label class="form-label" for="form3Example4">Password</label>
               <input type="password" id="form3Example4" class="form-control form-control-lg"
-                placeholder="Enter password" />
+                placeholder="Enter password" formControlName="password"[ngClass]="{'is-invalid': loginForm.controls['password'].touched&& loginForm.controls['password'].errors}"/>
+                <div *ngIf="loginForm.controls['password'].touched">
+                    <div class="error" *ngIf="loginForm.controls['password']?.errors?.['required']">Enter
+                        password</div>
+                    <div class="error" *ngIf="loginForm.controls['password']?.errors?.['pattern']">password must
+                        contain minimum eight
+                        characters, at least one uppercase letter, one lowercase letter, one number and one
+                        special character</div>
+    
+                </div>
             </div>
   
             <div class="d-flex justify-content-between align-items-center">
             </div>
   
             <div class="text-center text-lg-start mt-4 pt-2">
-              <button type="button" class="btn btn-primary btn-lg"
+              <button type="submit" class="btn btn-primary btn-lg"
                 style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button>
             </div>
   
