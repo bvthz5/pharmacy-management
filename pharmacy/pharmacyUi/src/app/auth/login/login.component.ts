@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ApiService } from 'src/app/common-lib/service/api.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { ApiService } from 'src/app/common-lib/service/api.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private service: ApiService) { }
+  constructor(private service: ApiService, private router :Router) { }
 
   ngOnInit(): void {
   }
@@ -25,6 +26,7 @@ export class LoginComponent implements OnInit {
         next:(res:any)=>{
           alert("login Success"),
           console.log(res);
+          this.router.navigateByUrl("dashBoard")
           
         }
       })
