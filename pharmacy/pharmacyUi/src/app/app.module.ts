@@ -6,16 +6,23 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { CommonLibModule } from './common-lib/common-lib.module';
+import { FeaturesModule } from './features/features.module';
+
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+   
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    FeaturesModule
+    
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
