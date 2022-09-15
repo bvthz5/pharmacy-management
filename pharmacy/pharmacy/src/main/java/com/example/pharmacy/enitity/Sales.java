@@ -40,10 +40,12 @@ public class Sales {
     @JoinColumn
     private Medicine medicine;
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @JoinColumn
     private User user;
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @JoinColumn
     private Company company;
 
     public Sales() {
