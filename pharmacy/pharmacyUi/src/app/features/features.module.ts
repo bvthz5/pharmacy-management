@@ -7,6 +7,8 @@ import { CommonLibModule } from '../common-lib/common-lib.module';
 import { HeaderComponent } from './header/header.component';
 import { CompanyComponent } from './company/company.component';
 import { SalesComponent } from './sales/sales.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { InterceptorInterceptor } from '../common-lib/interceptor/interceptor.interceptor';
 
 
 @NgModule({
@@ -20,6 +22,13 @@ import { SalesComponent } from './sales/sales.component';
     CommonModule,
     FeaturesRoutingModule,
 
-  ]
+  ],
+  providers: [
+    {
+      provide:HTTP_INTERCEPTORS,
+      useClass:InterceptorInterceptor,
+      multi:true}
+  
+  ],
 })
 export class FeaturesModule { }

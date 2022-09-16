@@ -16,4 +16,12 @@ export class ApiService {
   loginUser(data:any){
     return this.http.post(this.api_url+"/login",data)
   }
+
+  /**
+   * get All medicne List
+   */
+  getMedineList(){
+    return this.http.get(this.api_url+"/medicine")
+  }
+
 }
