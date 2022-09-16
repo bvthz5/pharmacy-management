@@ -1,29 +1,32 @@
-<div style="margin-top: 100px;"class="container">
-    <div class="row">
-      <div class="col-12">
-        <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th scope="col">Sales_ID</th>
-              <th scope="col">Sales Date</th>
-              <th scope="col">Sales Quantity</th>
-              <th scope="col">Total Amount</th>
-              <th scope="col">Company Id</th>
-              <th scope="col">Medicine Id</th>
-              <th scope="col">Medicine Name</th>
-              <th scope="col">User Id</th>
-            </tr>
-          </thead>
-          <tbody>
-            
-              <tr *ngFor="let value of salesdata">
-                <th>{{value.salesId}}</th>
-                <td>{{value.salesDate}}</td>
-                <td>{{value.salesQuantity}}</td>
-                <td>{{value.totalAmount}}</td>
-                <td>{{value.companyId}}</td>
-                <td>{{value.medicineId}}</td>
-                <td>{{value.medicinename}}</td>
-                <td>{{value.userId}}</td>
-                
-              <td>
+
+                <h2>Responsive Table</h2>
+                <div class="table-wrapper">
+                    <table class="fl-table">
+
+                        <thead>
+                            <tr>
+                              <th scope="col">Sales_ID</th>
+                              <th scope="col">User Id</th>
+                              <th scope="col">Company Id</th>
+                              <th scope="col">Medicine Id</th>
+                              <th scope="col">Sales Quantity</th>
+                              <th scope="col">Total Amount</th>
+                              <th scope="col">Sales Date</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            
+                              <tr *ngFor="let value of salesdata">
+                                <th>{{value.salesId}}</th>
+                                <td>{{value.userId}}</td>
+                                <td>{{value.companyId}}</td>
+                                <td>{{value.medicineId}}</td>
+                                <td>{{value.salesQuantity}}</td>
+                                <td>{{value.totalAmount}}</td>
+                                <td>{{value.salesDate}}</td>
+
+                              <tr>
+                        
+                        <tbody>
+                    </table>
+                </div>

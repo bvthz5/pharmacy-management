@@ -8,6 +8,8 @@ public class SalesDetailView extends SalesListView{
         super(
             sales.getSalesId(),
             sales.getMedicine().getMedicineId(),
+            sales.getCompany().getCompanyId(),
+            sales.getUser().getUserId(),
             sales.getMedicine().getMedicinename(),
             sales.getMedicine().getCategory(),
             sales.getMedicine().getBrand(),

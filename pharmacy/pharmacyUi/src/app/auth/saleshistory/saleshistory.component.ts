@@ -15,11 +15,7 @@ export class SaleshistoryComponent implements OnInit {
         this.service.getSalesData().subscribe((res:any)=> {  
           console.log(res);
           
-          this.salesdata = res; 
-          
-          // this.id = res.itemId; 
-          // console.log(this.Item);
-    
+          this.salesdata = res;
         },  
         err => {  
           console.log("error while getting user Details");  

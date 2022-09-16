@@ -9,6 +9,8 @@ public class SalesListView {
 
     private final int salesId;
     private final int medicineId;
+    private final int companyId;
+    private final int userId;
     private final String medicinename;
     private final String category;
     private final String brand;
@@ -18,10 +20,12 @@ public class SalesListView {
     private final Date salesDate;
     private final Float totalAmount;
     
-    public SalesListView(int salesId, int medicineId, String medicinename, String category, String brand,
+    public SalesListView(int salesId, int medicineId, int companyId,int userId, String medicinename, String category, String brand,
             Date production_date, Date expiry_date, int salesQuantity, Date salesDate, Float totalAmount) {
         this.salesId = salesId;
         this.medicineId = medicineId;
+        this.companyId = companyId;
+        this.userId = userId;
         this.medicinename = medicinename;
         this.category = category;
         this.brand = brand;
@@ -35,6 +39,8 @@ public class SalesListView {
     public SalesListView(Sales sales) {
         this.salesId = sales.getSalesId() ;
         this.medicineId = sales.getMedicine().getMedicineId();
+        this.companyId = sales.getCompany().getCompanyId();
+        this.userId = sales.getUser().getUserId();
         this.medicinename = sales.getMedicine().getMedicinename();
         this.category = sales.getMedicine().getCategory();
         this.brand = sales.getMedicine().getBrand();
@@ -51,6 +57,12 @@ public class SalesListView {
 
     public int getMedicineId() {
         return medicineId;
+    }
+    public int getCompanyId() {
+        return companyId;
+    }
+    public int getUserId() {
+        return userId;
     }
 
     public String getMedicinename() {
