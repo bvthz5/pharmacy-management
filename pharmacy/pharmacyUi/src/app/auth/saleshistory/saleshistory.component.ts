@@ -11,16 +11,41 @@ export class SaleshistoryComponent implements OnInit {
 
   constructor(private router : Router, private service : ApiService) { }
   salesdata:any;
+   
   ngOnInit(): void {
-        this.service.getSalesData().subscribe((res:any)=> {  
-          console.log(res);
-          
-          this.salesdata = res;
-        },  
-        err => {  
-          console.log("error while getting user Details");  
-        }  
-      );  
+      this.getValueFromContactApi(0,1);
       }
-}
+
+      conditionVariable:any;
+      valuesOfUser:any;
+      pageNo:any = 0;
+      pageSize:any = 1;
+      getValueFromContactApi(pageNo: number, pageSize: number) {
+      this.service.getSalesData(pageNo, pageSize).subscribe((res: any) => {
+
+            console.log(res);
+            if (res == 0) {
+              this.conditionVariable = false
+              return
+            }
+            this.conditionVariable = true
+            this.salesdata = res
+
+          });
+
+        }
     
+      nextClick() {
+        this.pageNo = this.pageNo + 1;
+        this.getValueFromContactApi(this.pageNo, this.pageSize)
+    
+      }
+      previousClick() {
+        if (this.pageNo == 0)
+          return
+        this.pageNo = this.pageNo - 1;
+        this.getValueFromContactApi(this.pageNo, this.pageSize)
+    
+      }
+      
+    }

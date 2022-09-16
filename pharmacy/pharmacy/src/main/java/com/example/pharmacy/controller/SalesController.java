@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.example.pharmacy.form.SalesForm;
 import com.example.pharmacy.service.SalesService;
 import com.example.pharmacy.view.SalesDetailView;
@@ -32,6 +31,10 @@ public class SalesController {
         return salesService.list();
         
     }
+    @GetMapping("/{pageNo}/{pageSize}")
+	public Collection<SalesListView> getPaginated(@PathVariable Integer pageNo,@PathVariable Integer pageSize){
+		return salesService.findPaginated(pageNo, pageSize);
+	}
 
     @PostMapping("/add")
     public SalesDetailView add(@Valid @RequestBody SalesForm form)
@@ -41,9 +44,9 @@ public class SalesController {
 
     @GetMapping("/{salesId}")
     public SalesDetailView get(@PathVariable("salesId")Integer salesId) throws NotFoundException
-{
-    return salesService.get(salesId);
-}    
+    {
+        return salesService.get(salesId);
+    }    
     
     
 }

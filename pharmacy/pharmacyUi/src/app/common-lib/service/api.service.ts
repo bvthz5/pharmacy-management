@@ -40,10 +40,10 @@ export class ApiService {
   loginUser(data:any){
     return this.http.post(this.api_url+"/login",data)
   }
-
-  getSalesData() : Observable<any>
+  
+  getSalesData(data:any,data1:any): Observable<any> 
   {
     const headers = this.getHeader();
-    return this.http.get(this.api_url+"/sales", { headers })
+    return this.http.get(this.api_url+"/sales/"+data+"/"+data1, { headers });
   }
 }

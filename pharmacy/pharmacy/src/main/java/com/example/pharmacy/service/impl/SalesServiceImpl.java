@@ -6,6 +6,9 @@ import java.util.stream.Collectors;
 // import org.apache.catalina.security.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.example.pharmacy.enitity.Sales;
@@ -65,5 +68,11 @@ public class SalesServiceImpl implements SalesService {
         }).orElseThrow(NotFoundException::new);
     }
 
-    
+    @Override
+	public Collection<SalesListView> findPaginated(Integer pageNo, Integer pageSize) {
+		Pageable paging =  PageRequest.of(pageNo, pageSize);
+		Page<SalesListView> pagedResult = salesRepository.findAllByUserUserId(SecurityUtil.getCurrentUserId(),paging);
+		return pagedResult.toList();
+	}
+
 }

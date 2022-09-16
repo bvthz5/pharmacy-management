@@ -1,13 +1,12 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
 import { CommonLibModule } from './common-lib/common-lib.module';
 import { FeaturesModule } from './features/features.module';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -20,7 +19,8 @@ import { FeaturesModule } from './features/features.module';
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
-    FeaturesModule
+    FeaturesModule,
+    NgxPaginationModule
     
     
   ],

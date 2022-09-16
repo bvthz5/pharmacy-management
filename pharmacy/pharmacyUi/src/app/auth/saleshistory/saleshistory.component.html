@@ -30,3 +30,7 @@
                         <tbody>
                     </table>
                 </div>
+                <ul class="pagination justify-content-center">
+                  <li class="page-item" *ngIf="pageNo!=0"><a (click)="previousClick()" class="page-link">Previous</a></li>
+                  <li class="page-item" *ngIf="conditionVariable"><a (click)="nextClick()" class="page-link">Next</a></li>
+                </ul>

@@ -2,7 +2,10 @@ package com.example.pharmacy.view;
 
 import java.util.Date;
 
+import org.springframework.data.web.JsonPath;
+
 import com.example.pharmacy.enitity.Sales;
+import com.fasterxml.jackson.annotation.JsonAlias;
 
 public class SalesListView {
     
