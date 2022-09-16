@@ -27,13 +27,16 @@ export class LoginComponent implements OnInit {
         next:(res:any)=>{
           alert("login Success"),
           console.log(res);
-          this.router.navigateByUrl("dashBoard")
+          // this.router.navigateByUrl("dashBoard")
           console.log("===============");
-
+          localStorage.setItem('accessToken',res.AccessToken.value)
+          localStorage.setItem('user',res.email)
 
         }
+        
       })
     }
+    this.router.navigate(["saleshistory"]);
   }
 
 }
