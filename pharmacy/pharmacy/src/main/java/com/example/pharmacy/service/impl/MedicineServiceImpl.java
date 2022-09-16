@@ -27,6 +27,11 @@ public class MedicineServiceImpl implements MedicineService {
 
         // return null;
     }
+    @Override
+    public Collection<MedicineListView> listbyCompanyId(Integer companyId) {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
     @Override
     public MedicineDetailView add(MedicineForm form) {
@@ -55,5 +60,7 @@ public class MedicineServiceImpl implements MedicineService {
         medicineRepository.deleteMedicine(medicineId);
 
     }
+
+    
 
 }

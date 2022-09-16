@@ -12,6 +12,7 @@ private final String category;
  private final String brand;
  private final Date production_date;
  private final  Date expiry_date;
+ private final Integer companyId;
 //  private final String dosage;
 //  private final String reg_date;
  private final Integer quantity;
@@ -20,7 +21,7 @@ private final String category;
 //  private final String expected_sale;
  
 public MedicineListView(int medicineId, String medicinename, String category, String brand, Date production_date,
-        Date expiry_date, Integer quantity, Float cost_price ) {
+        Date expiry_date, Integer quantity, Float cost_price,Integer companyId ) {
     this.medicineId = medicineId;
     this.medicinename = medicinename;
     this.category = category;
@@ -29,6 +30,7 @@ public MedicineListView(int medicineId, String medicinename, String category, St
     this.expiry_date = expiry_date;
     this.quantity = quantity;
     this.cost_price = cost_price;
+    this.companyId=companyId;
     // this.expected_sale = expected_sale;
 }
 public MedicineListView(Medicine medicine) {
@@ -40,6 +42,7 @@ public MedicineListView(Medicine medicine) {
     this.expiry_date = medicine.getExpiryDate();
     this.quantity = medicine.getQuantity();
     this.cost_price = medicine.getCostPrice();
+    this.companyId=medicine.getCompany().getCompanyId();
     // this.expected_sale = medicine.getExpectedSale();
 }
 
@@ -70,6 +73,9 @@ public Float getCost_price() {
 // public String getExpected_sale() {
 //     return expected_sale;
 // }
+public Integer getCompanyId() {
+    return companyId;
+}
 
 
 

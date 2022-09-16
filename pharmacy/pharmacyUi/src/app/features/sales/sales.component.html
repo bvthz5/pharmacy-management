@@ -32,7 +32,7 @@
                                 <select class="form-select col-12" style="width: 17vw;"
                                     aria-label="Default select example" (change)="onChangeMedicine($event)">
                                     <option value="" disabled selected>Select your option</option>
-                                    <option *ngFor="let val of medicine" [value]="val.medicineId">{{val.medicinename}}</option>
+                                    <option *ngFor="let val of medicine" [value]="val.companyId">{{val.medicinename}}</option>
                                     
                                 </select>
                                 <label class="col">Brand:</label>

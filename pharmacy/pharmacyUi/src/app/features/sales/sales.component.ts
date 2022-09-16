@@ -40,6 +40,6 @@ export class SalesComponent implements OnInit {
 // }]
 onChangeMedicine(data:any){
 console.log(data.target.value);
-
+let name= this.medicine.find((p:any)=>p.id==data.target.value)
 }
 }
