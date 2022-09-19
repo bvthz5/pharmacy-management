@@ -26,12 +26,14 @@ export class LoginComponent implements OnInit {
       this.service.loginUser(this.loginForm.value).subscribe({
         next:(res:any)=>{
           alert("login Success"),
+
+          console.log("********************************************")
           console.log(res);
           // this.router.navigateByUrl("dashBoard")
-          console.log("===============");
-          console.log(res.AccessToken.value);
+          
+          console.log(res.accessToken.value);
           console.log(res.email);
-          localStorage.setItem('accessToken',res.AccessToken.value);
+          localStorage.setItem('accessToken',res.accessToken.value);
           localStorage.setItem('user',res.email);
 
         }
