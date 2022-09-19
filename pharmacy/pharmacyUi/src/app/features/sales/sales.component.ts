@@ -1,6 +1,8 @@
 import { formatCurrency } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormControlName, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Route, Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 import { ApiService } from 'src/app/common-lib/service/api.service';
 
 @Component({
@@ -10,7 +12,7 @@ import { ApiService } from 'src/app/common-lib/service/api.service';
 })
 export class SalesComponent implements OnInit {
 
-  constructor(private service: ApiService) { }
+  constructor(private service: ApiService,private router:Router) { }
   // brandName:String="Select your option";
   salesForm: FormGroup = new FormGroup({
     quantity: new FormControl('', Validators.required),
@@ -36,6 +38,11 @@ export class SalesComponent implements OnInit {
   availableQuantity?: any = ""
   med: any
   cart: any = {}
+   private paramSource = new BehaviorSubject(null);
+   sharedParam = this.paramSource.asObservable();
+   changeParam(param: any) {
+    this.paramSource.next(param)
+  }
 
   //   =[{
   //     "id":1,
@@ -116,6 +123,11 @@ export class SalesComponent implements OnInit {
     this.service.addSale(this.cart).subscribe({
       next:(res:any)=>{
         console.log(res)
+        this.router.navigateByUrl('/invoice');
+        this.changeParam(this.cart)
+       
+      
+
       },
       error:(err:any)=>{
         console.log(err);

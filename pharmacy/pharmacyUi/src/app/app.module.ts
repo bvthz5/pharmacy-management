@@ -21,7 +21,7 @@ import { InterceptorInterceptor } from './common-lib/interceptor/interceptor.int
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
-    FeaturesModule
+   FeaturesModule
     
     
   ],

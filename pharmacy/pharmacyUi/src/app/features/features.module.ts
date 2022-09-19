@@ -10,6 +10,7 @@ import { SalesComponent } from './sales/sales.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { InterceptorInterceptor } from '../common-lib/interceptor/interceptor.interceptor';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { InvoiceComponent } from './invoice/invoice.component';
 
 
 @NgModule({
@@ -17,7 +18,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     DashboardComponent,
     HeaderComponent,
     CompanyComponent,
-    SalesComponent
+    SalesComponent,
+   
+    InvoiceComponent
   ],
   imports: [
     CommonModule,
