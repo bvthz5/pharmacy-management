@@ -10,12 +10,25 @@ import { SalesComponent } from '../sales/sales.component';
 })
 export class InvoiceComponent implements OnInit {
 
-  constructor(private router:Router,private service:ApiService) { }
-saleDetails?:any
-  ngOnInit(): void {
-   this.saleDetails= this.service.returnSale()   
-   console.log(this.saleDetails);
-   
+  constructor(private router: Router, private service: ApiService) { }
+  saleDetails?: any
+  async ngOnInit(): Promise<void> {
+   await this.service.returnSale().then((result: any) => {
+      this.saleDetails=  result
+      console.log(this.saleDetails);
+      setTimeout(() => {
+          window.print()
+        this.router.navigateByUrl('/home')
+
+      }, 100);
+     
+      //  this.router.navigateByUrl('/home')
+    }).catch((err: any) => {
+
+    });
+
+
+
   }
 
 }

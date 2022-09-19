@@ -8,5 +8,35 @@
         <label class="text-center">Email:  pharmacy@gmail.com</label><br>
         <label class="text-center">Date:  19-09-2022</label>
         <hr style="background-color: rgb(0, 24, 0); height: 2px; ">
+
+        <table class="table ">
+            <thead class="tabl">
+              <tr>
+                
+                <th scope="col">Medicine</th>
+                <th scope="col">Brand</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Price</th>
+                <th scope="col">Total Amount</th>
+
+
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{saleDetails?.medicinename}}</td>
+                
+                <td>{{saleDetails?.brand}}</td>
+                <td>{{saleDetails?.salesQuantity}}</td>
+                <td>{{saleDetails?.price}}</td>
+                <td>{{saleDetails?.totalAmount}}</td>
+
+              </tr>
+              
+            </tbody>
+          </table> 
+        <hr style="background-color: rgb(0, 24, 0); position: absolute; bottom: 0; margin-bottom: 85px; width: 75%;">
+        <!-- <hr style="background-color: rgb(0, 24, 0); height: 2px; position: absolute; bottom: 0; margin-bottom: 60px;right: 0;margin-right: 12.5vw;"> -->
+          <label style="float: right; position: absolute; bottom: 0; margin-bottom: 50px;right: 0;margin-right: 12.5vw; font-weight: bold; font-size: 30;">Total Amount: {{saleDetails?.completeTotal}}</label>
     </div>
 </div>

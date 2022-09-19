@@ -33,7 +33,7 @@ export class ApiService {
   getsale(data: any) {
      this.sales = data
   }
-  returnSale(){
-    return this.sales
+  async returnSale(){
+    return await this.sales
   }
 }

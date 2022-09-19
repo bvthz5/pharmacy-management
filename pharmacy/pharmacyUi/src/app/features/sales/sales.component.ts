@@ -38,11 +38,7 @@ export class SalesComponent implements OnInit {
   availableQuantity?: any = ""
   med: any
   cart: any = {}
-   private paramSource = new BehaviorSubject(null);
-   sharedParam = this.paramSource.asObservable();
-   changeParam(param: any) {
-    this.paramSource.next(param)
-  }
+  
 
   //   =[{
   //     "id":1,
@@ -120,11 +116,16 @@ export class SalesComponent implements OnInit {
   }
 
   confirmSale(){
+    var obj={
+      "completeTotal":this.totalAmount
+     }
+    let value= Object.assign(this.cart,obj)
     this.service.addSale(this.cart).subscribe({
       next:(res:any)=>{
         console.log(res)
+        this.service.getsale(this.cart)
         this.router.navigateByUrl('/invoice');
-        this.changeParam(this.cart)
+      
        
       
 
