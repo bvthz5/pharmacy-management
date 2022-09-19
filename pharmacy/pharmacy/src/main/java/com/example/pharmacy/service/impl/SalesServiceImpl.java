@@ -19,6 +19,8 @@ import com.example.pharmacy.security.util.SecurityUtil;
 import com.example.pharmacy.service.SalesService;
 import com.example.pharmacy.view.SalesDetailView;
 import com.example.pharmacy.view.SalesListView;
+
+import net.bytebuddy.TypeCache.Sort;
 @Service
 public class SalesServiceImpl implements SalesService {
 
@@ -75,4 +77,13 @@ public class SalesServiceImpl implements SalesService {
 		return pagedResult.toList();
 	}
 
+
+//     @Override
+//     public Page<Sales> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection) {
+//     Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending() :
+//      Sort.by(sortField).descending();
+ 
+//     Pageable pageable = PageRequest.of(pageNo - 1, pageSize, sort);
+//     return this.salesRepository.findAllByUserUserId(pageable);
+// }
 }

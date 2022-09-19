@@ -22,15 +22,17 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.loginForm.markAllAsTouched()
-    if (this.loginForm.valid ) {
+    if (this.loginForm.valid) {
       this.service.loginUser(this.loginForm.value).subscribe({
         next:(res:any)=>{
           alert("login Success"),
           console.log(res);
           // this.router.navigateByUrl("dashBoard")
           console.log("===============");
-          localStorage.setItem('accessToken',res.AccessToken.value)
-          localStorage.setItem('user',res.email)
+          console.log(res.AccessToken.value);
+          console.log(res.email);
+          localStorage.setItem('accessToken',res.AccessToken.value);
+          localStorage.setItem('user',res.email);
 
         }
         

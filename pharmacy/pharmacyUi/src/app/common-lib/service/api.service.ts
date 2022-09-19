@@ -6,7 +6,8 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class ApiService {
+export class ApiService 
+{
 
 
 
@@ -37,7 +38,8 @@ export class ApiService {
   /**
    * Login user
    */
-  loginUser(data:any){
+  loginUser(data:any)
+  {
     return this.http.post(this.api_url+"/login",data)
   }
   

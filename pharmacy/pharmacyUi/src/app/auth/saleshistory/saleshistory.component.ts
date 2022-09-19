@@ -13,14 +13,14 @@ export class SaleshistoryComponent implements OnInit {
   salesdata:any;
    
   ngOnInit(): void {
-      this.getValueFromContactApi(0,1);
+      this.getValueFromSalesApi(0,1);
       }
 
       conditionVariable:any;
       valuesOfUser:any;
       pageNo:any = 0;
       pageSize:any = 1;
-      getValueFromContactApi(pageNo: number, pageSize: number) {
+      getValueFromSalesApi(pageNo: number, pageSize: number) {
       this.service.getSalesData(pageNo, pageSize).subscribe((res: any) => {
 
             console.log(res);
@@ -37,14 +37,14 @@ export class SaleshistoryComponent implements OnInit {
     
       nextClick() {
         this.pageNo = this.pageNo + 1;
-        this.getValueFromContactApi(this.pageNo, this.pageSize)
+        this.getValueFromSalesApi(this.pageNo, this.pageSize)
     
       }
       previousClick() {
         if (this.pageNo == 0)
           return
         this.pageNo = this.pageNo - 1;
-        this.getValueFromContactApi(this.pageNo, this.pageSize)
+        this.getValueFromSalesApi(this.pageNo, this.pageSize)
     
       }
       

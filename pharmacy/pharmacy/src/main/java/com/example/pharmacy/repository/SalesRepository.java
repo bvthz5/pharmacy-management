@@ -1,5 +1,6 @@
 package com.example.pharmacy.repository;
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
@@ -15,4 +16,7 @@ public interface SalesRepository extends Repository<Sales, Integer>{
 
     Optional<Sales>findBySalesIdAndUserUserIdAndStatus(Integer salesId, Integer currentUserId, byte value); 
     Page<SalesListView> findAllByUserUserId(Integer userId,Pageable paging);
+    // public List<Sales> getFilteredData(Sales sales);
+    // Page<Sales> findAllByUserUserId(Pageable pageable);  
+    
 }
