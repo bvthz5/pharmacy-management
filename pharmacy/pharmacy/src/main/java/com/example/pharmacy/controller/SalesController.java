@@ -33,7 +33,7 @@ public class SalesController {
         
     }
 
-    @PostMapping("/add")
+    @PostMapping
     public SalesDetailView add(@Valid @RequestBody SalesForm form)
     {
         return salesService.add(form);

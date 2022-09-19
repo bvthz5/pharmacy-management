@@ -23,5 +23,7 @@ export class ApiService {
   getMedineList(){
     return this.http.get(this.api_url+"/medicine")
   }
-
+  addSale(data:any){
+    return this.http.post(this.api_url+"/sales",data)
+  }
 }
