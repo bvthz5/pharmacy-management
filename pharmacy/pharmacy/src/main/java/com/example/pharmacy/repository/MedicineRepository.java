@@ -16,7 +16,7 @@ import com.example.pharmacy.enitity.Medicine;
 public interface MedicineRepository extends Repository<Medicine, Integer>{
 
     //  Collection<MedicineListView>findByUserUserIdAndStatus(Integer currentUserId, byte value);
-     Collection<Medicine>findByStatus( byte value);
+     Collection<Medicine>findByStatusAndQuantityGreaterThan( byte value,Integer quantity);
     Medicine save(Medicine medicine);
 
     Optional<Medicine>findByMedicineIdAndStatus(Integer medicine_id,  byte value); 

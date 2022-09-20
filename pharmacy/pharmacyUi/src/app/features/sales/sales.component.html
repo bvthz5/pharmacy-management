@@ -39,7 +39,7 @@
                                 <select class="form-select col-12" style="width: 17vw;" formControlName="brand"
                                     aria-label="Default select example" (change)="onChangeCompany($event)">
                                     <option disabled selected>Open this select menu</option>
-                                    <option *ngFor="let val of brand" [value]="val.medicineId">{{val.brand}}</option>
+                                    <option *ngFor="let val of sortedBrand" [value]="val.medicineId">{{val.brand}}</option>
                                     
                                 </select>
                                 <label class="col">Quantity:</label>
@@ -53,7 +53,7 @@
                         <h5>Order Details</h5>
                         <hr>
                       
-                        <table class="table " *ngIf="cart.medicinename!=null">
+                        <table class="table " *ngIf="soldMedicine!=null">
                           <thead class="tabl">
                             <tr>
                               
@@ -62,18 +62,20 @@
                               <th scope="col">Quantity</th>
                               <th scope="col">Price</th>
                               <th scope="col">Total Amount</th>
+                              <th scope="col">Action</th>
 
 
                             </tr>
                           </thead>
                           <tbody>
-                            <tr>
-                              <td>{{cart.medicinename}}</td>
+                            <tr *ngFor="let value of soldMedicine;let i=index">
+                              <td>{{value.medicinename}}</td>
                               
-                              <td>{{cart.brand}}</td>
-                              <td>{{cart.salesQuantity}}</td>
-                              <td>{{cart.price}}</td>
-                              <td>{{cart.totalAmount}}</td>
+                              <td>{{value.brand}}</td>
+                              <td>{{value.salesQuantity}}</td>
+                              <td>{{value.price}}</td>
+                              <td>{{value.totalAmount}}</td>
+                              <td><Button class="btn btn-danger" (click)="onDelete(i,value.medicineId,value.salesQuantity)">Delete</Button></td>
 
                             </tr>
                             

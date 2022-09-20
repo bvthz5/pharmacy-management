@@ -22,7 +22,7 @@ public class MedicineServiceImpl implements MedicineService {
 
     @Override
     public Collection<MedicineListView> list() {
-        return medicineRepository.findByStatus(Medicine.Status.ACTIVE.value)
+        return medicineRepository.findByStatusAndQuantityGreaterThan(Medicine.Status.ACTIVE.value,0)
                 .stream().map(x -> new MedicineListView(x)).collect(Collectors.toList());
 
         // return null;

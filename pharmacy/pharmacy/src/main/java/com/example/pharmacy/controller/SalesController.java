@@ -34,7 +34,7 @@ public class SalesController {
     }
 
     @PostMapping
-    public SalesDetailView add(@Valid @RequestBody SalesForm form)
+    public  Collection<SalesListView> add(@Valid @RequestBody Collection<SalesForm> form)
     {
         return salesService.add(form);
     }
