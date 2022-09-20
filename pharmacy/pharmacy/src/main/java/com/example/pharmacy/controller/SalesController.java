@@ -38,9 +38,15 @@ public class SalesController {
         
     }
     @GetMapping("/{pageNo}/{pageSize}")
-	public Collection<SalesListView> getPaginated(@PathVariable Integer pageNo,@PathVariable Integer pageSize){
-		return salesService.findPaginated(pageNo, pageSize);
+	public Collection<SalesListView> getPaginated(@PathVariable Integer pageNo,@PathVariable Integer pageSize,String sortBy)
+    {
+		return salesService.findPaginated(pageNo, pageSize,sortBy);
 	}
+    // @GetMapping
+    // public List<SalesListView> getSalesBySalesId() {
+
+    //     return salesService.findAllOrderBySalesIdAsc();
+    // }
 
     @PostMapping("/add")
     public SalesDetailView add(@Valid @RequestBody SalesForm form)

@@ -1,6 +1,7 @@
 package com.example.pharmacy.service;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.data.domain.Page;
@@ -18,6 +19,10 @@ public interface SalesService {
     SalesDetailView add(SalesForm form);
 
     SalesDetailView get(Integer salesId) throws NotFoundException;
-    Collection<SalesListView> findPaginated(Integer pageNo, Integer pageSize);
+    Collection<SalesListView> findPaginated(Integer pageNo, Integer pageSize,String sortBy);
     // Page < Sales > findPaginated(int pageNo, int pageSize, String sortField, String sortDirection);
+    // List<SalesListView> findAllOrderBySalesIdAsc();
+    
+    
 }
+
