@@ -11,5 +11,10 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  onLogout(){
+    localStorage.removeItem("accessToken")
+    localStorage.removeItem("refreshToken")
+    window.location.reload()
 
+  }
 }

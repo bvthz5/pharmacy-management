@@ -13,7 +13,7 @@ import { InterceptorInterceptor } from './common-lib/interceptor/interceptor.int
 @NgModule({
   declarations: [
     AppComponent,
-   
+
   ],
   imports: [
     BrowserModule,
@@ -21,16 +21,16 @@ import { InterceptorInterceptor } from './common-lib/interceptor/interceptor.int
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
-   FeaturesModule
-    
-    
+    FeaturesModule
+
   ],
   providers: [
     {
-      provide:HTTP_INTERCEPTORS,
-      useClass:InterceptorInterceptor,
-      multi:true}
-  
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptorInterceptor,
+      multi: true
+    }
+
   ],
   bootstrap: [AppComponent]
 })

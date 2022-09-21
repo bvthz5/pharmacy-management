@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthguardGuard } from '../common-lib/guard/authguard.guard';
+import { AddEditCompanyComponent } from './add-edit-company/add-edit-company.component';
 import { CompanyComponent } from './company/company.component';
 import { InvoiceComponent } from './invoice/invoice.component';
 import { SalesComponent } from './sales/sales.component';
@@ -14,7 +15,13 @@ const routes: Routes = [
   },
   {
     path:"invoice",component:InvoiceComponent,pathMatch:"full",title:"invoice",canActivate:[AuthguardGuard]
-  }
+  },
+  {
+    path:"addCompany",component:AddEditCompanyComponent,pathMatch:"full",title:"addCompany",canActivate:[AuthguardGuard]
+  },
+  {
+    path:"addCompany/:id",component:AddEditCompanyComponent,pathMatch:"full" ,canActivate:[AuthguardGuard]
+  },
 ];
 
 @NgModule({

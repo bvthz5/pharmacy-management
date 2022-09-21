@@ -31,9 +31,29 @@ export class ApiService {
    * get sale details after adding it to sales table
    */
   getsale(data: any) {
-     this.sales = data
+    this.sales = data
   }
-  async returnSale(){
+  async returnSale() {
     return await this.sales
+  }
+
+  getCompany() {
+    return this.http.get(this.api_url + "/company")
+  }
+
+  deleteCompany(data: any) {
+    return this.http.delete(this.api_url + "/company/" + data)
+  }
+
+  getCompanyDeatails(companyId: any) {
+    return this.http.get(this.api_url + "/company/" + companyId)
+  }
+  
+  addCompany(data: any) {
+    return this.http.post(this.api_url + "/company", data)
+  }
+
+  updateCompany(data: any, companyId: any) {
+    return this.http.put(this.api_url + "/company/" + companyId, data)
   }
 }

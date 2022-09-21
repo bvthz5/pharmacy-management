@@ -11,6 +11,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { InterceptorInterceptor } from '../common-lib/interceptor/interceptor.interceptor';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InvoiceComponent } from './invoice/invoice.component';
+import { AddEditCompanyComponent } from './add-edit-company/add-edit-company.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { InvoiceComponent } from './invoice/invoice.component';
     CompanyComponent,
     SalesComponent,
    
-    InvoiceComponent
+    InvoiceComponent,
+        AddEditCompanyComponent
   ],
   imports: [
     CommonModule,
