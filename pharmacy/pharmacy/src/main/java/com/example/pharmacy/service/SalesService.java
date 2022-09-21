@@ -1,6 +1,7 @@
 package com.example.pharmacy.service;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
@@ -22,6 +23,9 @@ public interface SalesService {
     Collection<SalesListView> findPaginated(Integer pageNo, Integer pageSize,String sortBy);
     // Page < Sales > findPaginated(int pageNo, int pageSize, String sortField, String sortDirection);
     // List<SalesListView> findAllOrderBySalesIdAsc();
+    Collection<SalesListView> findAllByDateBetween(Integer days);
+   
+
     
     
 }

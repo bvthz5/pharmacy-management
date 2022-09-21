@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/common-lib/service/api.service';
 
@@ -12,9 +13,10 @@ export class SaleshistoryComponent implements OnInit {
   constructor(private router : Router, private service : ApiService) { }
   salesdata:any;
    
-  ngOnInit(): void {
+  ngOnInit(): void 
+  {
       this.getValueFromSalesApi(0,1);
-      }
+  }
 
       conditionVariable:any;
       valuesOfUser:any;
@@ -47,5 +49,20 @@ export class SaleshistoryComponent implements OnInit {
         this.getValueFromSalesApi(this.pageNo, this.pageSize)
     
       }
-      
+
+      SortBy()
+      {
+        this.router.navigate(['login']);
+      }
+  
+      ShowHistory()
+      {
+        this.router.navigate(['login']);
+      }
+      onSubmit(form: NgForm): void {
+ 
+        console.log(form.value.name);
+
+      } 
     }
+   

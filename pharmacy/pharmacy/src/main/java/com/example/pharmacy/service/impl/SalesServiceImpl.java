@@ -1,7 +1,9 @@
 package com.example.pharmacy.service.impl;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -84,38 +86,51 @@ public class SalesServiceImpl implements SalesService {
 
 
     @Override
-    public void whenFindByPublicationDate_thenArticles1And2Returned() {
-        List<Sales> result = salesRepository.findAllBysalesDate(
-          new SimpleDateFormat("yyyy-MM-dd").parse("2022-09-15"));
+    public Collection<SalesListView> findAllByDateBetween(Integer days)
+    {
+        Calendar calendar = Calendar.getInstance();
+        Date today = calendar.getTime();
 
-        assertEquals(2, result.size());
-        assertTrue(result.stream()
-          .map(Sales::getId)
-          .allMatch(id -> Arrays.asList(1, 2).contains(id)));
+        calendar.add(Calendar.DAY_OF_MONTH, -days);
+        Date beforeDays = calendar.getTime();
+        return salesRepository.findAllBysalesDateBetween(beforeDays, today);
+
     }
 
-    @Override
-    public void whenFindByPublicationTimeBetween_thenArticles2And3Returned() {
-        List<Sales> result = salesRepository.findAllBysalesDateBetween(
-          new SimpleDateFormat("yyyy-MM-dd HH:mm").parse("2022-09-19 15:15"),
-          new SimpleDateFormat("yyyy-MM-dd HH:mm").parse("2022-09-15 16:30"));
 
-        assertEquals(2, result.size());
-        assertTrue(result.stream()
-          .map(Sales::getId)
-          .allMatch(id -> Arrays.asList(2, 3).contains(id)));
-    }
+    // @Override
+    // public void whenFindByPublicationDate_thenArticles1And2Returned() {
+    //     List<Sales> result = salesRepository.findAllBysalesDate(
+    //       new SimpleDateFormat("yyyy-MM-dd").parse("2022-09-15"));
 
-    @Override
-    public void givenArticlesWhenFindWithCreationDateThenArticles2And3Returned() {
-        List<Sales> result = salesRepository.findAllWithsalesDateBefore(
-          new SimpleDateFormat("yyyy-MM-dd HH:mm").parse("2022-09-19 10:00"));
+    //     assertEquals(2, result.size());
+    //     assertTrue(result.stream()
+    //       .map(Sales::getId)
+    //       .allMatch(id -> Arrays.asList(1, 2).contains(id)));
+    // }
 
-        assertEquals(2, result.size());
-        assertTrue(result.stream()
-          .map(Sales::getId)
-          .allMatch(id -> Arrays.asList(2, 3).contains(id)));
-    }
+    // @Override
+    // public void whenFindByPublicationTimeBetween_thenArticles2And3Returned() {
+    //     List<Sales> result = salesRepository.findAllBysalesDateBetween(
+    //       new SimpleDateFormat("yyyy-MM-dd HH:mm").parse("2022-09-19 15:15"),
+    //       new SimpleDateFormat("yyyy-MM-dd HH:mm").parse("2022-09-15 16:30"));
+
+    //     assertEquals(2, result.size());
+    //     assertTrue(result.stream()
+    //       .map(Sales::getId)
+    //       .allMatch(id -> Arrays.asList(2, 3).contains(id)));
+    // }
+
+    // @Override
+    // public void givenArticlesWhenFindWithCreationDateThenArticles2And3Returned() {
+    //     List<Sales> result = salesRepository.findAllWithsalesDateBefore(
+    //       new SimpleDateFormat("yyyy-MM-dd HH:mm").parse("2022-09-19 10:00"));
+
+    //     assertEquals(2, result.size());
+    //     assertTrue(result.stream()
+    //       .map(Sales::getId)
+    //       .allMatch(id -> Arrays.asList(2, 3).contains(id)));
+    // }
     // @Override
     // public List<SalesListView> findAllOrderBySalesIdAsc() {
     //     var sort;

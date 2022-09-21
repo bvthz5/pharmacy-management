@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonLibModule } from './common-lib/common-lib.module';
 import { FeaturesModule } from './features/features.module';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     ReactiveFormsModule,
     FormsModule,
     FeaturesModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    BrowserAnimationsModule
     
     
   ],

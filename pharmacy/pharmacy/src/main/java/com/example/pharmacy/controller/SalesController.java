@@ -2,6 +2,7 @@ package com.example.pharmacy.controller;
 
 import java.security.Principal;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -29,7 +30,7 @@ import com.example.pharmacy.view.SalesListView;
 @RequestMapping("/sales")
 public class SalesController {
 
-     @Autowired
+    @Autowired
     SalesService salesService;
 
     @GetMapping
@@ -37,11 +38,20 @@ public class SalesController {
         return salesService.list();
         
     }
+    
     @GetMapping("/{pageNo}/{pageSize}")
 	public Collection<SalesListView> getPaginated(@PathVariable Integer pageNo,@PathVariable Integer pageSize,String sortBy)
     {
 		return salesService.findPaginated(pageNo, pageSize,sortBy);
 	}
+
+   
+    @GetMapping("/filter/{days}")
+    public Collection<SalesListView> findAllByDateBetween(@PathVariable Integer days){
+        System.out.println(days);
+        return salesService.findAllByDateBetween(days);
+    }
+
     // @GetMapping
     // public List<SalesListView> getSalesBySalesId() {
 
