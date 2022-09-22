@@ -1,0 +1,12 @@
+.btns{
+    margin-right: 10px;
+    max-width: 70px;
+}
+.error{
+    color: red !important;
+}
+.form1{
+    max-width: 700px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

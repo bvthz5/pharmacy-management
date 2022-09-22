@@ -12,6 +12,8 @@ import { InterceptorInterceptor } from '../common-lib/interceptor/interceptor.in
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InvoiceComponent } from './invoice/invoice.component';
 import { AddEditCompanyComponent } from './add-edit-company/add-edit-company.component';
+import { MedicineComponent } from './medicine/medicine.component';
+import { AddEditMedicineComponent } from './add-edit-medicine/add-edit-medicine.component';
 
 
 @NgModule({
@@ -20,9 +22,10 @@ import { AddEditCompanyComponent } from './add-edit-company/add-edit-company.com
     HeaderComponent,
     CompanyComponent,
     SalesComponent,
-   
     InvoiceComponent,
-        AddEditCompanyComponent
+    AddEditCompanyComponent,
+    MedicineComponent,
+    AddEditMedicineComponent
   ],
   imports: [
     CommonModule,
@@ -33,10 +36,11 @@ import { AddEditCompanyComponent } from './add-edit-company/add-edit-company.com
   ],
   providers: [
     {
-      provide:HTTP_INTERCEPTORS,
-      useClass:InterceptorInterceptor,
-      multi:true}
-  
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptorInterceptor,
+      multi: true
+    }
+
   ],
 })
 export class FeaturesModule { }

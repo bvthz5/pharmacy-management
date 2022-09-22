@@ -1,0 +1,57 @@
+<app-header></app-header>
+
+<section class="gradient-custom" style="background-color: rgb(194, 190, 190);height: 100%;min-height: 100vh;">
+    <div class="container py-5 h-100">
+        <div class="row justify-content-center align-items-start h-100">
+            <div class="col-12 col-lg-9 col-xl-7 " >
+                <div class="card shadow-2-strong card-registration card " style="border-radius: 15px; width: 100%;">
+                    <div class="card-body ">
+                        <label *ngIf="id==null;" style="font-size: 20px;">Add Medicine</label>
+                        <label *ngIf="id!=null;" style="font-size: 20px;">Update Medicine</label>
+                        <br>
+                        <br>
+                        
+                        <form [formGroup]="medicineAdd">
+                            <!-- <Button class="btn btn-primary" routerLink="/company">Home</Button><br /> -->
+                            <label>Medicine Name</label>
+                            <input type="text" class="form-control form1" formControlName="medicinename" />
+                            <label>Category</label>
+                            <input type="text" class="form-control form1" formControlName="category" />
+                            <label>Brand</label>
+                            <!-- <input type="text" class="form-control form1" formControlName="brand" > -->
+                            <select class="form-select form1" formControlName="brand" (change)="onChange($event)">
+                              <option   class="form-control form1" *ngFor="let val of companyList" [value]="val.companyId">
+                                {{ val?.name }}
+                              </option>
+                            </select>
+                          
+                            <label>ProductionDate</label>
+                          
+                            <input type="date" class="form-control form1" formControlName="production_date" />
+                            <label>ExpiryDate</label>
+                            <input type="date" class="form-control form1" formControlName="expiry_date" />
+                            <label>Quantity</label>
+                            <input type="text" class="form-control form1" formControlName="quantity" />
+                            <label>CostPrice</label>
+                            <input type="text" class="form-control form1" formControlName="cost_price" />
+                            <!-- <label>CompanyId</label>
+                            <input type="text" class="form-control form1" formControlName="companyId" /> -->
+                          
+                            
+                            <button *ngIf="id == null" type="submit" (click)="AddMedicine()" class="custom-btn btn-5">
+                              Submit
+                            </button>
+                            <button *ngIf="id != null" type="submit" (click)="updateMedicine(medicineDetails.medicineId)" class="custom-btn btn-5">
+                              Update
+                            </button>
+                          
+                            
+                          </form>
+                   </div>
+                </div>
+                <!-- <br><br> -->
+
+            </div>
+        </div>
+    </div>
+</section>
