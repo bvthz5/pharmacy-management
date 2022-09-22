@@ -17,6 +17,7 @@ import com.example.pharmacy.view.SalesListView;
 public interface SalesService {
     
     Collection<SalesListView> list();
+    
     SalesDetailView add(SalesForm form);
 
     SalesDetailView get(Integer salesId) throws NotFoundException;

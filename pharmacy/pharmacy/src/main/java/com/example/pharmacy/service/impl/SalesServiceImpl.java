@@ -1,5 +1,8 @@
 package com.example.pharmacy.service.impl;
 
+import java.net.MalformedURLException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Collection;
@@ -10,6 +13,8 @@ import java.util.stream.Collectors;
 
 // import org.apache.catalina.security.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.UrlResource;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -33,7 +38,6 @@ public class SalesServiceImpl implements SalesService {
     private SalesRepository salesRepository;
     @Autowired  
     private MedicineRepository medicineRepository;
-
 
     @Override
     public Collection<SalesListView> list(){

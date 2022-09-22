@@ -1,52 +1,106 @@
-<select formControlName="standard" placeholder="Standard">
-<option value="" disabled selected> Standard</option>
-<option value="1">1</option>
-<option value="2">2</option>
-<option value="3">3</option>
-<option value="4">4</option>
-<option value="5">5</option>
-<option value="6">6</option>
-<option value="7">7</option>
-<option value="8">8</option>
-<option value="9">9</option>
-<option value="10">10</option>
-</select><br><br>
 
+<button type="button" class="btn btn-outline-primary btn-sm m-0 waves-effect" (click)="SortBy()">Sort By</button>          
 
-                <h2>Responsive Table</h2>
-                <div class="table-wrapper">
-                    <table class="fl-table">
+<button type="button" class="btn btn-outline-primary btn-sm m-0 waves-effect" (click)="downloadFile()">Download as Excel</button>
 
-                        <thead>
-                            <tr>
-                              <th scope="col">Sales_ID</th>
-                              <th scope="col">User Id</th>
-                              <th scope="col">Company Id</th>
-                              <th scope="col">Medicine Id</th>
-                              <th scope="col">Sales Quantity</th>
-                              <th scope="col">Total Amount</th>
-                              <th scope="col">Sales Date</th>
-                            </tr>
-                          </thead>
-                          <tbody>
+<label class="col">Show Data From:</label><input type="number" style="width: 17vw;" formControlName="quantity" [placeholder]="availableQuantity">Days
+<button class="btn btn-primary col" style="width: 10vw;margin-left: 10px;" (click)="onChangeDays()">SET</button>
+
+<h2>Responsive Table</h2>
+
+<div class="table-wrapper">
+<table class="fl-table">
+<thead>
+<tr>
+<th scope="col">Sales_ID</th>
+<th scope="col">User Id</th>
+<th scope="col">Company Id</th>
+<th scope="col">Medicine Id</th>
+<th scope="col">Sales Quantity</th>
+<th scope="col">Total Amount</th>
+<th scope="col">Sales Date</th>
+</tr>
+</thead>
+<tbody>
                             
-                              <tr *ngFor="let value of salesdata">
-                                <th>{{value.salesId}}</th>
-                                <td>{{value.userId}}</td>
-                                <td>{{value.companyId}}</td>
-                                <td>{{value.medicineId}}</td>
-                                <td>{{value.salesQuantity}}</td>
-                                <td>{{value.totalAmount}}</td>
-                                <td>{{value.salesDate}}</td>
-
-                              <tr>
+    <tr *ngFor="let value of salesdata">
+    <th>{{value.salesId}}</th>
+    <td>{{value.userId}}</td>
+    <td>{{value.companyId}}</td>
+    <td>{{value.medicineId}}</td>
+    <td>{{value.salesQuantity}}</td>
+    <td>{{value.totalAmount}}</td>
+    <td>{{value.salesDate}}</td>
+    <tr>
                         
-                        <tbody>
-                    </table>
+<tbody>
+</table>
                 </div>
                 <ul class="pagination justify-content-center">
                   <li class="page-item" *ngIf="pageNo!=0"><a (click)="previousClick()" class="page-link">Previous</a></li>
                   <li class="page-item" *ngIf="conditionVariable"><a (click)="nextClick()" class="page-link">Next</a></li>
                 </ul>
-                <button type="button" class="btn btn-outline-primary btn-sm m-0 waves-effect" (click)="SortBy()">Sort By</button>
-                <!-- <button type="button" class="btn btn-outline-primary btn-sm m-0 waves-effect" (click)="ShowHistory()">Show Data from</button> -->
+
+                <div class="list-group">
+
+                  <!-- <a href="#" (click)="downloadFile('sample.pdf')">Download PDF</a><br/> -->
+
+                  <!-- <a href="#" (click)="downloadFile()">Download Excel</a><br/> -->
+              
+                  <!-- <a href="#" (click)="downloadFile('sample.csv')">Download CSV</a><br/>
+              
+                </div>
+
+
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+
+
+
+
+
+
+<link rel='stylesheet' id='roboto-subset.css-css'
+    href='https://mdbcdn.b-cdn.net/wp-content/themes/mdbootstrap4/docs-app/css/mdb5/fonts/roboto-subset.css?ver=3.9.0-update.5'
+    type='text/css' media='all' />
+
+<link rel="shortcut icon" href="https://mdbcdn.b-cdn.net/wp-content/themes/mdbootstrap4/favicon.ico" />
+
+<link rel="canonical" href="https://mdbootstrap.com/docs/standard/extended/registration/" />
+
+
+<section class="gradient-custom">
+    <div class="container py-5 h-100">
+        <div class="row justify-content-center align-items-start h-100">
+            <div class="col-12 col-lg-9 col-xl-7 w-100">
+                <div class="card shadow-2-strong card-registration card " style="border-radius: 15px;">
+                    <div class="card-body">
+                        <h5>Add items into Cart</h5>
+                        <hr>
+                        <form style="margin-right: 10px;" [formGroup]="salesForm">
+                          
+                            <div class="row justify-content-between">
+                                <label class="col align-items-center">Sort :</label>
+                                <select class="form-select col-12" style="width: 17vw;"
+                                    aria-label="Default select example" (change)="onChangeField($event)">
+                                    <option value="" disabled selected>Select your option</option>
+                                    <option *ngFor="let val of medicine" [value]="val.medicineId  ">{{val.medicinename}}</option>
+                                    
+                                </select>
+
+                               
+                            </div>
+                            
+                        </form>
+                        <br>
+                        
+                          
+                        
+                    </div>
+                </div>
+                
+
+            </div>
+        </div>
+    </div>
+</section> --> 
