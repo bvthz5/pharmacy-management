@@ -5,6 +5,7 @@ import { AddEditCompanyComponent } from './add-edit-company/add-edit-company.com
 import { AddEditMedicineComponent } from './add-edit-medicine/add-edit-medicine.component';
 import { CompanyComponent } from './company/company.component';
 import { InvoiceComponent } from './invoice/invoice.component';
+import { MedicineViewComponent } from './medicine-view/medicine-view.component';
 import { MedicineComponent } from './medicine/medicine.component';
 import { SalesComponent } from './sales/sales.component';
 
@@ -33,6 +34,9 @@ const routes: Routes = [
   },
   {
     path: "medicineAdd/:id", component: AddEditMedicineComponent, pathMatch: "full", canActivate: [AuthguardGuard]
+  },
+  {
+    path: "medicineView/:id", component: MedicineViewComponent, pathMatch: "full", canActivate: [AuthguardGuard]
   }
 ];
 

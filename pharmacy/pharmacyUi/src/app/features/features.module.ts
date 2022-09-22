@@ -14,6 +14,7 @@ import { InvoiceComponent } from './invoice/invoice.component';
 import { AddEditCompanyComponent } from './add-edit-company/add-edit-company.component';
 import { MedicineComponent } from './medicine/medicine.component';
 import { AddEditMedicineComponent } from './add-edit-medicine/add-edit-medicine.component';
+import { MedicineViewComponent } from './medicine-view/medicine-view.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { AddEditMedicineComponent } from './add-edit-medicine/add-edit-medicine.
     InvoiceComponent,
     AddEditCompanyComponent,
     MedicineComponent,
-    AddEditMedicineComponent
+    AddEditMedicineComponent,
+    MedicineViewComponent
   ],
   imports: [
     CommonModule,
