@@ -14,12 +14,12 @@
                         <form [formGroup]="medicineAdd">
                             <!-- <Button class="btn btn-primary" routerLink="/company">Home</Button><br /> -->
                             <label>Medicine Name</label>
-                            <input type="text" class="form-control form1" formControlName="medicinename" />
+                            <input type="text" class="form-control form1" formControlName="medicinename" [ngClass]="{'is-invalid':medicineAdd.controls['medicinename'].touched && medicineAdd.controls['medicinename'].errors}"/>
                             <label>Category</label>
-                            <input type="text" class="form-control form1" formControlName="category" />
+                            <input type="text" class="form-control form1" formControlName="category" [ngClass]="{'is-invalid':medicineAdd.controls['category'].touched && medicineAdd.controls['category'].errors}"/>
                             <label>Brand</label>
                             <!-- <input type="text" class="form-control form1" formControlName="brand" > -->
-                            <select class="form-select form1" formControlName="brand" (change)="onChange($event)">
+                            <select class="form-select form1" formControlName="brand" (change)="onChange($event)" [ngClass]="{'is-invalid':medicineAdd.controls['brand'].touched && medicineAdd.controls['brand'].errors}">
                               <option   class="form-control form1" *ngFor="let val of companyList" [value]="val.companyId">
                                 {{ val?.name }}
                               </option>
@@ -27,13 +27,13 @@
                           
                             <label>ProductionDate</label>
                           
-                            <input type="date" class="form-control form1" (keydown)="$event.preventDefault()" formControlName="production_date"  max="{{date | date:'yyyy-MM-dd'}}"/>
+                            <input type="date" class="form-control form1" (keydown)="$event.preventDefault()" formControlName="production_date"  max="{{date | date:'yyyy-MM-dd'}}" [ngClass]="{'is-invalid':medicineAdd.controls['production_date'].touched && medicineAdd.controls['production_date'].errors}"/>
                             <label>ExpiryDate</label>
-                            <input type="date" class="form-control form1" (keydown)="$event.preventDefault()" formControlName="expiry_date" min="{{date | date:'yyyy-MM-dd'}}"/>
+                            <input type="date" class="form-control form1" (keydown)="$event.preventDefault()" formControlName="expiry_date" min="{{date | date:'yyyy-MM-dd'}}"[ngClass]="{'is-invalid':medicineAdd.controls['expiry_date'].touched && medicineAdd.controls['expiry_date'].errors}"/>
                             <label>Quantity</label>
-                            <input type="text" class="form-control form1" formControlName="quantity" />
+                            <input type="number" class="form-control form1" formControlName="quantity" [ngClass]="{'is-invalid':medicineAdd.controls['quantity'].touched && medicineAdd.controls['quantity'].errors}"/>
                             <label>CostPrice</label>
-                            <input type="text" class="form-control form1" formControlName="cost_price" />
+                            <input type="number" class="form-control form1" formControlName="cost_price" [ngClass]="{'is-invalid':medicineAdd.controls['cost_price'].touched && medicineAdd.controls['cost_price'].errors}"/>
                             <!-- <label>CompanyId</label>
                             <input type="text" class="form-control form1" formControlName="companyId" /> -->
                           

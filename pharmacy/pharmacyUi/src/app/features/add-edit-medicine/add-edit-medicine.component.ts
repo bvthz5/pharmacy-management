@@ -60,15 +60,15 @@ export class AddEditMedicineComponent implements OnInit {
       brand: new FormControl('', Validators.required),
       production_date: new FormControl('', Validators.required),
       expiry_date: new FormControl('', Validators.required),
-      quantity: new FormControl('', Validators.required),
-      cost_price: new FormControl('', Validators.required),
+      quantity: new FormControl('', [Validators.required,Validators.pattern("^[1-9]+[0-9]*$")]),
+      cost_price: new FormControl('', [Validators.required,Validators.pattern("^[1-9.]+$")]),
 
     })
 
   }
 
   AddMedicine() {
-  
+  this.medicineAdd.markAllAsTouched()
     if(this.medicineAdd.valid)
     {
       var data = {
@@ -92,11 +92,10 @@ export class AddEditMedicineComponent implements OnInit {
         error: (error: any) => console.log(error)
   
       });
-    }else{
-      alert("Enter a valid Form")
     }
   }
   updateMedicine(id: any) {
+  this.medicineAdd.markAllAsTouched()
     if (this.medicineAdd.valid) {
       var data = {
         "medicinename": this.medicineAdd.value.medicinename,
@@ -119,8 +118,6 @@ export class AddEditMedicineComponent implements OnInit {
           },
           error: (err: any) => console.log(err)
         })
-      }else{
-        alert("Enter a valid form")
       }
     }
   }

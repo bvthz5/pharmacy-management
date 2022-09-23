@@ -25,7 +25,8 @@ public class MedicineServiceImpl implements MedicineService {
 
     @Override
     public Collection<MedicineListView> list() {
-        return medicineRepository.findByStatusAndQuantityGreaterThan(Medicine.Status.ACTIVE.value,0)
+        Date date = new Date();
+        return medicineRepository.findByStatusAndQuantityGreaterThanAndExpiryDateGreaterThan(Medicine.Status.ACTIVE.value,0,date)
                 .stream().map(x -> new MedicineListView(x)).collect(Collectors.toList());
 
         // return null;

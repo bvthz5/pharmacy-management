@@ -1,6 +1,7 @@
 package com.example.pharmacy.repository;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -16,7 +17,7 @@ import com.example.pharmacy.enitity.Medicine;
 public interface MedicineRepository extends Repository<Medicine, Integer>{
 
     //  Collection<MedicineListView>findByUserUserIdAndStatus(Integer currentUserId, byte value);
-     Collection<Medicine>findByStatusAndQuantityGreaterThan( byte value,Integer quantity);
+     Collection<Medicine>findByStatusAndQuantityGreaterThanAndExpiryDateGreaterThan( byte value,Integer quantity,Date currentDate);
     Medicine save(Medicine medicine);
 
     Optional<Medicine>findByMedicineIdAndStatus(Integer medicine_id,  byte value); 
