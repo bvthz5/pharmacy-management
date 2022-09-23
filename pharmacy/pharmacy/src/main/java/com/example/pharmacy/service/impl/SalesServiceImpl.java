@@ -83,7 +83,7 @@ public class SalesServiceImpl implements SalesService {
 
     @Override
 	public Collection<SalesListView> findPaginated(Integer pageNo, Integer pageSize,String sortBy) {
-		Pageable paging =  PageRequest.of(pageNo, pageSize,Sort.by("totalAmount").ascending());
+		Pageable paging =  PageRequest.of(pageNo, pageSize,Sort.by(sortBy).ascending());
 		Page<SalesListView> pagedResult = salesRepository.findAllByUserUserId(SecurityUtil.getCurrentUserId(),paging);
 		return pagedResult.toList();
     }

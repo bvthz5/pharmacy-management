@@ -56,8 +56,8 @@ public class SalesController {
         
     }
     
-    @GetMapping("/{pageNo}/{pageSize}")
-	public Collection<SalesListView> getPaginated(@PathVariable Integer pageNo,@PathVariable Integer pageSize,String sortBy)
+    @GetMapping("/{pageNo}/{pageSize}/{sortBy}")
+	public Collection<SalesListView> getPaginated(@PathVariable Integer pageNo,@PathVariable Integer pageSize,@PathVariable String sortBy)
     {
 		return salesService.findPaginated(pageNo, pageSize,sortBy);
 	}

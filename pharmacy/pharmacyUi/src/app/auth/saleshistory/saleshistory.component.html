@@ -1,53 +1,63 @@
 
-<button type="button" class="btn btn-outline-primary btn-sm m-0 waves-effect" (click)="SortBy()">Sort By</button>          
 
-<button type="button" class="btn btn-outline-primary btn-sm m-0 waves-effect" (click)="downloadFile()">Download as Excel</button>
 
-<label class="col">Show Data From:</label><input type="number" style="width: 17vw;" formControlName="quantity" [placeholder]="availableQuantity">Days
-<button class="btn btn-primary col" style="width: 10vw;margin-left: 10px;" (click)="onChangeDays()">SET</button>
+
+<button type="button" class="btn btn-outline-primary btn-sm m-0 waves-effect" (click)="downloadFile()">Download as
+    Excel</button>
+
+<label class="col">Show Data From:</label><input type="number" style="width: 17vw;" 
+    [placeholder]="days">Days
+<button class="btn btn-primary col" style="width: 10vw;margin-left: 10px;" (click)="onChangeDays($event)">SET</button>
 
 <h2>Responsive Table</h2>
 
+<br>
+<select class="form-select col-12 table-wrapper" style="width: 17vw; margin-bottom: 5px;" aria-label="Default select example"
+    (change)="onSort($event)">
+    <option [value]="1" selected>Sales Id</option>
+    <option [value]="2">Sales Date</option>
+    <option [value]="3">Total Amount</option>
+</select>
 <div class="table-wrapper">
-<table class="fl-table">
-<thead>
-<tr>
-<th scope="col">Sales_ID</th>
-<th scope="col">User Id</th>
-<th scope="col">Company Id</th>
-<th scope="col">Medicine Id</th>
-<th scope="col">Sales Quantity</th>
-<th scope="col">Total Amount</th>
-<th scope="col">Sales Date</th>
-</tr>
-</thead>
-<tbody>
-                            
-    <tr *ngFor="let value of salesdata">
-    <th>{{value.salesId}}</th>
-    <td>{{value.userId}}</td>
-    <td>{{value.companyId}}</td>
-    <td>{{value.medicineId}}</td>
-    <td>{{value.salesQuantity}}</td>
-    <td>{{value.totalAmount}}</td>
-    <td>{{value.salesDate}}</td>
-    <tr>
-                        
-<tbody>
-</table>
-                </div>
-                <ul class="pagination justify-content-center">
-                  <li class="page-item" *ngIf="pageNo!=0"><a (click)="previousClick()" class="page-link">Previous</a></li>
-                  <li class="page-item" *ngIf="conditionVariable"><a (click)="nextClick()" class="page-link">Next</a></li>
-                </ul>
+    <table class="fl-table">
+        <thead>
+            <tr>
+                <th scope="col">Sales_ID</th>
+                <th scope="col">User Id</th>
+                <th scope="col">Company</th>
+                <th scope="col">Medicine Name</th>
+                <th scope="col">Sales Quantity</th>
+                <th scope="col">Total Amount</th>
+                <th scope="col">Sales Date</th>
+            </tr>
+        </thead>
+        <tbody>
 
-                <div class="list-group">
+            <tr *ngFor="let value of salesdata">
+                <th>{{value.salesId}}</th>
+                <td>{{value.userId}}</td>
+                <td>{{value.brand}}</td>
+                <td>{{value.medicinename}}</td>
+                <td>{{value.salesQuantity}}</td>
+                <td>{{value.totalAmount}}</td>
+                <td>{{value.salesDate| date:"dd-MM-yyyy"}}</td>
+            <tr>
 
-                  <!-- <a href="#" (click)="downloadFile('sample.pdf')">Download PDF</a><br/> -->
+        <tbody>
+    </table>
+</div>
+<ul class="pagination justify-content-center">
+    <li class="page-item" *ngIf="pageNo!=0"><a (click)="previousClick()" class="page-link">Previous</a></li>
+    <li class="page-item" *ngIf="conditionVariable"><a (click)="nextClick()" class="page-link">Next</a></li>
+</ul>
 
-                  <!-- <a href="#" (click)="downloadFile()">Download Excel</a><br/> -->
-              
-                  <!-- <a href="#" (click)="downloadFile('sample.csv')">Download CSV</a><br/>
+<div class="list-group">
+
+    <!-- <a href="#" (click)="downloadFile('sample.pdf')">Download PDF</a><br/> -->
+
+    <!-- <a href="#" (click)="downloadFile()">Download Excel</a><br/> -->
+
+    <!-- <a href="#" (click)="downloadFile('sample.csv')">Download CSV</a><br/>
               
                 </div>
 
@@ -103,4 +113,4 @@
             </div>
         </div>
     </div>
-</section> --> 
+</section> -->
