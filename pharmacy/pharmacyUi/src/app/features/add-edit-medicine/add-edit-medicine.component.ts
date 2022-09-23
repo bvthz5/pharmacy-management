@@ -18,7 +18,7 @@ export class AddEditMedicineComponent implements OnInit {
   companyList: any;
   brand: any
   companyId: any
-
+  date= new Date()
   ngOnInit(): void {
     if (this.activatedRoute.snapshot.paramMap.get('id') != null) {
       this.id = this.activatedRoute.snapshot.paramMap.get('id')
@@ -33,7 +33,7 @@ export class AddEditMedicineComponent implements OnInit {
          console. log("===>",this.medicineDetails.brand)
          this.medicineAdd.get("expiry_date").patchValue(this.formatDate(this.medicineDetails.expiry_date));
          this.medicineAdd.get("production_date").patchValue(this.formatDate(this.medicineDetails.production_date));
-         
+         this.medicineAdd.get("brand").setValue(this.medicineDetails.companyId)
 
         },
         error: (error: any) => {

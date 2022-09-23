@@ -1,6 +1,9 @@
 package com.example.pharmacy.service.impl;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.Date;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +39,16 @@ public class MedicineServiceImpl implements MedicineService {
     @Override
     public MedicineDetailView add(MedicineForm form) {
         // System.out.println("jkgsdjgjksdb->"+form.getMedicinename());
+        // System.out.println("=====>"+form.getExpiryDate());
+        // SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        // try {
+        //     Date date1 = sdf.parse(form.getExpiryDate().toString());
+        // System.out.println("=====>"+date1);
+
+        // } catch (ParseException e) {
+        //     // TODO Auto-generated catch block
+        //     e.printStackTrace();
+        // }
         return new MedicineDetailView(medicineRepository.save(new Medicine(form)));
     }
 

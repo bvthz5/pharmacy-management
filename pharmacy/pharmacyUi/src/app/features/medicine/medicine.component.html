@@ -52,10 +52,10 @@
                             <td [ngClass]="{'error': vmedicine.quantity <10}">{{vmedicine.quantity}}</td>
                             <td>{{vmedicine.cost_price}}</td>
                   
-                            <td><button type="button" class="btn btn-success btns" routerLink="/medicineView/{{vmedicine.companyId}}">View</button>
+                            <td><button type="button" class="btn btn-success btns" routerLink="/medicineView/{{vmedicine.medicineId}}">View</button>
                                 <Button
                                     class="btn btn-primary btns"
-                                    routerLink="/medicineAdd/{{vmedicine.companyId}}">Edit</Button><Button
+                                    routerLink="/medicineAdd/{{vmedicine.medicineId}}">Edit</Button><Button
                                     class="btn btn-danger btns" (click)="deleteMedicine(vmedicine.medicineId)">Delete</Button></td>
 
 

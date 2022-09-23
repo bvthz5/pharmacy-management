@@ -2,12 +2,16 @@ package com.example.pharmacy.form;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class MedicineForm {
 
     private String medicinename;
     private String category;
     private String brand;
+
     private Date productionDate;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date expiryDate;
     // private String dosage;
     // private String reg_date;

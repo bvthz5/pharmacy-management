@@ -27,9 +27,9 @@
                           
                             <label>ProductionDate</label>
                           
-                            <input type="date" class="form-control form1" formControlName="production_date" />
+                            <input type="date" class="form-control form1" (keydown)="$event.preventDefault()" formControlName="production_date"  max="{{date | date:'yyyy-MM-dd'}}"/>
                             <label>ExpiryDate</label>
-                            <input type="date" class="form-control form1" formControlName="expiry_date" />
+                            <input type="date" class="form-control form1" (keydown)="$event.preventDefault()" formControlName="expiry_date" min="{{date | date:'yyyy-MM-dd'}}"/>
                             <label>Quantity</label>
                             <input type="text" class="form-control form1" formControlName="quantity" />
                             <label>CostPrice</label>

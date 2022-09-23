@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthguardGuard } from '../common-lib/guard/authguard.guard';
 import { AddEditCompanyComponent } from './add-edit-company/add-edit-company.component';
 import { AddEditMedicineComponent } from './add-edit-medicine/add-edit-medicine.component';
+import { CompanyDetainViewComponent } from './company-detain-view/company-detain-view.component';
 import { CompanyComponent } from './company/company.component';
 import { InvoiceComponent } from './invoice/invoice.component';
 import { MedicineViewComponent } from './medicine-view/medicine-view.component';
@@ -37,6 +38,10 @@ const routes: Routes = [
   },
   {
     path: "medicineView/:id", component: MedicineViewComponent, pathMatch: "full", canActivate: [AuthguardGuard]
+  }
+  ,
+  {
+    path: "companyView/:id", component: CompanyDetainViewComponent, pathMatch: "full", canActivate: [AuthguardGuard]
   }
 ];
 

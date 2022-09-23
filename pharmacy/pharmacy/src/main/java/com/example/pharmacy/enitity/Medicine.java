@@ -79,6 +79,7 @@ public Medicine(MedicineForm form) {
 
 
 public Medicine update(MedicineForm form) {
+    this.company=new Company( form.getCompanyId());
     this.medicinename=form.getMedicinename();
     this.category=form.getCategory();
     this.brand=form.getBrand();
