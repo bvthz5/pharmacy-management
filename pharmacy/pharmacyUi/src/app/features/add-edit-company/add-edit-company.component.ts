@@ -42,11 +42,12 @@ export class AddEditCompanyComponent implements OnInit {
     this.companyGroup = new FormGroup({
       name: new FormControl('', [Validators.required]),
       address: new FormControl('', Validators.required),
-      phone: new FormControl('', Validators.required),
+      phone: new FormControl('', [Validators.required,Validators.pattern("^[0-9]{10}$")]),
       description: new FormControl('', Validators.required),
     })
   }
   addCompany() {
+    this.companyGroup.markAllAsTouched()
     if (this.companyGroup.valid) {
       this.service.addCompany(this.companyGroup.value).subscribe({
         next: (res: any) => {
@@ -58,11 +59,13 @@ export class AddEditCompanyComponent implements OnInit {
         error: (error: any) => console.log(error)
 
       });
-    } else {
-      alert("Enter a valid form")
     }
+    //  else {
+    //   alert("Enter a valid form")
+    // }
   }
   updateCompany(companyId:any) {
+    this.companyGroup.markAllAsTouched()
     if (this.companyGroup.valid) {
       this.service.updateCompany(this.companyGroup.value,companyId).subscribe({
         next:(response:any)=>{
