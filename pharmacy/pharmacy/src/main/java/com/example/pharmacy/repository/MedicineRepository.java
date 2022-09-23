@@ -34,6 +34,10 @@ public interface MedicineRepository extends Repository<Medicine, Integer>{
     // sCollection<MedicineListView> findByUserUserId(Integer userId);
 	
 	Optional<Medicine>findByMedicineId(Integer medicineId);
+    @Modifying
+	@Transactional
+	@Query(value = "update medicine set status=0 where company_id=:companyId",nativeQuery = true)
+	public void deleteMedicineByCompany(@Param("companyId")Integer companyId);
 
     
 }
