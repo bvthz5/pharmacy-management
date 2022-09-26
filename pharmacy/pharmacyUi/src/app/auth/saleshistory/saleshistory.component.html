@@ -1,33 +1,28 @@
 
-<button type="button" class="btn btn-outline-primary btn-sm m-0 waves-effect" (click)="downloadFile()">Download as
-    Excel</button>
+<div class="nav">
+    <h1>Sales History</h1>
 
-<!-- <label class="col">Show Data From:</label><input type="number" style="width: 17vw;" 
-    [placeholder]="days">Days -->
-    <!-- <input type = "number" class = "fortextbox" name="day" 
-    placeholder = "day" formControlName = "day">
-<button class="btn btn-primary col" style="width: 10vw;margin-left: 10px;" (click)="onChangeDays(days)">SET</button> -->
+</div>
 
-<br>
-<div class="body">
+
+
     <div class="container">
-
-    <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
-    
-      <label for="Input">NoOfDays</label>
-        <input type="number" class="form-control" placeholder="days" formControlName="days">
-      <button type="submit" class="btn btn-primary">NoOfDays</button><br><br>
-
-    </form>
-   
+        <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
+            <div class="flex">
+            <input type="number" id="formcontrol" class="form-control" placeholder="days" formControlName="days">
+            <button type="submit" class="primary">NoOfDays</button>
+        </div>
+        </form>
     </div>
+
+
+
 <select class="form-select col-12 table-wrapper" style="width: 17vw; margin-bottom: 5px;" aria-label="Default select example"
     (change)="onSort($event)">
     <option [value]="1" selected>Sales Id</option>
     <option [value]="2">Sales Date</option>
     <option [value]="3">Total Amount</option>
 </select>
-
 
 <div class="table-wrapper">
     <table class="fl-table">
@@ -63,65 +58,10 @@
 </ul>
 
 <div class="list-group">
-
-    <!-- <a href="#" (click)="downloadFile('sample.pdf')">Download PDF</a><br/> -->
-
-    <!-- <a href="#" (click)="downloadFile()">Download Excel</a><br/> -->
-
-    <!-- <a href="#" (click)="downloadFile('sample.csv')">Download CSV</a><br/>
-              
-                </div>
-
-
-                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <button type="button" class="download" (click)="downloadFile()">Download as
+        Excel</button>
 
 
 
 
 
-
-
-<link rel='stylesheet' id='roboto-subset.css-css'
-    href='https://mdbcdn.b-cdn.net/wp-content/themes/mdbootstrap4/docs-app/css/mdb5/fonts/roboto-subset.css?ver=3.9.0-update.5'
-    type='text/css' media='all' />
-
-<link rel="shortcut icon" href="https://mdbcdn.b-cdn.net/wp-content/themes/mdbootstrap4/favicon.ico" />
-
-<link rel="canonical" href="https://mdbootstrap.com/docs/standard/extended/registration/" />
-
-
-<section class="gradient-custom">
-    <div class="container py-5 h-100">
-        <div class="row justify-content-center align-items-start h-100">
-            <div class="col-12 col-lg-9 col-xl-7 w-100">
-                <div class="card shadow-2-strong card-registration card " style="border-radius: 15px;">
-                    <div class="card-body">
-                        <h5>Add items into Cart</h5>
-                        <hr>
-                        <form style="margin-right: 10px;" [formGroup]="salesForm">
-                          
-                            <div class="row justify-content-between">
-                                <label class="col align-items-center">Sort :</label>
-                                <select class="form-select col-12" style="width: 17vw;"
-                                    aria-label="Default select example" (change)="onChangeField($event)">
-                                    <option value="" disabled selected>Select your option</option>
-                                    <option *ngFor="let val of medicine" [value]="val.medicineId  ">{{val.medicinename}}</option>
-                                    
-                                </select>
-
-                               
-                            </div>
-                            
-                        </form>
-                        <br>
-                        
-                          
-                        
-                    </div>
-                </div>
-                
-
-            </div>
-        </div>
-    </div>
-</section> -->

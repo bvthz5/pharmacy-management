@@ -125,7 +125,7 @@ export class SaleshistoryComponent implements OnInit {
         this.service.filter(this.addForm.value.days).subscribe(res => {
 
           this.salesdata = res
-          alert("success")
+          // alert("success")
           } );
         // this.router.navigate(['itemlist'])
         
