@@ -14,7 +14,14 @@ export class SaleshistoryComponent implements OnInit {
  
   constructor(private router : Router, private service : ApiService) { }
   salesdata:any;
-  
+
+
+  addForm =new FormGroup({
+    days:new FormControl('',[Validators.required]),
+
+  })
+
+
   ngOnInit(): void
   {
       this.getValueFromSalesApi(0,5,this.sortValue);
@@ -99,18 +106,31 @@ export class SaleshistoryComponent implements OnInit {
         });
      
       }
-      onChangeDays(days:any) {
-        this.service.filter(days).subscribe(
-          (res:any)=>{
+    //   onChangeDays(days:any) {
+    //     this.service.filter(days).subscribe(
+    //       (res:any)=>{
 
-            console.log(res);
+    //         console.log(res);
             
-          this.salesdata = res
+    //       this.salesdata = res
         
-        });
+    //     });
       
 
+    // }
+
+    onSubmit()
+    {
+        console.log(this.addForm.value)
+        this.service.filter(this.addForm.value.days).subscribe(res => {
+
+          this.salesdata = res
+          alert("success")
+          } );
+        // this.router.navigate(['itemlist'])
+        
     }
+  
     }
 
 

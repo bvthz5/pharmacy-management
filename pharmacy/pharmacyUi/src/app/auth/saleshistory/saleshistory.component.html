@@ -1,23 +1,34 @@
 
-
-
-
 <button type="button" class="btn btn-outline-primary btn-sm m-0 waves-effect" (click)="downloadFile()">Download as
     Excel</button>
 
-<label class="col">Show Data From:</label><input type="number" style="width: 17vw;" 
-    [placeholder]="days">Days
-<button class="btn btn-primary col" style="width: 10vw;margin-left: 10px;" (click)="onChangeDays($event)">SET</button>
-
-<h2>Responsive Table</h2>
+<!-- <label class="col">Show Data From:</label><input type="number" style="width: 17vw;" 
+    [placeholder]="days">Days -->
+    <!-- <input type = "number" class = "fortextbox" name="day" 
+    placeholder = "day" formControlName = "day">
+<button class="btn btn-primary col" style="width: 10vw;margin-left: 10px;" (click)="onChangeDays(days)">SET</button> -->
 
 <br>
+<div class="body">
+    <div class="container">
+
+    <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
+    
+      <label for="Input">NoOfDays</label>
+        <input type="number" class="form-control" placeholder="days" formControlName="days">
+      <button type="submit" class="btn btn-primary">NoOfDays</button><br><br>
+
+    </form>
+   
+    </div>
 <select class="form-select col-12 table-wrapper" style="width: 17vw; margin-bottom: 5px;" aria-label="Default select example"
     (change)="onSort($event)">
     <option [value]="1" selected>Sales Id</option>
     <option [value]="2">Sales Date</option>
     <option [value]="3">Total Amount</option>
 </select>
+
+
 <div class="table-wrapper">
     <table class="fl-table">
         <thead>
