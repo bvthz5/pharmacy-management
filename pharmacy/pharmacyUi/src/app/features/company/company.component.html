@@ -1,0 +1,50 @@
+<app-dashboard></app-dashboard>
+<br>
+<div class="container-xl ">
+    <div class="table">
+        <div class="table-wrapper">
+            <div class="table-title">
+                <div class="row justify-content-between">
+                    <div class="col-sm-8">
+                        <h2><b>Company Details</b></h2>
+                    </div>
+                    <div class="col-sm-2">
+                        <button type="button" *ngIf="userType=='admin'" class="btn btn-success " routerLink="/addCompany">Add Company</button>
+                    </div>
+
+                </div>
+            </div>
+            <br>
+            <div class="justify-content-center text-center">
+                <table class="table table-striped table-hover table-bordered" style="width: 100%;">
+                    <thead>
+                        <tr>
+                            <th>Company Id</th>
+                            <th>Name</th>
+                            <th>Phone</th>
+                            <th>Address</th>
+                            <th>Descripion</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let val of companyData">
+                            <td>{{val.companyId}}</td>
+                            <td>{{val.name}}</td>
+                            <td>{{val.phone}}</td>
+                            <td>{{val.address}}</td>
+                            <td>{{val.description}}</td>
+                            <td><button type="button" class="btn btn-success btns" routerLink="/companyView/{{val.companyId}}">View</button>
+                                <Button *ngIf="userType=='admin'"
+                                    class="btn btn-primary btns"
+                                    routerLink="/addCompany/{{val.companyId}}">Edit</Button><Button *ngIf="userType=='admin'"
+                                    class="btn btn-danger btns" (click)="onDelete(val.companyId)">Delete</Button></td>
+
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

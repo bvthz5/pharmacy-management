@@ -9,7 +9,7 @@ import com.example.pharmacy.enitity.Company;
 import com.example.pharmacy.exception.NotFoundException;
 import com.example.pharmacy.form.CompanyForm;
 import com.example.pharmacy.repository.CompanyRepository;
-import com.example.pharmacy.security.util.SecurityUtil;
+import com.example.pharmacy.repository.MedicineRepository;
 import com.example.pharmacy.service.CompanyService;
 import com.example.pharmacy.view.CompanyDetailView;
 import com.example.pharmacy.view.CompanyListView;
@@ -19,6 +19,9 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Autowired
     private CompanyRepository companyRepository;
+    @Autowired
+    private MedicineRepository medicineRepository;
+
 
     @Override
     public Collection<CompanyListView> list(){
@@ -48,6 +51,7 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public void delete(Integer companyId) throws NotFoundException {
+        medicineRepository.deleteMedicineByCompany(companyId);
         companyRepository.deleteCompany(companyId);
        
         

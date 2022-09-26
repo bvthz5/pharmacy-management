@@ -1,0 +1,57 @@
+<app-header></app-header>
+
+<section class="gradient-custom" style="background-color: rgb(194, 190, 190);height: 100%;min-height: 100vh;">
+    <div class="container py-5 h-100">
+        <div class="row justify-content-center align-items-start h-100">
+            <div class="col-12 col-lg-9 col-xl-7 " >
+                <div class="card shadow-2-strong card-registration card " style="border-radius: 15px; width: 100%;">
+                    <div class="card-body ">
+                        <label *ngIf="id==null;" style="font-size: 20px;">Add Medicine</label>
+                        <label *ngIf="id!=null;" style="font-size: 20px;">Update Medicine</label>
+                        <br>
+                        <br>
+                        
+                        <form [formGroup]="medicineAdd">
+                            <!-- <Button class="btn btn-primary" routerLink="/company">Home</Button><br /> -->
+                            <label>Medicine Name</label>
+                            <input type="text" class="form-control form1" formControlName="medicinename" [ngClass]="{'is-invalid':medicineAdd.controls['medicinename'].touched && medicineAdd.controls['medicinename'].errors}"/>
+                            <label>Category</label>
+                            <input type="text" class="form-control form1" formControlName="category" [ngClass]="{'is-invalid':medicineAdd.controls['category'].touched && medicineAdd.controls['category'].errors}"/>
+                            <label>Brand</label>
+                            <!-- <input type="text" class="form-control form1" formControlName="brand" > -->
+                            <select class="form-select form1" formControlName="brand" (change)="onChange($event)" [ngClass]="{'is-invalid':medicineAdd.controls['brand'].touched && medicineAdd.controls['brand'].errors}">
+                              <option   class="form-control form1" *ngFor="let val of companyList" [value]="val.companyId">
+                                {{ val?.name }}
+                              </option>
+                            </select>
+                          
+                            <label>ProductionDate</label>
+                          
+                            <input type="date" class="form-control form1" (keydown)="$event.preventDefault()" formControlName="production_date"  max="{{date | date:'yyyy-MM-dd'}}" [ngClass]="{'is-invalid':medicineAdd.controls['production_date'].touched && medicineAdd.controls['production_date'].errors}"/>
+                            <label>ExpiryDate</label>
+                            <input type="date" class="form-control form1" (keydown)="$event.preventDefault()" formControlName="expiry_date" min="{{date | date:'yyyy-MM-dd'}}"[ngClass]="{'is-invalid':medicineAdd.controls['expiry_date'].touched && medicineAdd.controls['expiry_date'].errors}"/>
+                            <label>Quantity</label>
+                            <input type="number" class="form-control form1" formControlName="quantity" [ngClass]="{'is-invalid':medicineAdd.controls['quantity'].touched && medicineAdd.controls['quantity'].errors}"/>
+                            <label>CostPrice</label>
+                            <input type="number" class="form-control form1" formControlName="cost_price" [ngClass]="{'is-invalid':medicineAdd.controls['cost_price'].touched && medicineAdd.controls['cost_price'].errors}"/>
+                            <!-- <label>CompanyId</label>
+                            <input type="text" class="form-control form1" formControlName="companyId" /> -->
+                          
+                            
+                            <button *ngIf="id == null" type="submit" (click)="AddMedicine()" class="custom-btn btn-5">
+                              Submit
+                            </button>
+                            <button *ngIf="id != null" type="submit" (click)="updateMedicine(medicineDetails.medicineId)" class="custom-btn btn-5">
+                              Update
+                            </button>
+                          
+                            
+                          </form>
+                   </div>
+                </div>
+                <!-- <br><br> -->
+
+            </div>
+        </div>
+    </div>
+</section>

@@ -34,6 +34,11 @@ public class MedicineController {
     public Collection<MedicineListView> list(Principal p){
         return medicineService.list();
     }
+    @GetMapping("/getCompany/{comapnyId}")
+    public Collection<MedicineListView> listbyCompanyId(@PathVariable("comapnyId") Integer comapnyId,Principal p){
+        return medicineService.listbyCompanyId(comapnyId);
+    }
+
 
     @PostMapping
     public MedicineDetailView add(@Valid @RequestBody MedicineForm form){

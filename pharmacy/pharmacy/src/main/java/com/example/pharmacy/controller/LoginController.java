@@ -6,6 +6,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.pharmacy.form.LoginForm;
 import com.example.pharmacy.service.UserService;
 import com.example.pharmacy.view.LoginView;
+import com.example.pharmacy.view.UserView;
 
 
 
@@ -25,10 +27,10 @@ public class LoginController {
     @Autowired
     private UserService userService;
 
-    // @GetMapping
-    // public UserView currentUser() {
-    //     return userService.currentUser();
-    // }
+    @GetMapping
+    public UserView currentUser() {
+        return userService.currentUser();
+    }
 
     @PostMapping
     public LoginView login(@Valid @RequestBody LoginForm form, Errors errors) {

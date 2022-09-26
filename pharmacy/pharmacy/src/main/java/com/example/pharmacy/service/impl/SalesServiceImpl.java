@@ -1,6 +1,7 @@
 package com.example.pharmacy.service.impl;
 
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.stream.Collectors;
 
 // import org.apache.catalina.security.SecurityUtil;
@@ -16,54 +17,66 @@ import com.example.pharmacy.security.util.SecurityUtil;
 import com.example.pharmacy.service.SalesService;
 import com.example.pharmacy.view.SalesDetailView;
 import com.example.pharmacy.view.SalesListView;
+
 @Service
 public class SalesServiceImpl implements SalesService {
 
     @Autowired
     private SalesRepository salesRepository;
-    @Autowired  
+    @Autowired
     private MedicineRepository medicineRepository;
+
     @Override
-    public Collection<SalesListView> list(){
-    	  
-          return salesRepository.findByUserUserIdAndStatus(SecurityUtil.getCurrentUserId(),Sales.Status.ACTIVE.value)
-          .stream().map(x-> new SalesListView(x)).collect(Collectors.toList());
-          
-          
+    public Collection<SalesListView> list() {
+
+        return salesRepository.findByUserUserIdAndStatus(SecurityUtil.getCurrentUserId(), Sales.Status.ACTIVE.value)
+                .stream().map(x -> new SalesListView(x)).collect(Collectors.toList());
+
         // return null;
     }
 
     @Override
-    public SalesDetailView add(SalesForm form){
-   System.out.println("jkgsdjgjksdb->"+form.getSalesQuantity());
-    	try {
-    		Integer x=	 medicineRepository.editStock(form.getSalesQuantity(), form.getMedicineId());
-    		System.out.println("============"+x);
-    		if(x==1) {
-    		return	new SalesDetailView(salesRepository.save(new Sales(form, SecurityUtil.getCurrentUserId())));
-    		}
-    		else {
-    			throw new ArithmeticException();
-    		}
-    	}
-    	catch(Exception e) {
-    		System.out.println("=====================");
-    		throw new ArithmeticException();
-    		
-    	}
+    public  Collection<SalesListView> add(Collection<SalesForm> form) {
+        // System.out.println("jkgsdjgjksdb->"+form.getSalesQuantity());
+        Iterator<SalesForm> itr = form.iterator();
+        System.out.println(itr.toString());
+        try {
+            while (itr.hasNext()) {
+                SalesForm salesForm=itr.next();
+                System.out.println("Quantity=====>" +salesForm.getSalesQuantity());
+                System.out.println("Companay ID==>" +salesForm.getCompanyId());
 
-       
+                // System.out.println("Inside try===>"+itr.next().getSalesQuantity().toString() );
 
-    	
+                 Integer x = medicineRepository.editStock(salesForm.getSalesQuantity(),salesForm.getMedicineId());
+               
+                System.out.println("============" + x);
+                if (x == 1) {
+                     new SalesDetailView(
+                    salesRepository.save(new Sales(salesForm, SecurityUtil.getCurrentUserId())));
+                } else {
+                     throw new ArithmeticException("----------errrrrrr--------");
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println("=====================");
+            throw new ArithmeticException();
+
+        }
+        return salesRepository.findByStatus( Sales.Status.ACTIVE.value)
+        .stream().map(x -> new SalesListView(x)).collect(Collectors.toList());
+
     }
 
     @Override
     public SalesDetailView get(Integer salesId) throws NotFoundException {
-        return salesRepository.findBySalesIdAndUserUserIdAndStatus( salesId, SecurityUtil.getCurrentUserId(),  Sales.Status.ACTIVE.value)
-        .map((sales)->{
-            return new SalesDetailView(sales);
-        }).orElseThrow(NotFoundException::new);
+        return salesRepository
+                .findBySalesIdAndUserUserIdAndStatus(salesId, SecurityUtil.getCurrentUserId(),
+                        Sales.Status.ACTIVE.value)
+                .map((sales) -> {
+                    return new SalesDetailView(sales);
+                }).orElseThrow(NotFoundException::new);
     }
 
-    
 }

@@ -1,6 +1,7 @@
 package com.example.pharmacy.repository;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -16,7 +17,7 @@ import com.example.pharmacy.enitity.Medicine;
 public interface MedicineRepository extends Repository<Medicine, Integer>{
 
     //  Collection<MedicineListView>findByUserUserIdAndStatus(Integer currentUserId, byte value);
-     Collection<Medicine>findByStatus( byte value);
+     Collection<Medicine>findByStatusAndQuantityGreaterThanAndExpiryDateGreaterThan( byte value,Integer quantity,Date currentDate);
     Medicine save(Medicine medicine);
 
     Optional<Medicine>findByMedicineIdAndStatus(Integer medicine_id,  byte value); 
@@ -34,6 +35,10 @@ public interface MedicineRepository extends Repository<Medicine, Integer>{
     // sCollection<MedicineListView> findByUserUserId(Integer userId);
 	
 	Optional<Medicine>findByMedicineId(Integer medicineId);
+    @Modifying
+	@Transactional
+	@Query(value = "update medicine set status=0 where company_id=:companyId",nativeQuery = true)
+	public void deleteMedicineByCompany(@Param("companyId")Integer companyId);
 
     
 }

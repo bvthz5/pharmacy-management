@@ -1,0 +1,63 @@
+<app-dashboard></app-dashboard>
+
+
+
+<section class="gradient-custom" style="background-color: rgb(194, 190, 190);height: 100%; min-height: 100vh;">
+    <div class="container py-5 h-100">
+        <div class="row justify-content-center align-items-start h-100">
+            <div class="col-12 col-lg-9 col-xl-7 ">
+                <div class="card shadow-2-strong card-registration card " style="border-radius: 15px; width: 100%;">
+                    <div class="card-body ">
+                        <label *ngIf="id==null;" style="font-size: 20px;">Add Company</label>
+                        <label *ngIf="id!=null;" style="font-size: 20px;">Update Company</label>
+                        <br>
+                        <br>
+
+                        <form [formGroup]="companyGroup" class="justify-content-center">
+                            <label>Company Name:</label>
+                            <input type="text" class="form-control form1" formControlName="name"
+                                [ngClass]="{'is-invalid':companyGroup.controls['name'].touched && companyGroup.controls['name'].errors}">
+                            <div *ngIf="companyGroup.controls['name'].touched">
+                                <div class="error" *ngIf="companyGroup.controls['name'].errors?.['required']">Enter a valid company name</div>
+
+                            </div>
+                            <label>Phone:</label>
+                            <!-- <td><textarea name="address" cols="30" rows="4"></textarea></td> -->
+                            <input type="number" class="form-control form1" formControlName="phone"
+                                [ngClass]="{'is-invalid':companyGroup.controls['phone'].touched && companyGroup.controls['phone'].errors}">
+                                <div *ngIf="companyGroup.controls['phone'].touched">
+                                    <div class="error" *ngIf="companyGroup.controls['phone'].errors?.['required']">Enter
+                                        a valid phone number</div>
+    
+                                </div>
+                            <label>Address:</label>
+                            <input type="text" class="form-control form1" formControlName="address"
+                                [ngClass]="{'is-invalid':companyGroup.controls['address'].touched && companyGroup.controls['address'].errors}">
+                                <div *ngIf="companyGroup.controls['address'].touched">
+                                    <div class="error" *ngIf="companyGroup.controls['address'].errors?.['required']">Enter
+                                        a valid address</div>
+    
+                                </div>
+                            <label>Description:</label>
+                            <input type="text" class="form-control form1" formControlName="description"
+                                [ngClass]="{'is-invalid':companyGroup.controls['description'].touched && companyGroup.controls['description'].errors}">
+                                <div *ngIf="companyGroup.controls['description'].touched">
+                                    <div class="error" *ngIf="companyGroup.controls['description'].errors?.['required']">Enter
+                                         description</div>
+    
+                                </div>
+                            <br>
+                            <button *ngIf="id==null" type="submit" (click)="addCompany()"
+                                class="custom-btn btn-5">Submit</button>
+                            <button *ngIf="id!=null" type="submit" (click)="updateCompany(companyDetails.companyId)"
+                                class="custom-btn btn-5">Update</button>
+
+                        </form>
+                    </div>
+                </div>
+                <!-- <br><br> -->
+
+            </div>
+        </div>
+    </div>
+</section>

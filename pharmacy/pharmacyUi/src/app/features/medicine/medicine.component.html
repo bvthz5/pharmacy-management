@@ -1,0 +1,68 @@
+<app-header></app-header>
+<br>
+<div class="container-xl ">
+    <div class="table">
+        <div class="table-wrapper">
+            <div class="table-title">
+                <div class="row justify-content-between">
+                    <div class="col-sm-8">
+                        <h2><b>Medicine Details</b></h2>
+                    </div>
+                    <div class="col-sm-2">
+                        <button type="button" class="btn btn-success " routerLink="/medicineAdd" *ngIf="userType=='admin'">Add Medicine</button>
+                    </div>
+
+                </div>
+            </div>
+            <br>
+            <div class="d-flex flex-row">
+
+                <label class="p-2 ">Sort By: </label>
+                <select class="form-select col-12 " style="width: 17vw; margin-bottom: 5px;"
+                                    aria-label="Default select example" (change)="onSortChange($event)">
+                                    <option [value]="1" selected>Medicine Id</option>
+                                    <option [value]="2" >Expiry</option>
+                                    <option [value]="3" >Quantity</option>                                    
+                                </select>
+            </div>
+           
+            <div class="justify-content-center text-center">
+                <table class="table table-striped table-hover table-bordered" style="width: 100%;">
+                    <thead>
+                        <tr>
+                            <th>MedicineId</th>
+                            <th>Name</th>
+                            <th>Category</th>
+                            <th>Brand</th>
+                            <th>Mfg. Date</th>
+                            <th>Expiry Date</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor=" let vmedicine of medicine">
+                            <td>{{vmedicine.medicineId}}</td>
+                            <td>{{vmedicine.medicinename}}</td>
+                            <td>{{vmedicine.category}}</td>
+                            <td>{{vmedicine.brand}}</td>
+                            <td>{{vmedicine.production_date| date:"dd-MM-YYYY"}}</td>
+                            <td [ngClass]="{'error': checkExpiry(vmedicine.expiry_date)}">{{vmedicine.expiry_date|date:"dd-MM-yyyy"}}</td>
+                            <td [ngClass]="{'error': vmedicine.quantity <10}">{{vmedicine.quantity}}</td>
+                            <td>{{vmedicine.cost_price}}</td>
+                  
+                            <td><button type="button" class="btn btn-success btns" routerLink="/medicineView/{{vmedicine.medicineId}}">View</button>
+                                <Button
+                                    class="btn btn-primary btns" *ngIf="userType=='admin'" 
+                                    routerLink="/medicineAdd/{{vmedicine.medicineId}}">Edit</Button><Button *ngIf="userType=='admin'"
+                                    class="btn btn-danger btns" (click)="deleteMedicine(vmedicine.medicineId)">Delete</Button></td>
+
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -6,6 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.ManyToOne;
+import javax.persistence.Column;
 
 import com.example.pharmacy.form.CompanyForm;
 
@@ -24,8 +25,10 @@ public class Company {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer companyId;
+	@Column(unique=true)
      private String name;
      private String address;
+	 @Column(unique=true)
      private String phone;
      private String description;
     //  private String type;

@@ -1,0 +1,95 @@
+<app-dashboard></app-dashboard>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+
+
+
+<!-- <link rel="stylesheet"
+  href="https://mdbcdn.b-cdn.net/wp-content/themes/mdbootstrap4/docs-app/css/dist/mdb5/standard/core.min.css"> -->
+
+
+<link rel='stylesheet' id='roboto-subset.css-css'
+    href='https://mdbcdn.b-cdn.net/wp-content/themes/mdbootstrap4/docs-app/css/mdb5/fonts/roboto-subset.css?ver=3.9.0-update.5'
+    type='text/css' media='all' />
+
+<link rel="shortcut icon" href="https://mdbcdn.b-cdn.net/wp-content/themes/mdbootstrap4/favicon.ico" />
+
+<link rel="canonical" href="https://mdbootstrap.com/docs/standard/extended/registration/" />
+
+
+<section class="gradient-custom">
+    <div class="container py-5 h-100">
+        <div class="row justify-content-center align-items-start h-100">
+            <div class="col-12 col-lg-9 col-xl-7 w-100">
+                <div class="card shadow-2-strong card-registration card " style="border-radius: 15px;">
+                    <div class="card-body">
+                        <h5>Add items into Cart</h5>
+                        <hr>
+                        <form style="margin-right: 10px;" [formGroup]="salesForm">
+                          
+                            <div class="row justify-content-between">
+                                <label class="col align-items-center">Medicine:</label>
+                                <select class="form-select col-12" style="width: 17vw;"
+                                    aria-label="Default select example" (change)="onChangeMedicine($event)">
+                                    <option value="" disabled selected>Select your option</option>
+                                    <option *ngFor="let val of medicine" [value]="val.medicineId  ">{{val.medicinename}}</option>
+                                    
+                                </select>
+                                <label class="col">Brand:</label>
+                                <select class="form-select col-12" style="width: 17vw;" formControlName="brand"
+                                    aria-label="Default select example" (change)="onChangeCompany($event)">
+                                    <option disabled selected>Open this select menu</option>
+                                    <option *ngFor="let val of sortedBrand" [value]="val.medicineId">{{val.brand}}</option>
+                                    
+                                </select>
+                                <label class="col">Quantity:</label>
+                                <input type="number" style="width: 17vw;" formControlName="quantity" [placeholder]="availableQuantity">
+                                
+                                <button class="btn btn-primary col" style="width: 10vw;margin-left: 10px;" (click)="addItem()">Add Item</button>
+                            </div>
+                            
+                        </form>
+                        <br>
+                        <h5>Order Details</h5>
+                        <hr>
+                      
+                        <table class="table " *ngIf="soldMedicine!=null">
+                          <thead class="tabl">
+                            <tr>
+                              
+                              <th scope="col">Medicine</th>
+                              <th scope="col">Brand</th>
+                              <th scope="col">Quantity</th>
+                              <th scope="col">Price</th>
+                              <th scope="col">Total Amount</th>
+                              <th scope="col">Action</th>
+
+
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let value of soldMedicine;let i=index">
+                              <td>{{value.medicinename}}</td>
+                              
+                              <td>{{value.brand}}</td>
+                              <td>{{value.salesQuantity}}</td>
+                              <td>{{value.price}}</td>
+                              <td>{{value.totalAmount}}</td>
+                              <td><Button class="btn btn-danger" (click)="onDelete(i,value.medicineId,value.salesQuantity)">Delete</Button></td>
+
+                            </tr>
+                            
+                          </tbody>
+                        </table>
+                       <label style="font-size: 25; font-weight: bold;">Total Amount: {{totalAmount}}</label> 
+                        <button  *ngIf="cart.medicinename!=null" class="btn btn-primary " style="float: right;" (click)="confirmSale()">Confirm</button>
+
+                        
+                    </div>
+                </div>
+                <!-- <br><br> -->
+
+            </div>
+        </div>
+    </div>
+</section>

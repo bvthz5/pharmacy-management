@@ -1,0 +1,85 @@
+<app-header></app-header>
+<section class="gradient-custom" style="background-color: rgb(194, 190, 190);height: 100%;min-height: 100vh;">
+    <div class="container py-5 h-100">
+        <div class="row justify-content-center align-items-start h-100">
+            <div class="col-12 col-lg-9 col-xl-7 ">
+                <div class="card shadow-2-strong card-registration card " style="border-radius: 15px; width: 100%;">
+                    <div class="card-body ">
+                        <div class="modal-header">
+                            <label for="header" style="font-size: 22px; color: rgb(11, 63, 54);">Medicine
+                                Details</label>
+                        </div>
+                        <br>
+                        <table class="table " >
+                            <thead>
+                                <tr>
+                                    <th>MedicineId:</th>
+                                    <td>{{medicineDetails.medicineId}}</td>
+                                </tr>
+                            </thead>
+
+                            <thead>
+                                <tr>
+                                    <th>Medicine name:</th>
+                                    <td>{{medicineDetails.medicinename}}</td>
+                                </tr>
+                            </thead>
+                            <thead>
+                                <tr>
+                                    <th>Category:</th>
+                                    <td>{{medicineDetails.category}}</td>
+                                </tr>
+                            </thead>
+                            <thead>
+                                <tr>
+                                    <th>Brand:</th>
+                                    <td>{{medicineDetails.brand}}</td>
+                                </tr>
+                            </thead>
+                            <thead>
+                                <tr>
+                                    <th>ProductionDate:</th>
+                                    <td>{{medicineDetails.production_date| date:"dd-MM-yyyy"}}</td>
+                                </tr>
+                            </thead>
+                            <thead>
+                                <tr>
+                                    <th>ExpiryDate:</th>
+                                    <td>{{medicineDetails.expiry_date| date:"dd-MM-yyyy"}}</td>
+                                </tr>
+                            </thead>
+                            <thead>
+                                <tr>
+                                    <th>Quantity:</th>
+                                    <td>{{medicineDetails.quantity}}</td>
+                                </tr>
+                            </thead>
+                            <thead>
+                                <tr>
+                                    <th>CostPrice:</th>
+                                    <td>{{medicineDetails.cost_price}}</td>
+                                </tr>
+                            </thead>
+                            <thead>
+                                <tr>
+                                    <th>CompanyId:</th>
+                                    <td>{{medicineDetails.companyId}}</td>
+                                </tr>
+                            </thead>
+
+
+                        </table>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-dark" routerLink="/medicine">Close</button>
+
+
+                        </div>
+                    </div>
+                </div>
+                <!-- <br><br> -->
+
+            </div>
+        </div>
+    </div>
+</section>
