@@ -21,22 +21,22 @@ export class LoginComponent implements OnInit {
 
 
   login() {
+    this.loginForm.markAllAsTouched()
     if (this.loginForm.valid ) {
       this.service.loginUser(this.loginForm.value).subscribe({
         next:(res:any)=>{
           alert("login Success"),
           console.log(res);
+
           localStorage.setItem("accessToken",res.accessToken.value),
           localStorage.setItem("refreshToken",res.refreshToken.value),
           localStorage.setItem("type",res.type)
 
           this.router.navigateByUrl("home")
           
+
         }
       })
-    }
-    else{
-      alert("Enter a valid form")
     }
   }
 
