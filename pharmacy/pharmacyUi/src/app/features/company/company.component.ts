@@ -29,4 +29,16 @@ export class CompanyComponent implements OnInit {
 
     })
   }
+  Method(data:any,data2:any){ {
+
+    if(confirm("Are You Sure To Delete :"+data)) {
+      console.log("Implement delete functionality here");
+
+        this.onDelete(data2);
+
+
+    }
+
+  }
+}
 }

@@ -18,7 +18,7 @@ export class MedicineComponent implements OnInit {
       next: (res: any) => {
         let date = new Date()
         this.medicine = res
-        
+
         console.log(res);
       },
       error: (error: any) => console.log(error)
@@ -34,6 +34,15 @@ export class MedicineComponent implements OnInit {
     });
 
   }
+
+  Method(data: any,data1 : any) {
+    if(confirm('Are you sure you want to delete:'+data)){
+
+    this.deleteMedicine(data1);
+  }
+
+  }
+
   checkExpiry(expiryDate: any): Boolean {
     let epoch = new Date(expiryDate).getTime() - new Date().getTime()
     let day = epoch / 84600000
@@ -49,11 +58,11 @@ export class MedicineComponent implements OnInit {
       this.medicine.sort((a: any, b: any) => {
         return new Date(a.expiry_date).getTime() - new Date(b.expiry_date).getTime();
       });
-     
+
     } else if(data.target.value==3){
       this.medicine.sort((a: any, b: any) => {
         return a.quantity - b.quantity ;
-      }); 
+      });
     }
     else{
       this.medicine.sort((a: any, b: any) => {

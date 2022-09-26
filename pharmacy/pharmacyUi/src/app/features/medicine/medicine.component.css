@@ -10,3 +10,6 @@
     margin-top: 10px;
     margin-bottom: 10px;
 }
+.table-bordered{
+  box-shadow: 5px 10px rgb(248,248,255);
+}
