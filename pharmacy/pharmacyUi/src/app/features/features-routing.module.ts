@@ -10,6 +10,7 @@ import { InvoiceComponent } from './invoice/invoice.component';
 import { MedicineViewComponent } from './medicine-view/medicine-view.component';
 import { MedicineComponent } from './medicine/medicine.component';
 import { SalesComponent } from './sales/sales.component';
+import { SaleshistoryComponent } from './saleshistory/saleshistory.component';
 
 const routes: Routes = [
   {
@@ -43,7 +44,9 @@ const routes: Routes = [
   ,
   {
     path: "companyView/:id", component: CompanyDetainViewComponent, pathMatch: "full", canActivate: [AuthguardGuard]
-  }
+  },
+  { path: "saleshistory", component: SaleshistoryComponent, title: "login", canActivate: [UserTypeGuard] }
+
 ];
 
 @NgModule({

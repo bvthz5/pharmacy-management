@@ -82,4 +82,19 @@ export class ApiService {
   getCurrentUserDetails(){
     return this.http.get(this.api_url + "/login")
   }
+  getSalesData(data:any,data1:any,sort:any): Observable<any> 
+  {
+    
+    return this.http.get(this.api_url+"/sales/"+data+"/"+data1+"/"+sort);
+  }
+
+  download(): Observable<Blob> 
+  {
+    return this.http.get(this.api_url+"/sales/export", {responseType: 'blob'});
+  }
+
+  filter(days:any) : Observable<any>
+  {
+    return this.http.get(this.api_url+"/sales/filter/" + days);
+  }
 }

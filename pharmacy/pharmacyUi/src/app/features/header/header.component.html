@@ -15,7 +15,7 @@
           <li class="nav-item">
             <a class="nav-link" routerLink="/medicine" routerLinkActive="active" ariaCurrentWhenActive="page">Medicine</a>
           </li>
-          <li class="nav-item dropdown">
+          <!-- <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Dropdown
             </a>
@@ -24,9 +24,9 @@
               <li><a class="dropdown-item" href="#">Another action</a></li>
               <li><a class="dropdown-item" href="#">Something else here</a></li>
             </ul>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled">Disabled</a>
+          </li> -->
+          <li class="nav-item" >
+            <a class="nav-link" *ngIf="userType=='admin'"  routerLink="/saleshistory" routerLinkActive="active" ariaCurrentWhenActive="page">History</a>
           </li>
         </ul>
         <button class="btn btn-outline-success" type="submit" (click)="onLogout()">Logout</button>
