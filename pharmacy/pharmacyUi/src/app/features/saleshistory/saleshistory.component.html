@@ -1,0 +1,68 @@
+<app-header></app-header>
+<br>
+<label for="header" style="font-size: 22px; color: rgb(11, 63, 54);margin-left: 60px;">Sales
+    History</label>
+
+
+
+
+<br>
+<br>
+
+
+
+<div class="row">
+    <select class="form-select col-13 table-wrapper" style="width: 17vw; margin-bottom: 5px;"
+        aria-label="Default select example" (change)="onSort($event)">
+        <option [value]="1" selected>Sales Id</option>
+        <option [value]="2">Sales Date</option>
+        <option [value]="3">Total Amount</option>
+    </select>
+    <div class="container col">
+        <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
+            <div class="flex">
+                <input type="number" id="formcontrol" class="form-control" placeholder="History" formControlName="days"
+                    style="width: 150px;margin-right: 8px;">
+                <button type="submit" class="primary"> Days </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<div class="table-wrapper">
+    <table class="fl-table">
+        <thead>
+            <tr>
+                <th scope="col">Sales_ID</th>
+                <th scope="col">User Id</th>
+                <th scope="col">Company</th>
+                <th scope="col">Medicine Name</th>
+                <th scope="col">Sales Quantity</th>
+                <th scope="col">Total Amount</th>
+                <th scope="col">Sales Date</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr *ngFor="let value of salesdata">
+                <th>{{value.salesId}}</th>
+                <td>{{value.userId}}</td>
+                <td>{{value.brand}}</td>
+                <td>{{value.medicinename}}</td>
+                <td>{{value.salesQuantity}}</td>
+                <td>{{value.totalAmount}}</td>
+                <td>{{value.salesDate| date:"dd-MM-yyyy"}}</td>
+            <tr>
+
+        <tbody>
+    </table>
+</div>
+<ul class="pagination justify-content-center">
+    <li class="page-item" *ngIf="pageNo!=0"><a (click)="previousClick()" class="page-link">Previous</a></li>
+    <li class="page-item" *ngIf="conditionVariable"><a (click)="nextClick()" class="page-link">Next</a></li>
+</ul>
+
+<div class="list-group">
+    <button type="button" class="download" (click)="downloadFile()">Download as
+        Excel</button>
