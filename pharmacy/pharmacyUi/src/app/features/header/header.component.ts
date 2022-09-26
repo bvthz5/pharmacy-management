@@ -8,10 +8,11 @@ import { Component, OnInit } from '@angular/core';
 export class HeaderComponent implements OnInit {
 
   constructor() { }
-
+  userType: any = localStorage.getItem("type")
   ngOnInit(): void {
+
   }
-  onLogout(){
+  onLogout() {
     localStorage.removeItem("accessToken")
     localStorage.removeItem("refreshToken")
     window.location.reload()

@@ -15,7 +15,8 @@ public class SalesDetailView extends SalesListView{
             sales.getMedicine().getExpiryDate(),
             sales.getSalesQuantity(),
             sales.getSalesDate(),
-            sales.getTotalAmount()
+            sales.getTotalAmount(),
+            sales.getUser().getUserId()
             );
     }
 

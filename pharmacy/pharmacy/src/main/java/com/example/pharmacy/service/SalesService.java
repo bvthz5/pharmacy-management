@@ -18,4 +18,8 @@ public interface SalesService {
     Collection<SalesListView> add(@Valid Collection<SalesForm> form);
 
     SalesDetailView get(Integer salesId) throws NotFoundException;
+    Collection<SalesListView> findPaginated(Integer pageNo, Integer pageSize,String sortBy);
+    Collection<SalesListView> findAllByDateBetween(Integer days);
+
+
 }
