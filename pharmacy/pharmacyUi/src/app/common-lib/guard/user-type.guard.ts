@@ -6,24 +6,24 @@ import { ApiService } from '../service/api.service';
 @Injectable({
   providedIn: 'root'
 })
-export class LoginGuard implements CanActivate {
-  constructor(private router:Router,private service:ApiService){}
+export class UserTypeGuard implements CanActivate {
+  constructor(private router:Router,private service :ApiService){}
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      
-      
       let accessToken=localStorage.getItem("accessToken")
+      let userType=localStorage.getItem("type")
       
-      if(accessToken==null){
-       
-        return true
+      if(accessToken!=null && userType==="admin"){
+        return true;
       }
-      
       else{
-       this.router.navigateByUrl("home")
-        return false;
+        this.router.navigateByUrl("/home")
+        return false
       }
+    
   }
+
+
   
 }

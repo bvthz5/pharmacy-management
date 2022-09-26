@@ -9,7 +9,7 @@
                         <h2><b>Medicine Details</b></h2>
                     </div>
                     <div class="col-sm-2">
-                        <button type="button" class="btn btn-success " routerLink="/medicineAdd">Add Medicine</button>
+                        <button type="button" class="btn btn-success " routerLink="/medicineAdd" *ngIf="userType=='admin'">Add Medicine</button>
                     </div>
 
                 </div>
@@ -54,8 +54,8 @@
                   
                             <td><button type="button" class="btn btn-success btns" routerLink="/medicineView/{{vmedicine.medicineId}}">View</button>
                                 <Button
-                                    class="btn btn-primary btns"
-                                    routerLink="/medicineAdd/{{vmedicine.medicineId}}">Edit</Button><Button
+                                    class="btn btn-primary btns" *ngIf="userType=='admin'" 
+                                    routerLink="/medicineAdd/{{vmedicine.medicineId}}">Edit</Button><Button *ngIf="userType=='admin'"
                                     class="btn btn-danger btns" (click)="deleteMedicine(vmedicine.medicineId)">Delete</Button></td>
 
 

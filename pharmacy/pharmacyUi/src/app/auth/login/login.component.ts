@@ -27,7 +27,8 @@ export class LoginComponent implements OnInit {
           alert("login Success"),
           console.log(res);
           localStorage.setItem("accessToken",res.accessToken.value),
-          localStorage.setItem("refreshToken",res.refreshToken.value)
+          localStorage.setItem("refreshToken",res.refreshToken.value),
+          localStorage.setItem("type",res.type)
 
           this.router.navigateByUrl("home")
           

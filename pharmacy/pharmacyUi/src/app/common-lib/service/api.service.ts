@@ -78,4 +78,8 @@ export class ApiService {
   updatemedicine(data: any, medicineId: any) {
     return this.http.put(this.api_url + "/medicine/" + medicineId, data)
   }
+
+  getCurrentUserDetails(){
+    return this.http.get(this.api_url + "/login")
+  }
 }

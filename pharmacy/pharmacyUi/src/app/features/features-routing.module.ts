@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthguardGuard } from '../common-lib/guard/authguard.guard';
+import { UserTypeGuard } from '../common-lib/guard/user-type.guard';
 import { AddEditCompanyComponent } from './add-edit-company/add-edit-company.component';
 import { AddEditMedicineComponent } from './add-edit-medicine/add-edit-medicine.component';
 import { CompanyDetainViewComponent } from './company-detain-view/company-detain-view.component';
@@ -21,20 +22,20 @@ const routes: Routes = [
     path: "invoice", component: InvoiceComponent, pathMatch: "full", title: "invoice", canActivate: [AuthguardGuard]
   },
   {
-    path: "addCompany", component: AddEditCompanyComponent, pathMatch: "full", title: "addCompany", canActivate: [AuthguardGuard]
+    path: "addCompany", component: AddEditCompanyComponent, pathMatch: "full", title: "addCompany", canActivate: [UserTypeGuard]
   },
   {
-    path: "addCompany/:id", component: AddEditCompanyComponent, pathMatch: "full", canActivate: [AuthguardGuard]
+    path: "addCompany/:id", component: AddEditCompanyComponent, pathMatch: "full", canActivate: [UserTypeGuard]
   }
   ,
   {
     path: "medicine", component: MedicineComponent, pathMatch: "full", canActivate: [AuthguardGuard]
   },
   {
-    path: "medicineAdd", component: AddEditMedicineComponent, pathMatch: "full", canActivate: [AuthguardGuard]
+    path: "medicineAdd", component: AddEditMedicineComponent, pathMatch: "full", canActivate: [UserTypeGuard]
   },
   {
-    path: "medicineAdd/:id", component: AddEditMedicineComponent, pathMatch: "full", canActivate: [AuthguardGuard]
+    path: "medicineAdd/:id", component: AddEditMedicineComponent, pathMatch: "full", canActivate: [UserTypeGuard]
   },
   {
     path: "medicineView/:id", component: MedicineViewComponent, pathMatch: "full", canActivate: [AuthguardGuard]

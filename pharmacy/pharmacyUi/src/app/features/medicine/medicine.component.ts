@@ -10,6 +10,8 @@ export class MedicineComponent implements OnInit {
 
   medicine: any
   constructor(private service: ApiService) { }
+  userType:any=localStorage.getItem("type")
+
 
   ngOnInit(): void {
     this.service.medicineList().subscribe({

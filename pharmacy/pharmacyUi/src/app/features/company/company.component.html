@@ -9,7 +9,7 @@
                         <h2><b>Company Details</b></h2>
                     </div>
                     <div class="col-sm-2">
-                        <button type="button" class="btn btn-success " routerLink="/addCompany">Add Company</button>
+                        <button type="button" *ngIf="userType=='admin'" class="btn btn-success " routerLink="/addCompany">Add Company</button>
                     </div>
 
                 </div>
@@ -35,9 +35,9 @@
                             <td>{{val.address}}</td>
                             <td>{{val.description}}</td>
                             <td><button type="button" class="btn btn-success btns" routerLink="/companyView/{{val.companyId}}">View</button>
-                                <Button
+                                <Button *ngIf="userType=='admin'"
                                     class="btn btn-primary btns"
-                                    routerLink="/addCompany/{{val.companyId}}">Edit</Button><Button
+                                    routerLink="/addCompany/{{val.companyId}}">Edit</Button><Button *ngIf="userType=='admin'"
                                     class="btn btn-danger btns" (click)="onDelete(val.companyId)">Delete</Button></td>
 
 

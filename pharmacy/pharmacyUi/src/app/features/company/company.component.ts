@@ -11,6 +11,7 @@ export class CompanyComponent implements OnInit {
 
   constructor(private service:ApiService, private router:Router) { }
   companyData:any=[];
+  userType:any=localStorage.getItem("type")
 
   ngOnInit(): void {
 
