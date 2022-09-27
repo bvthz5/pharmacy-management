@@ -57,21 +57,11 @@
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                     data-bs-target="#exampleModal"
                                     (click)="medView(vmedicine.medicineId)">view</button>&nbsp;
-                                <Button class="btn btn-primary btns" *ngIf="userType=='admin'"
-                                    routerLink="/medicineAdd/{{vmedicine.medicineId}}">Edit</Button>
-                                <Button *ngIf="userType=='admin'" class="btn btn-danger btns"
+                                <Button class="btn btn-success" *ngIf="userType=='admin'"
+                                    routerLink="/medicineAdd/{{vmedicine.medicineId}}">Edit</Button>&nbsp;
+                                <Button class="btn btn-primary btns" *ngIf="userType=='admin'" class="btn btn-danger btns"
                                     (click)="deleteMedicine(vmedicine.medicineId)">Delete</Button>
                             </td>
-
-
-                            <td><button type="button" class="btn btn-success btns"
-                                    routerLink="/medicineView/{{vmedicine.medicineId}}">View</button>
-                                <Button class="btn btn-primary btns" *ngIf="userType=='admin'"
-                                    routerLink="/medicineAdd/{{vmedicine.medicineId}}">Edit</Button><Button
-                                    *ngIf="userType=='admin'" class="btn btn-danger btns"
-                                    (click)="Method(vmedicine.medicinename,vmedicine.medicineId)">Delete</Button>
-                            </td>
-
 
                         </tr>
                     </tbody>
