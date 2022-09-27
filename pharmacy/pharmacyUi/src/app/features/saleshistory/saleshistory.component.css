@@ -22,6 +22,7 @@ h2{
 /* Table Styles */
 
 .table-wrapper{
+    
     margin: 10px 70px 70px;
     box-shadow: 0px 35px 50px rgba( 0, 0, 0, 0.2 );
 }
@@ -36,6 +37,7 @@ h2{
     max-width: 100%;
     white-space: nowrap;
     background-color: white;
+    
 }
 
 .fl-table td, .fl-table th {
@@ -153,34 +155,13 @@ h2{
   transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
 }
 
-/* The navigation menu links */
-.sidenav a {
-  padding: 8px 8px 8px 32px;
-  text-decoration: none;
-  font-size: 25px;
-  color: #818181;
-  display: block;
-  transition: 0.3s;
-}
 
-/* When you mouse over the navigation links, change their color */
-.sidenav a:hover {
-  color: #f1f1f1;
-}
-
-/* Position and style the close button (top right corner) */
-.sidenav .closebtn {
-  position: absolute;
-  top: 0;
-  right: 25px;
-  font-size: 36px;
-  margin-left: 50px;
-}
 
 /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
 #main {
   transition: margin-left .5s;
   padding: 20px;
+  
 }
 
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
@@ -192,12 +173,14 @@ h2{
   display: flex;
   /* flex-direction: row; */
   /* margin-left: 950px; */
+  
   width: 100%;
 }
 .nav{
   display: flex;
   flex-direction: row;
 }
+
 
 #formcontrol{
   width: 10%;
@@ -206,7 +189,8 @@ h2{
 
 }
 .container{
-  margin-left: 600px;
+  
+  margin-left: 1115px;
 }
 .container form .primary{
   margin-right: 5px !important;

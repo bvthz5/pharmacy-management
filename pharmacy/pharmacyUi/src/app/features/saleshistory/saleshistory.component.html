@@ -1,6 +1,6 @@
 <app-header></app-header>
 <br>
-<label for="header" style="font-size: 22px; color: rgb(11, 63, 54);margin-left: 60px;">Sales
+<label for="header" style="font-size: 35px; color: rgb(11, 63, 54);margin-left: 60px;">Sales
     History</label>
 
 
@@ -21,9 +21,9 @@
     <div class="container col">
         <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
             <div class="flex">
-                <input type="number" id="formcontrol" class="form-control" placeholder="History" formControlName="days"
+                <input type="number" id="formcontrol" class="form-control" placeholder="No of Days" formControlName="days"
                     style="width: 150px;margin-right: 8px;">
-                <button type="submit" class="primary"> Days </button>
+                <button type="submit" class="primary"> Filter </button>
             </div>
         </form>
     </div>

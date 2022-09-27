@@ -9,7 +9,8 @@
                         <h2><b>Medicine Details</b></h2>
                     </div>
                     <div class="col-sm-2">
-                        <button type="button" class="btn btn-success " routerLink="/medicineAdd" *ngIf="userType=='admin'">Add Medicine</button>
+                        <button type="button" class="btn btn-success " routerLink="/medicineAdd"
+                            *ngIf="userType=='admin'">Add Medicine</button>
                     </div>
 
                 </div>
@@ -19,13 +20,13 @@
 
                 <label class="p-2 ">Sort By: </label>
                 <select class="form-select col-12 " style="width: 17vw; margin-bottom: 5px;"
-                                    aria-label="Default select example" (change)="onSortChange($event)">
-                                    <option [value]="1" selected>Medicine Id</option>
-                                    <option [value]="2" >Expiry</option>
-                                    <option [value]="3" >Quantity</option>                                    
-                                </select>
+                    aria-label="Default select example" (change)="onSortChange($event)">
+                    <option [value]="1" selected>Medicine Id</option>
+                    <option [value]="2">Expiry</option>
+                    <option [value]="3">Quantity</option>
+                </select>
             </div>
-           
+
             <div class="justify-content-center text-center">
                 <table class="table table-striped table-hover table-bordered" style="width: 100%;">
                     <thead>
@@ -48,16 +49,19 @@
                             <td>{{vmedicine.category}}</td>
                             <td>{{vmedicine.brand}}</td>
                             <td>{{vmedicine.production_date| date:"dd-MM-YYYY"}}</td>
-                            <td [ngClass]="{'error': checkExpiry(vmedicine.expiry_date)}">{{vmedicine.expiry_date|date:"dd-MM-yyyy"}}</td>
+                            <td [ngClass]="{'error': checkExpiry(vmedicine.expiry_date)}">
+                                {{vmedicine.expiry_date|date:"dd-MM-yyyy"}}</td>
                             <td [ngClass]="{'error': vmedicine.quantity <10}">{{vmedicine.quantity}}</td>
                             <td>{{vmedicine.cost_price}}</td>
-                  
-                            <td><button type="button" class="btn btn-success btns" routerLink="/medicineView/{{vmedicine.medicineId}}">View</button>
-                                <Button
-                                    class="btn btn-primary btns" *ngIf="userType=='admin'" 
-                                    routerLink="/medicineAdd/{{vmedicine.medicineId}}">Edit</Button><Button *ngIf="userType=='admin'"
-                                    class="btn btn-danger btns" (click)="deleteMedicine(vmedicine.medicineId)">Delete</Button></td>
-
+                        <td>
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal"
+                                (click)="medView(vmedicine.medicineId)">view</button>&nbsp;
+                            <Button class="btn btn-primary btns" *ngIf="userType=='admin'"
+                                routerLink="/medicineAdd/{{vmedicine.medicineId}}">Edit</Button>
+                                <Button *ngIf="userType=='admin'" class="btn btn-danger btns"
+                                (click)="deleteMedicine(vmedicine.medicineId)">Delete</Button>
+                            </td>
 
                         </tr>
                     </tbody>
@@ -66,3 +70,261 @@
         </div>
     </div>
 </div>
+
+<style>
+    html,
+    body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        display: 'flex';
+
+        background-color: rgb(100, 155, 218);
+        font-family: 'Arimo', sans-serif;
+    }
+
+    .title {
+        text-align: center;
+        color: #2c3e50;
+    }
+
+    /* CONTAINERS */
+
+    .container {
+        max-width: 940px;
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    .twelve {
+        width: 100%;
+    }
+
+    .eleven {
+        width: 91.53%;
+    }
+
+    .ten {
+        width: 83.06%;
+    }
+
+    .nine {
+        width: 74.6%;
+    }
+
+    .eight {
+        width: 66.13%;
+    }
+
+    .seven {
+        width: 57.66%;
+    }
+
+    .six {
+        width: 49.2%;
+    }
+
+    .five {
+        width: 40.73%;
+    }
+
+    .four {
+        width: 32.26%;
+    }
+
+    .three {
+        width: 23.8%;
+    }
+
+    .two {
+        width: 15.33%;
+    }
+
+    .one {
+        width: 6.866%;
+    }
+
+    /* COLUMNS */
+
+    .col {
+        display: block;
+        float: left;
+        margin: 1% 0 1% 1.6%;
+    }
+
+    .col:first-of-type {
+        margin-left: 0;
+    }
+
+    /* CLEARFIX */
+
+    .cf:before,
+    .cf:after {
+        content: " ";
+        display: table;
+    }
+
+    .cf:after {
+        clear: both;
+    }
+
+    .cf {
+        *zoom: 1;
+    }
+
+    /* PROFILES */
+
+    .card {
+        max-width: 100%;
+        height: 400px;
+        background-color: #fff;
+        font-family: 'Arimo', sans-serif;
+        font-size: 14px;
+    }
+
+
+
+    #card1 {
+        text-align: center;
+        color: #2c3e50;
+        padding: 15px;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+    #card1 .image-wrapper {
+        width: 50px;
+        height: 50px;
+        margin: 20px auto;
+        border-radius: 100%;
+        background-image: url("https://cdn-icons-png.flaticon.com/512/4840/4840430.png");
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+    #card1 .info .four {
+        text-align: center;
+        border-right: 1px solid #2c3e50;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+    #card1 .info .four:last-of-type {
+        border-right: none;
+    }
+
+    #card1 .info .four .number {
+        display: block;
+        font-size: 20px;
+        padding: 3px 0;
+        font-weight: 700;
+    }
+
+    #card1 .options {
+        margin-top: 30px;
+        text-align: left;
+    }
+
+    #card1 .options ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    #card1 .options ul .icon {
+        display: inline-block;
+        width: 30px;
+        height: 30px;
+        background-color: #c5d5e0;
+        border-radius: 100%;
+        margin-right: 8px;
+        vertical-align: middle;
+        color: #fff;
+        line-height: 30px;
+        text-align: center;
+    }
+
+    #card1 .options ul li {
+        margin: 12px 0;
+    }
+
+    p {
+        font-size: 15px;
+    }
+</style>
+<div class="modal fade" id="exampleModal" tabindex="" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <h1 class="title">Medicine Details</h1>
+                    <div>
+                        <div id="card1" *ngIf="medicine">
+                            <div class="image-wrapper"></div>
+                            <table class="table " >
+                                <thead>
+                                    <tr>
+                                        <th>MedicineId:</th>
+                                        <td>{{medicineDetails.medicineId}}</td>
+                                    </tr>
+                                </thead>
+    
+                                <thead>
+                                    <tr>
+                                        <th>Medicine name:</th>
+                                        <td>{{medicineDetails.medicinename}}</td>
+                                    </tr>
+                                </thead>
+                                <thead>
+                                    <tr>
+                                        <th>Category:</th>
+                                        <td>{{medicineDetails.category}}</td>
+                                    </tr>
+                                </thead>
+                                <thead>
+                                    <tr>
+                                        <th>Brand:</th>
+                                        <td>{{medicineDetails.brand}}</td>
+                                    </tr>
+                                </thead>
+                                <thead>
+                                    <tr>
+                                        <th>ProductionDate:</th>
+                                        <td>{{medicineDetails.production_date| date:"dd-MM-yyyy"}}</td>
+                                    </tr>
+                                </thead>
+                                <thead>
+                                    <tr>
+                                        <th>ExpiryDate:</th>
+                                        <td>{{medicineDetails.expiry_date| date:"dd-MM-yyyy"}}</td>
+                                    </tr>
+                                </thead>
+                                <thead>
+                                    <tr>
+                                        <th>Quantity:</th>
+                                        <td>{{medicineDetails.quantity}}</td>
+                                    </tr>
+                                </thead>
+                                <thead>
+                                    <tr>
+                                        <th>CostPrice:</th>
+                                        <td>{{medicineDetails.cost_price}}</td>
+                                    </tr>
+                                </thead>
+                                <thead>
+                                    <tr>
+                                        <th>CompanyId:</th>
+                                        <td>{{medicineDetails.companyId}}</td>
+                                    </tr>
+                                </thead>
+    
+    
+                            </table>
+                        </div>
+                    </div>

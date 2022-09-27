@@ -10,15 +10,14 @@ export class MedicineComponent implements OnInit {
 
   medicine: any
   constructor(private service: ApiService) { }
-  userType:any=localStorage.getItem("type")
-
+  userType: any = localStorage.getItem("type")
 
   ngOnInit(): void {
     this.service.medicineList().subscribe({
       next: (res: any) => {
         let date = new Date()
         this.medicine = res
-        
+
         console.log(res);
       },
       error: (error: any) => console.log(error)
@@ -26,6 +25,22 @@ export class MedicineComponent implements OnInit {
 
     });
 
+  }
+  medicineDetails:any
+  medView(medId: any) {
+    this.service.getMedicineDetails(medId).subscribe({
+      next: (response: any) => {
+
+        console.log('Success', response);
+        this.medicineDetails = response
+     
+
+      },
+      error: (error: any) => {
+        console.log('error', error);
+      }
+    })
+    
   }
   deleteMedicine(data: any) {
     this.service.deleteMedicine(data).subscribe((res: any) => {
@@ -45,19 +60,19 @@ export class MedicineComponent implements OnInit {
     }
   }
   onSortChange(data: any) {
-    if(data.target.value==2){
+    if (data.target.value == 2) {
       this.medicine.sort((a: any, b: any) => {
         return new Date(a.expiry_date).getTime() - new Date(b.expiry_date).getTime();
       });
-     
-    } else if(data.target.value==3){
+
+    } else if (data.target.value == 3) {
       this.medicine.sort((a: any, b: any) => {
-        return a.quantity - b.quantity ;
-      }); 
+        return a.quantity - b.quantity;
+      });
     }
-    else{
+    else {
       this.medicine.sort((a: any, b: any) => {
-        return a.medicineId - b.medicineId ;
+        return a.medicineId - b.medicineId;
       });
     }
   }

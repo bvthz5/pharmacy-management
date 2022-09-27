@@ -17,6 +17,7 @@ import { AddEditMedicineComponent } from './add-edit-medicine/add-edit-medicine.
 import { MedicineViewComponent } from './medicine-view/medicine-view.component';
 import { CompanyDetainViewComponent } from './company-detain-view/company-detain-view.component';
 import { SaleshistoryComponent } from './saleshistory/saleshistory.component';
+import { MedicineViewmodalComponent } from './medicine-viewmodal/medicine-viewmodal.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { SaleshistoryComponent } from './saleshistory/saleshistory.component';
     AddEditMedicineComponent,
     MedicineViewComponent,
     CompanyDetainViewComponent,
-    SaleshistoryComponent
+    SaleshistoryComponent,
+    MedicineViewmodalComponent
   ],
   imports: [
     CommonModule,

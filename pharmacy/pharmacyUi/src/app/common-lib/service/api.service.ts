@@ -11,6 +11,7 @@ export class ApiService {
   constructor(private http: HttpClient) { }
   api_url = environment.api_url
   sales: any
+  medId: any
 
   /**
    * Login user
@@ -79,22 +80,19 @@ export class ApiService {
     return this.http.put(this.api_url + "/medicine/" + medicineId, data)
   }
 
-  getCurrentUserDetails(){
+  getCurrentUserDetails() {
     return this.http.get(this.api_url + "/login")
   }
-  getSalesData(data:any,data1:any,sort:any): Observable<any> 
-  {
-    
-    return this.http.get(this.api_url+"/sales/"+data+"/"+data1+"/"+sort);
+  getSalesData(data: any, data1: any, sort: any): Observable<any> {
+
+    return this.http.get(this.api_url + "/sales/" + data + "/" + data1 + "/" + sort);
   }
 
-  download(): Observable<Blob> 
-  {
-    return this.http.get(this.api_url+"/sales/export", {responseType: 'blob'});
+  download(): Observable<Blob> {
+    return this.http.get(this.api_url + "/sales/export", { responseType: 'blob' });
   }
 
-  filter(days:any) : Observable<any>
-  {
-    return this.http.get(this.api_url+"/sales/filter/" + days);
+  filter(days: any): Observable<any> {
+    return this.http.get(this.api_url + "/sales/filter/" + days);
   }
 }
