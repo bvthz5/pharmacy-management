@@ -38,7 +38,7 @@
                                 <Button *ngIf="userType=='admin'"
                                     class="btn btn-primary btns"
                                     routerLink="/addCompany/{{val.companyId}}">Edit</Button><Button *ngIf="userType=='admin'"
-                                    class="btn btn-danger btns" (click)="onDelete(val.companyId)">Delete</Button></td>
+                                    class="btn btn-danger btns" (click)="Method(val.name,val.companyId)">Delete</Button></td>
 
 
                         </tr>

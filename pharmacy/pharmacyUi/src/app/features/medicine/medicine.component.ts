@@ -26,21 +26,21 @@ export class MedicineComponent implements OnInit {
     });
 
   }
-  medicineDetails:any
+  medicineDetails: any
   medView(medId: any) {
     this.service.getMedicineDetails(medId).subscribe({
       next: (response: any) => {
 
         console.log('Success', response);
         this.medicineDetails = response
-     
+
 
       },
       error: (error: any) => {
         console.log('error', error);
       }
     })
-    
+
   }
   deleteMedicine(data: any) {
     this.service.deleteMedicine(data).subscribe((res: any) => {
@@ -49,6 +49,15 @@ export class MedicineComponent implements OnInit {
     });
 
   }
+
+  Method(data: any, data1: any) {
+    if (confirm('Are you sure you want to delete:' + data)) {
+
+      this.deleteMedicine(data1);
+    }
+
+  }
+
   checkExpiry(expiryDate: any): Boolean {
     let epoch = new Date(expiryDate).getTime() - new Date().getTime()
     let day = epoch / 84600000

@@ -53,15 +53,25 @@
                                 {{vmedicine.expiry_date|date:"dd-MM-yyyy"}}</td>
                             <td [ngClass]="{'error': vmedicine.quantity <10}">{{vmedicine.quantity}}</td>
                             <td>{{vmedicine.cost_price}}</td>
-                        <td>
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal"
-                                (click)="medView(vmedicine.medicineId)">view</button>&nbsp;
-                            <Button class="btn btn-primary btns" *ngIf="userType=='admin'"
-                                routerLink="/medicineAdd/{{vmedicine.medicineId}}">Edit</Button>
+                            <td>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal"
+                                    (click)="medView(vmedicine.medicineId)">view</button>&nbsp;
+                                <Button class="btn btn-primary btns" *ngIf="userType=='admin'"
+                                    routerLink="/medicineAdd/{{vmedicine.medicineId}}">Edit</Button>
                                 <Button *ngIf="userType=='admin'" class="btn btn-danger btns"
-                                (click)="deleteMedicine(vmedicine.medicineId)">Delete</Button>
+                                    (click)="deleteMedicine(vmedicine.medicineId)">Delete</Button>
                             </td>
+
+
+                            <td><button type="button" class="btn btn-success btns"
+                                    routerLink="/medicineView/{{vmedicine.medicineId}}">View</button>
+                                <Button class="btn btn-primary btns" *ngIf="userType=='admin'"
+                                    routerLink="/medicineAdd/{{vmedicine.medicineId}}">Edit</Button><Button
+                                    *ngIf="userType=='admin'" class="btn btn-danger btns"
+                                    (click)="Method(vmedicine.medicinename,vmedicine.medicineId)">Delete</Button>
+                            </td>
+
 
                         </tr>
                     </tbody>
@@ -267,14 +277,14 @@
                     <div>
                         <div id="card1" *ngIf="medicine">
                             <div class="image-wrapper"></div>
-                            <table class="table " >
+                            <table class="table ">
                                 <thead>
                                     <tr>
                                         <th>MedicineId:</th>
                                         <td>{{medicineDetails.medicineId}}</td>
                                     </tr>
                                 </thead>
-    
+
                                 <thead>
                                     <tr>
                                         <th>Medicine name:</th>
@@ -323,8 +333,8 @@
                                         <td>{{medicineDetails.companyId}}</td>
                                     </tr>
                                 </thead>
-    
-    
+
+
                             </table>
                         </div>
                     </div>
