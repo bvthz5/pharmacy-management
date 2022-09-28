@@ -95,4 +95,7 @@ export class ApiService {
   filter(days: any): Observable<any> {
     return this.http.get(this.api_url + "/sales/filter/" + days);
   }
+  getExpiredMedicine(){
+    return this.http.get(this.api_url+"/medicine/expired")
+  }
 }
