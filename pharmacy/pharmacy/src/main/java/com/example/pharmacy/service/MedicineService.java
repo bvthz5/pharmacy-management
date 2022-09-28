@@ -10,6 +10,8 @@ import com.example.pharmacy.view.MedicineListView;
 public interface MedicineService {
 
     Collection<MedicineListView> list();
+    Collection<MedicineListView> listExpired();
+    
     Collection<MedicineListView> listbyCompanyId(Integer companyId);
     MedicineDetailView add(MedicineForm form);
 

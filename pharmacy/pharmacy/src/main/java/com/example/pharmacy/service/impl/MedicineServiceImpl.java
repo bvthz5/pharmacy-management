@@ -74,6 +74,13 @@ public class MedicineServiceImpl implements MedicineService {
         medicineRepository.deleteMedicine(medicineId);
 
     }
+    @Override
+    public Collection<MedicineListView> listExpired() {
+        Date date = new Date();
+        return medicineRepository.findByStatusAndExpiryDateLessThan(Medicine.Status.ACTIVE.value,date)
+                .stream().map(x -> new MedicineListView(x)).collect(Collectors.toList());
+
+    }
 
     
 

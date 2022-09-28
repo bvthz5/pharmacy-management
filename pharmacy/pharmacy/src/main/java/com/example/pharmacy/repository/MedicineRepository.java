@@ -18,7 +18,9 @@ public interface MedicineRepository extends Repository<Medicine, Integer>{
 
     //  Collection<MedicineListView>findByUserUserIdAndStatus(Integer currentUserId, byte value);
      Collection<Medicine>findByStatusAndQuantityGreaterThanAndExpiryDateGreaterThan( byte value,Integer quantity,Date currentDate);
-    Medicine save(Medicine medicine);
+     Collection<Medicine>findByStatusAndExpiryDateLessThan( byte value,Date currentDate);
+    
+	 Medicine save(Medicine medicine);
 
     Optional<Medicine>findByMedicineIdAndStatus(Integer medicine_id,  byte value); 
 
