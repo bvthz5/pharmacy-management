@@ -11,6 +11,7 @@ export class CompanyComponent implements OnInit {
 
   constructor(private service:ApiService, private router:Router) { }
   companyData:any=[];
+  companyDeatils:any
   userType:any=localStorage.getItem("type")
 
   ngOnInit(): void {
@@ -41,4 +42,20 @@ export class CompanyComponent implements OnInit {
 
   }
 }
+ComView(id: any) {
+  this.service.getCompanyDeatails(id).subscribe({
+    next: (response: any) => {
+
+      console.log('Success', response);
+      this.companyDeatils = response
+
+
+    },
+    error: (error: any) => {
+      console.log('error', error);
+    }
+  })
+
+}
+
 }
