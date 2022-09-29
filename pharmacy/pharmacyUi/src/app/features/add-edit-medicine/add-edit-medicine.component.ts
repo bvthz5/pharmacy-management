@@ -61,7 +61,7 @@ export class AddEditMedicineComponent implements OnInit {
       production_date: new FormControl('', Validators.required),
       expiry_date: new FormControl('', Validators.required),
       quantity: new FormControl('', [Validators.required,Validators.pattern("^[1-9]+[0-9]*$")]),
-      cost_price: new FormControl('', [Validators.required,Validators.pattern("^[1-9.]+$")]),
+      cost_price: new FormControl('', [Validators.required,Validators.pattern("^[0-9.]+$")]),
 
     })
 
