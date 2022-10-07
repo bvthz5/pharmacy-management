@@ -6,6 +6,7 @@ import { AddEditCompanyComponent } from './add-edit-company/add-edit-company.com
 import { AddEditMedicineComponent } from './add-edit-medicine/add-edit-medicine.component';
 import { CompanyDetainViewComponent } from './company-detain-view/company-detain-view.component';
 import { CompanyComponent } from './company/company.component';
+import { ExpiredMedicineComponent } from './expired-medicine/expired-medicine.component';
 import { InvoiceComponent } from './invoice/invoice.component';
 import { MedicineViewComponent } from './medicine-view/medicine-view.component';
 import { MedicineComponent } from './medicine/medicine.component';
@@ -45,7 +46,9 @@ const routes: Routes = [
   {
     path: "companyView/:id", component: CompanyDetainViewComponent, pathMatch: "full", canActivate: [AuthguardGuard]
   },
-  { path: "saleshistory", component: SaleshistoryComponent, title: "login", canActivate: [UserTypeGuard] }
+  { path: "saleshistory", component: SaleshistoryComponent, title: "saleshistory", canActivate: [UserTypeGuard] }
+  ,
+  { path: "expired", component: ExpiredMedicineComponent, title: "expired", canActivate: [AuthguardGuard  ] }
 
 ];
 

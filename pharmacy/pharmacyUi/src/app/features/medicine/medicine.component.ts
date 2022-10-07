@@ -9,6 +9,7 @@ import { ApiService } from 'src/app/common-lib/service/api.service';
 export class MedicineComponent implements OnInit {
 
   medicine: any
+  medicineDetails: any
   constructor(private service: ApiService) { }
   userType: any = localStorage.getItem("type")
 
@@ -26,7 +27,7 @@ export class MedicineComponent implements OnInit {
     });
 
   }
-  medicineDetails: any
+ 
   medView(medId: any) {
     this.service.getMedicineDetails(medId).subscribe({
       next: (response: any) => {

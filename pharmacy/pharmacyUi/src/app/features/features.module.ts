@@ -18,6 +18,9 @@ import { MedicineViewComponent } from './medicine-view/medicine-view.component';
 import { CompanyDetainViewComponent } from './company-detain-view/company-detain-view.component';
 import { SaleshistoryComponent } from './saleshistory/saleshistory.component';
 import { MedicineViewmodalComponent } from './medicine-viewmodal/medicine-viewmodal.component';
+import { ExpiredMedicineComponent } from './expired-medicine/expired-medicine.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
@@ -33,13 +36,21 @@ import { MedicineViewmodalComponent } from './medicine-viewmodal/medicine-viewmo
     MedicineViewComponent,
     CompanyDetainViewComponent,
     SaleshistoryComponent,
-    MedicineViewmodalComponent
+    MedicineViewmodalComponent,
+    ExpiredMedicineComponent
   ],
   imports: [
     CommonModule,
     FeaturesRoutingModule,
     ReactiveFormsModule,
     FormsModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      timeOut: 1000,
+      progressBar: true,
+      progressAnimation: 'increasing',
+      preventDuplicates: true
+    })
 
   ],
   providers: [

@@ -34,6 +34,11 @@ public class MedicineController {
     public Collection<MedicineListView> list(Principal p){
         return medicineService.list();
     }
+
+    @GetMapping("expired")
+    public Collection<MedicineListView> listExpired(Principal p){
+        return medicineService.listExpired();
+    }
     @GetMapping("/getCompany/{comapnyId}")
     public Collection<MedicineListView> listbyCompanyId(@PathVariable("comapnyId") Integer comapnyId,Principal p){
         return medicineService.listbyCompanyId(comapnyId);

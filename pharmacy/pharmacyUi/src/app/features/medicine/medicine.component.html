@@ -58,11 +58,12 @@
                             <td [ngClass]="{'error': vmedicine.quantity <10}">{{vmedicine.quantity}}</td>
                             <td>{{vmedicine.cost_price}}</td>
                             <td>
-                              <button type="button" class="btn btn-success btns" routerLink="/medicineView/{{vmedicine.medicineId}}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-view-list" viewBox="0 0 16 16">
+                              <button type="button" class="btn btn-success btns" data-bs-toggle="modal"
+                              data-bs-target="#exampleModal" (click)="medView(vmedicine.medicineId)"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-view-list" viewBox="0 0 16 16">
                               <path d="M3 4.5h10a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2zm0 1a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1H3zM1 2a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13A.5.5 0 0 1 1 2zm0 12a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13A.5.5 0 0 1 1 14z"/>
                             </svg>View</button>
                                 <Button
-                                    class="btn btn-primary btns" *ngIf="userType=='admin'"
+                                    class="btn btn-primary btns"   *ngIf="userType=='admin'"
                                     routerLink="/medicineAdd/{{vmedicine.medicineId}}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                                       <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
                                       <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
@@ -281,56 +282,56 @@
                                 <thead>
                                     <tr>
                                         <th>MedicineId:</th>
-                                        <td>{{medicineDetails.medicineId}}</td>
+                                        <td>{{medicineDetails?.medicineId}}</td>
                                     </tr>
                                 </thead>
 
                                 <thead>
                                     <tr>
                                         <th>Medicine name:</th>
-                                        <td>{{medicineDetails.medicinename}}</td>
+                                        <td>{{medicineDetails?.medicinename}}</td>
                                     </tr>
                                 </thead>
                                 <thead>
                                     <tr>
                                         <th>Category:</th>
-                                        <td>{{medicineDetails.category}}</td>
+                                        <td>{{medicineDetails?.category}}</td>
                                     </tr>
                                 </thead>
                                 <thead>
                                     <tr>
                                         <th>Brand:</th>
-                                        <td>{{medicineDetails.brand}}</td>
+                                        <td>{{medicineDetails?.brand}}</td>
                                     </tr>
                                 </thead>
                                 <thead>
                                     <tr>
                                         <th>ProductionDate:</th>
-                                        <td>{{medicineDetails.production_date| date:"dd-MM-yyyy"}}</td>
+                                        <td>{{medicineDetails?.production_date| date:"dd-MM-yyyy"}}</td>
                                     </tr>
                                 </thead>
                                 <thead>
                                     <tr>
                                         <th>ExpiryDate:</th>
-                                        <td>{{medicineDetails.expiry_date| date:"dd-MM-yyyy"}}</td>
+                                        <td>{{medicineDetails?.expiry_date| date:"dd-MM-yyyy"}}</td>
                                     </tr>
                                 </thead>
                                 <thead>
                                     <tr>
                                         <th>Quantity:</th>
-                                        <td>{{medicineDetails.quantity}}</td>
+                                        <td>{{medicineDetails?.quantity}}</td>
                                     </tr>
                                 </thead>
                                 <thead>
                                     <tr>
                                         <th>CostPrice:</th>
-                                        <td>{{medicineDetails.cost_price}}</td>
+                                        <td>{{medicineDetails?.cost_price}}</td>
                                     </tr>
                                 </thead>
                                 <thead>
                                     <tr>
                                         <th>CompanyId:</th>
-                                        <td>{{medicineDetails.companyId}}</td>
+                                        <td>{{medicineDetails?.companyId}}</td>
                                     </tr>
                                 </thead>
 
