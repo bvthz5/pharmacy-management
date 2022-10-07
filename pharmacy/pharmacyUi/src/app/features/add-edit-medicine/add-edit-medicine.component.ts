@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/common-lib/service/api.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-add-edit-medicine',
@@ -10,10 +11,10 @@ import { ApiService } from 'src/app/common-lib/service/api.service';
 })
 export class AddEditMedicineComponent implements OnInit {
 
-  constructor(private service: ApiService, private router: Router, private activatedRoute: ActivatedRoute) { }
+  constructor(private service: ApiService, private router: Router, private activatedRoute: ActivatedRoute, public toastr:ToastrService) { }
 
   id: any;
-  medicineAdd !: any;
+  medicineAdd : any;
   medicineDetails: any = {};
   companyList: any;
   brand: any
@@ -34,6 +35,9 @@ export class AddEditMedicineComponent implements OnInit {
          this.medicineAdd.get("expiry_date").patchValue(this.formatDate(this.medicineDetails.expiry_date));
          this.medicineAdd.get("production_date").patchValue(this.formatDate(this.medicineDetails.production_date));
          this.medicineAdd.get("brand").setValue(this.medicineDetails.companyId)
+
+         this.companyId = this.medicineDetails.companyId;
+         this.brand=this.medicineDetails.brand;
 
         },
         error: (error: any) => {
@@ -66,12 +70,12 @@ export class AddEditMedicineComponent implements OnInit {
     })
 
   }
-
+bv:any
   AddMedicine() {
   this.medicineAdd.markAllAsTouched()
     if(this.medicineAdd.valid)
     {
-      var data = {
+      let data = {
         "medicinename": this.medicineAdd.value.medicinename,
         "category": this.medicineAdd.value.category,
         "brand": this.brand,
@@ -84,20 +88,31 @@ export class AddEditMedicineComponent implements OnInit {
       console.log(data);
       this.service.AddMedicine(data).subscribe({
         next: (res: any) => {
+
           console.log(res)
-          alert("Successfully Inserted");
-  
+          this.bv=res.data;
+          if(this.bv !=0){
+            this.showToastSuccess()+res;
+          }
+
+
           this.router.navigateByUrl('/medicine');
         },
-        error: (error: any) => console.log(error)
-  
+        error: (error: any) =>{
+          this.bv=error.message;
+          if(this.bv==0){
+            this.showToastWarn();
+
+          }
+           console.log(error)}
+
       });
     }
   }
   updateMedicine(id: any) {
   this.medicineAdd.markAllAsTouched()
     if (this.medicineAdd.valid) {
-      var data = {
+      let data = {
         "medicinename": this.medicineAdd.value.medicinename,
         "category": this.medicineAdd.value.category,
         "brand": this.brand,
@@ -112,11 +127,20 @@ export class AddEditMedicineComponent implements OnInit {
         this.service.updatemedicine(data, id).subscribe({
           next:(response: any) => {
           console.log(response);
-          alert("Successfully Updated");
-          
+          this.bv= response;
+          if(this.bv !=0){
+            this.showToastSuccess2();
+          }
+
+
           this.router.navigateByUrl('/medicine');
           },
-          error: (err: any) => console.log(err)
+          error: (err: any) => {
+            this.bv=err;
+            if(this.bv==0){
+              this.showToastWarn()+err;
+            }
+            console.log(err)}
         })
       }
     }
@@ -144,4 +168,16 @@ export class AddEditMedicineComponent implements OnInit {
     if (day.length < 2) day = '0' + day;
     return [year, month, day].join('-');
   }
+  showToastSuccess() {
+    this.toastr.success("Added Successfully","Success",{timeOut: 800,positionClass: "toast-top-center"});
+  }
+  showToastSuccess2() {
+    this.toastr.success("Updated Successfully","Success",{timeOut: 800,positionClass: "toast-top-center"});
+  }
+
+
+  showToastWarn(){
+    this.toastr.warning("Error","Warning",{timeOut: 800,positionClass: "toast-top-center"});
+  }
+
 }

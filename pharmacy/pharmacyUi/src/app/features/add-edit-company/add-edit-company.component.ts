@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/common-lib/service/api.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-add-edit-company',
@@ -10,7 +11,7 @@ import { ApiService } from 'src/app/common-lib/service/api.service';
 })
 export class AddEditCompanyComponent implements OnInit {
 
-  constructor(private service: ApiService, private router: Router, private activatedRoute: ActivatedRoute) { }
+  constructor(private service: ApiService, private router: Router, private activatedRoute: ActivatedRoute , public toastr:ToastrService) { }
   companyGroup!: FormGroup
   id: any
   companyDetails: any = {
@@ -46,38 +47,69 @@ export class AddEditCompanyComponent implements OnInit {
       description: new FormControl('', Validators.required),
     })
   }
+  bv:any;
   addCompany() {
     this.companyGroup.markAllAsTouched()
     if (this.companyGroup.valid) {
       this.service.addCompany(this.companyGroup.value).subscribe({
         next: (res: any) => {
+          this.bv=res;
+          if(this.bv != 0){
+            this.showToastSuccess();
+
+          }
           console.log(res)
-          alert("Successfully Inserted");
+
 
           this.router.navigateByUrl('/company');
         },
-        error: (error: any) => console.log(error)
+        error: (error: any) =>{
+          this.bv=error.message;
+          if(this.bv==null){
+            this.showToastWarn()+error.message;
+          }
+          console.log(error)}
+
 
       });
     }
-    //  else {
-    //   alert("Enter a valid form")
-    // }
+
   }
   updateCompany(companyId:any) {
     this.companyGroup.markAllAsTouched()
     if (this.companyGroup.valid) {
       this.service.updateCompany(this.companyGroup.value,companyId).subscribe({
         next:(response:any)=>{
+          this.bv=response.data;
+          if(this.bv != 0){
+            this.showToastSuccess2();
+          }
         console.log(response)
-        alert("Successfully updated!");
+        
         this.router.navigateByUrl("company");
         },
-        error:(err:any)=> console.log(err)
+        error:(err:any)=> {this.bv=err;
+          if(this.bv==null) {
+            this.showToastWarn()+err;
+          }
+          console.log(err)}
 
 
       })
     }
   }
+
+  showToastSuccess() {
+    this.toastr.success("Added Successfully","Success",{timeOut: 800,positionClass: "toast-top-center"});
+  }
+  showToastSuccess2() {
+    this.toastr.success("Updated Successfully","Success",{timeOut: 800,positionClass: "toast-top-center"});
+  }
+
+
+  showToastWarn(){
+    this.toastr.warning("Error","Warning",{timeOut: 800,positionClass: "toast-top-center"});
+  }
+
 
 }
