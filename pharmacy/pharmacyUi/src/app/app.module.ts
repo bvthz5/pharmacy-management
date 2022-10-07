@@ -8,12 +8,14 @@ import { CommonLibModule } from './common-lib/common-lib.module';
 import { FeaturesModule } from './features/features.module';
 import { InterceptorInterceptor } from './common-lib/interceptor/interceptor.interceptor';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // import { MedicineViewmodalComponent } from './medicine-viewmodal/medicine-viewmodal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    
+
 
   ],
   imports: [
@@ -23,7 +25,14 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ReactiveFormsModule,
     FormsModule,
     FeaturesModule,
-    NgbModule
+    NgbModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      timeOut: 1000,
+      progressBar: true,
+      progressAnimation: 'increasing',
+      preventDuplicates: true
+    })
 
   ],
   providers: [
