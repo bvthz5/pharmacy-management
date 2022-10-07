@@ -48,6 +48,7 @@ export class AddEditCompanyComponent implements OnInit {
     })
   }
   bv:any;
+  // bbbb:any;
   addCompany() {
     this.companyGroup.markAllAsTouched()
     if (this.companyGroup.valid) {
@@ -85,7 +86,7 @@ export class AddEditCompanyComponent implements OnInit {
             this.showToastSuccess2();
           }
         console.log(response)
-        
+
         this.router.navigateByUrl("company");
         },
         error:(err:any)=> {this.bv=err;
@@ -110,6 +111,8 @@ export class AddEditCompanyComponent implements OnInit {
   showToastWarn(){
     this.toastr.warning("Error","Warning",{timeOut: 800,positionClass: "toast-top-center"});
   }
+
+
 
 
 }
