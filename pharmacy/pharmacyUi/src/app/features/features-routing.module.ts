@@ -12,6 +12,9 @@ import { MedicineViewComponent } from './medicine-view/medicine-view.component';
 import { MedicineComponent } from './medicine/medicine.component';
 import { SalesComponent } from './sales/sales.component';
 import { SaleshistoryComponent } from './saleshistory/saleshistory.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { LoginGuard } from '../common-lib/guard/login.guard';
+import { UserProPicComponent } from './user-pro-pic/user-pro-pic.component';
 
 const routes: Routes = [
   {
@@ -46,9 +49,18 @@ const routes: Routes = [
   {
     path: "companyView/:id", component: CompanyDetainViewComponent, pathMatch: "full", canActivate: [AuthguardGuard]
   },
-  { path: "saleshistory", component: SaleshistoryComponent, title: "saleshistory", canActivate: [UserTypeGuard] }
-  ,
-  { path: "expired", component: ExpiredMedicineComponent, title: "expired", canActivate: [AuthguardGuard  ] }
+  {
+    path: "saleshistory", component: SaleshistoryComponent, title: "saleshistory", canActivate: [UserTypeGuard]
+  },
+  {
+    path: "expired", component: ExpiredMedicineComponent, title: "expired", canActivate: [AuthguardGuard  ]
+  },
+  {
+    path: "resetPswrd/:url" , component: ForgotPasswordComponent, pathMatch:"full", canActivate: [LoginGuard]
+  },
+  {
+    path: "userpic", component: UserProPicComponent, pathMatch:"full", canActivate:[AuthguardGuard]
+  }
 
 ];
 

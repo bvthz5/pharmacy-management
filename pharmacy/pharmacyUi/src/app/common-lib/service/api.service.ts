@@ -98,4 +98,34 @@ export class ApiService {
   getExpiredMedicine(){
     return this.http.get(this.api_url+"/medicine/expired")
   }
+
+  resetPswrd(data :any,token:any){
+    return this.http.post(this.api_url+"/login/forgotPswrd/" + token, data);
+  }
+
+  forgotPswrd(data: any): Observable<any> {
+    return this.http.post(this.api_url+"/login/resetPswrd", data);
+  }
+
+// -----
+  // getJobCount(): Observable<any> {
+  //   return this.http.get(this.api_url+"/login/count");
+  // }
+
+  // getUserDetails(){
+  //   return this.http.get(this.api_url+"/users/detail");
+  // }
+
+  // changePswd(data:any):Observable<any>{
+  //   return this.http.put(this.api_url+"/login/changepswrd",data)
+  // }
+
+  // uploadImageManager(selectedFile:any):Observable<any>{
+  //   return this.http.put(this.api_url+"/login/profilePic",selectedFile);
+  // }
+
+  // getProfilePic():Observable<any>{
+  //   return this.http.get(this.api_url+"/login/getPic",{ responseType: "blob" })
+
+  // }
 }

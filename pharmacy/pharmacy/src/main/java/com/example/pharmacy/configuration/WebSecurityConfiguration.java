@@ -47,6 +47,9 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers(POST, "/login").anonymous()
                 .antMatchers(PUT, "/login").anonymous()
                 .antMatchers(OPTIONS, "/**").permitAll()
+                .antMatchers(POST, "/login/resetPswrd").anonymous()
+                .antMatchers(POST, "/login/forgotPswrd/**").anonymous()
+
                 .anyRequest().authenticated();
     }
 

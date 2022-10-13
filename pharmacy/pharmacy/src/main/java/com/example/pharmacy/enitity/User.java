@@ -7,16 +7,39 @@ import javax.persistence.Id;
 public class User {
 @Id
 private Integer userId;
+private String name;
 private String email;
 private String password;
 private String type;
+private String resetPasswrdToken;
+private String image;
 
+
+
+
+public String getName() {
+    return name;
+}
+
+public void setName(String name) {
+    this.name = name;
+}
+
+public String getResetPasswrdToken() {
+    return resetPasswrdToken;
+}
+
+public void setResetPasswrdToken(String resetPasswrdToken) {
+    this.resetPasswrdToken = resetPasswrdToken;
+}
 
 public User(Integer userId, String email, String password, String type) {
     this.userId = userId;
     this.email = email;
     this.password = password;
     this.type = type;
+
+    
 }
 
 public User() {
@@ -53,5 +76,13 @@ public void setType(String type) {
 @Override
 public String toString() {
     return "User [email=" + email + ", password=" + password + ", type=" + type + ", userId=" + userId + "]";
+}
+
+public String getImage() {
+    return image;
+}
+
+public void setImage(String image) {
+    this.image = image;
 }
 }

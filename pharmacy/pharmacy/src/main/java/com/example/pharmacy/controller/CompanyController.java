@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.pharmacy.extra.Pager;
 import com.example.pharmacy.form.CompanyForm;
 import com.example.pharmacy.service.CompanyService;
 import com.example.pharmacy.view.CompanyDetailView;
@@ -50,6 +52,21 @@ public class CompanyController {
     public void delete(@PathVariable("companyId") Integer companyId){
         companyService.delete(companyId);
     }
+
+    @GetMapping("/{pageNo}/{limit}/{sortBy}/{desc}/{filter}/{search}")
+	public Pager<CompanyListView> lists(@RequestParam(name = "page", required = false, defaultValue = "1") Integer page, Integer companyId,
+			@RequestParam(name = "limit", required = false, defaultValue = "10") Integer limit,
+			@RequestParam(name = "sortBy", required = false, defaultValue = "company_id") String sortBy,
+			@RequestParam(name = "desc", required = false, defaultValue = "false") Boolean desc,
+			@RequestParam(name = "filter", required = false, defaultValue = "") String filter,
+			@RequestParam(name = "search", required = false, defaultValue = "") String search) {
+		return companyService.lists(page, companyId, limit, sortBy, desc, filter, search);
+	}
+
+    @GetMapping("/count")
+	public long Count() {
+		return companyService.Count();
+	}
 
     
 

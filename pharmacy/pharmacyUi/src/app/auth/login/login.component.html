@@ -7,7 +7,7 @@
         </div>
         <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
           <form [formGroup]="loginForm" (ngSubmit)="login()">
-  
+
             <!-- Email input -->
             <div class="form-outline mb-4">
                 <label class="form-label" for="form3Example3">Email address</label>
@@ -17,12 +17,15 @@
                     <div class="error" *ngIf="loginForm.controls['email']?.errors">Enter a valid email address</div>
                 </div>
             </div>
-  
+
             <!-- Password input -->
             <div class="form-outline mb-3">
+
                 <label class="form-label" for="form3Example4">Password</label>
+
               <input type="password" id="form3Example4" class="form-control form-control-lg"
                 placeholder="Enter password" formControlName="password"[ngClass]="{'is-invalid': loginForm.controls['password'].touched&& loginForm.controls['password'].errors}"/>
+
                 <div *ngIf="loginForm.controls['password'].touched">
                     <div class="error" *ngIf="loginForm.controls['password']?.errors?.['required']">Enter
                         password</div>
@@ -30,25 +33,27 @@
                         contain minimum eight
                         characters, at least one uppercase letter, one lowercase letter, one number and one
                         special character</div>
-    
+
                 </div>
             </div>
-  
+
             <div class="d-flex justify-content-between align-items-center">
             </div>
-  
+
             <div class="text-center text-lg-start mt-4 pt-2">
               <button type="submit" class="btn btn-primary btn-lg"
                 style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button>
             </div>
-  
+
           </form>
+          <br>
+          <button type="button" (click)="open(bvpswmodal)" class="btn btn-link"><B><u>Forgot Password ?</u></B></button>
         </div>
       </div>
     </div>
     <div
       class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-primary">
-  
+
       <!-- Right -->
       <div>
         <a href="#!" class="text-white me-4">
@@ -67,3 +72,43 @@
       <!-- Right -->
     </div>
   </section>
+
+
+
+
+<ng-template #bvpswmodal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Recover Password</h4>
+    <button type="button" class=" btn-close" aria-label="Close" id="forgotPswdModal"
+      (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true"></span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="forgotPswdForm" (ngSubmit)="forgotPswd()">
+      <div class="form-outline mb-4">
+        <input type="text" id="form5Example2" class="form-control" formControlName="email"  [ngClass]="{'is-invalid': forgotPswdForm.controls['email'].touched&& forgotPswdForm.controls['email'].errors}" />
+        <label class="form-label" for="form5Example2">Enter your Email address</label>
+        <div *ngIf="forgotPswdForm.controls['email'].touched">
+          <div *ngIf="forgotPswdForm.controls['email']?.errors?.['required']" class="text-danger"> Email
+            Required</div>
+          <div *ngIf="forgotPswdForm.controls['email']?.errors?.['email']" class="text-danger"> Invalid Email
+            Format</div>
+
+        </div>
+      </div>
+      <div class="d-flex flex-sm-row flex-column justify-content-between">
+      <a href="\login" class="btn btn-primary btn-block mb-4">Back To Login</a>
+      <button type="submit" class="btn btn-primary btn-block mb-4">Send &nbsp;
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-send" viewBox="0 0 16 16">
+          <path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576 6.636 10.07Zm6.787-8.201L1.591 6.602l4.339 2.76 7.494-7.493Z"/>
+        </svg>
+      </button>
+      </div>
+    </form>
+  </div>
+</ng-template>
+
+
+<!-- Spinner -->
+<div *ngIf="showSpinner" class="loading">Loading&#8230;</div>

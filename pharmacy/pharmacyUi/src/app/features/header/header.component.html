@@ -15,13 +15,14 @@
           <li class="nav-item">
             <a class="nav-link" routerLink="/medicine" routerLinkActive="active" ariaCurrentWhenActive="page">Medicine</a>
           </li>
-         
+
           <li class="nav-item" >
             <a class="nav-link" *ngIf="userType=='admin'"  routerLink="/saleshistory" routerLinkActive="active" ariaCurrentWhenActive="page">History</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" routerLink="/expired" routerLinkActive="active" ariaCurrentWhenActive="page">Expired</a>
           </li>
+          
         </ul>
         <button class="btn btn-outline-success" type="submit" (click)="onLogout()">Logout</button>
 

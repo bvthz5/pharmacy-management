@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/common-lib/service/api.service';
 import { ToastrService } from 'ngx-toastr';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,9 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private service: ApiService, private router :Router,public toastr:ToastrService) { }
+ showSpinner: boolean = false;
+
+  constructor(private service: ApiService, private router :Router,public toastr:ToastrService,private modalService:NgbModal) { }
 
   ngOnInit(): void {
   }
@@ -19,6 +22,11 @@ export class LoginComponent implements OnInit {
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)])
   })
+
+  forgotPswdForm: FormGroup = new FormGroup({
+    email: new FormControl('',[ Validators.required,Validators.email]),
+  })
+
 
 bv:any;
   login() {
@@ -60,4 +68,30 @@ bv:any;
     this.toastr.warning("Invalid","Warning",{timeOut: 800,positionClass: "toast-top-center"});
   }
 
+  forgotPswd(){
+    if(this.forgotPswdForm.valid){
+      this.showSpinner=true
+      let data =this.forgotPswdForm.controls['email'].value;
+      this.service.forgotPswrd(data).subscribe({
+        next: (response: any) => {
+          this.showSpinner=false;
+          console.log(response);
+          document.getElementById('forgotPswdModal')?.click();
+          alert("Password reset link has been sent to "+this.forgotPswdForm.controls['email'].value);
+        },
+        error: (error: any) => {
+          this.showSpinner=false;
+          console.log(error);
+          document.getElementById('forgotPswdModal')?.click(); }
+      })
+    }
+  }
+
+  open(content: any) {
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' })
+  }
+
 }
+
+
+

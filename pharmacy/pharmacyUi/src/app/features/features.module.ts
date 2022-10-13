@@ -21,6 +21,9 @@ import { MedicineViewmodalComponent } from './medicine-viewmodal/medicine-viewmo
 import { ExpiredMedicineComponent } from './expired-medicine/expired-medicine.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { UserProPicComponent } from './user-pro-pic/user-pro-pic.component';
+
 
 
 @NgModule({
@@ -37,7 +40,9 @@ import { ToastrModule } from 'ngx-toastr';
     CompanyDetainViewComponent,
     SaleshistoryComponent,
     MedicineViewmodalComponent,
-    ExpiredMedicineComponent
+    ExpiredMedicineComponent,
+    ForgotPasswordComponent,
+    UserProPicComponent
   ],
   imports: [
     CommonModule,
