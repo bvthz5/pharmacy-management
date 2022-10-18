@@ -17,10 +17,10 @@ import com.example.pharmacy.enitity.Medicine;
 public interface MedicineRepository extends Repository<Medicine, Integer>{
 
     //  Collection<MedicineListView>findByUserUserIdAndStatus(Integer currentUserId, byte value);
-     Collection<Medicine>findByStatusAndQuantityGreaterThanAndExpiryDateGreaterThan( byte value,Integer quantity,Date currentDate);
-     Collection<Medicine>findByStatusAndExpiryDateLessThan( byte value,Date currentDate);
+    Collection<Medicine>findByStatusAndQuantityGreaterThanAndExpiryDateGreaterThan( byte value,Integer quantity,Date currentDate);
+    Collection<Medicine>findByStatusAndExpiryDateLessThan( byte value,Date currentDate);
     
-	 Medicine save(Medicine medicine);
+	Medicine save(Medicine medicine);
 
     Optional<Medicine>findByMedicineIdAndStatus(Integer medicine_id,  byte value); 
 

@@ -20,7 +20,8 @@ import { InterceptorInterceptor } from './interceptor/interceptor.interceptor';
     {
       provide:HTTP_INTERCEPTORS,
       useClass:InterceptorInterceptor,
-      multi:true}
+      multi:true,
+    }
   
   ],
 })

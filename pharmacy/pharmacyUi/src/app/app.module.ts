@@ -10,7 +10,9 @@ import { InterceptorInterceptor } from './common-lib/interceptor/interceptor.int
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-// import { MedicineViewmodalComponent } from './medicine-viewmodal/medicine-viewmodal.component';
+import { MatSortModule } from '@angular/material/sort';
+import { MatNativeDateModule } from '@angular/material/core';
+
 
 @NgModule({
   declarations: [
@@ -19,10 +21,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
   ],
   imports: [
+    
+    MatSortModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
+    MatNativeDateModule,
     FormsModule,
     FeaturesModule,
     NgbModule,
@@ -39,8 +44,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: InterceptorInterceptor,
-      multi: true
-    }
+      multi: true,
+      
+    },
+    
 
   ],
   bootstrap: [AppComponent]

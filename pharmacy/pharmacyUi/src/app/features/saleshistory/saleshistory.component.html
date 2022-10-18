@@ -18,10 +18,15 @@
         <option [value]="2">Sales Date</option>
         <option [value]="3">Total Amount</option>
     </select>
+    <select class="form-select col-13 table-wrapper" style="width: 17vw; margin-bottom: 5px;"
+    aria-label="Default select example" (change)="onSortDir($event)">
+    <option [value]="1" selected>Ascending</option>
+    <option [value]="2">Descending</option>
+    </select>
     <div class="container col">
         <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
             <div class="flex">
-                <input type="number" id="formcontrol" class="form-control" placeholder="No of Days" formControlName="days"
+                <input type="Date" id="formcontrol" class="form-control" placeholder="Date" formControlName="date"
                     style="width: 150px;margin-right: 8px;">
                 <button type="submit" class="primary"> Filter </button>
             </div>
@@ -29,13 +34,56 @@
     </div>
 </div>
 
+<!-- <div class="form-group">
+	<div class="col-md-6">
+		<input type="text" [(ngModel)]="searchText" 
+           class="form-control" placeholder="Search By Medicine" />
+  </div>
+</div> -->
+
+
+
+
+<!-- <div class="col-md-12">
+    <table class="table table-responsive table-hover">
+      <tr>
+        <th class="pointer" (click)="sort('salesId')">Sales_ID</th>
+        <th scope="col">User_ID</th>
+        <th scope="col">Brand</th>
+        <th scope="col">Medicine Name</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="sort('salesQuantity')">Sales Quantity</th>
+        <th scope="col">Total Amount</th>
+        <th class="pointer" (click)="sort('salesDate')">Sales Date</th>
+      </tr>
+      
+      <tr *ngFor="let value of salesdata | category : searchText">
+        <th>{{value.salesId}}</th>
+        <td>{{value.userId}}</td>
+        <td>{{value.brand}}</td>
+        <td>{{value.medicinename}}</td>
+        <td>{{value.salesQuantity}}</td>
+        <td>{{value.totalAmount}}</td>
+        <td>{{value.salesDate| date:"dd-MM-yyyy"}}</td>
+    <tr>
+    </table>
+  </div> -->
+
+
+
+
+  
+
+
+
 
 <div class="table-wrapper">
-    <table class="fl-table">
+    <!-- <table matSort (matSortChange)="sortData($event)"> -->
+        <table>
         <thead>
             <tr>
+                <!-- <th mat-sort-header="Sales_ID">Sales_ID</th> -->
                 <th scope="col">Sales_ID</th>
-                <th scope="col">User Id</th>
+                <th scope="col">User_Id</th>
                 <th scope="col">Company</th>
                 <th scope="col">Medicine Name</th>
                 <th scope="col">Sales Quantity</th>
@@ -66,3 +114,32 @@
 <div class="list-group">
     <button type="button" class="download" (click)="downloadFile()">Download as
         Excel</button>
+
+
+        <!-- <form th:action="@{/search}" method="get">
+            <input type="text" name="keyword" th:value="${keyword}"  placeholder="Find by Owner Name & Shop Type" size="50" >
+            <button type="submit" class="btn btn-info" >Search</button>
+            <button type="submit" class="btn btn-info" >Reset</button>
+            </form> -->
+
+            <form [formGroup]="searchForm" (ngSubmit)="onSearch()">
+                <div class="flex">
+                    <input type="text" id="formcontrol" class="form-control" placeholder="Search by Medicine Name or Brand Name or Total Amount" formControlName="name"
+                        style="width: 450px;margin-right: 8px;">
+                    <button type="submit" class="primary"> SEARCH </button>
+                </div>
+            </form>
+
+            <!-- <div id='remote' class='col-lg-6' style="margin: 0 auto;padding-top: 15px;">
+                <div style="width: 250px; margin: 0 auto;">
+                    <h4>Remote Data</h4>
+                    <ejs-autocomplete id='products' #remote [dataSource]='data' [suggestionCount]='suggestionCount' filterType='StartsWith' [fields]='remoteFields'
+                        [autofill]='true' [query]='query' [placeholder]='remoteWaterMark' sortOrder='Ascending'></ejs-autocomplete>
+                </div>
+            </div>
+        </div> -->
+<!-- 
+        <div class="paginationCont">
+            <dir-pagination-controls max-size="5" boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="templates/pagination_ctrls.html"></dir-pagination-controls>
+        </div> -->
+        

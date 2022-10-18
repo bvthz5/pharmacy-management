@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { catchError, Observable, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -16,86 +16,142 @@ export class ApiService {
   /**
    * Login user
    */
-  loginUser(data: any) {
+  loginUser(data: any) 
+  {
     return this.http.post(this.api_url + "/login", data)
   }
 
   /**
    * get All medicne List
    */
-  getMedineList() {
+  getMedineList() 
+  {
     return this.http.get(this.api_url + "/medicine")
   }
-  addSale(data: any) {
+
+  addSale(data: any)
+  {
     return this.http.post(this.api_url + "/sales", data)
   }
   /**
    * get sale details after adding it to sales table
    */
-  getsale(data: any) {
+  getsale(data: any) 
+  {
     this.sales = data
   }
-  async returnSale() {
+
+  async returnSale() 
+  {
     return await this.sales
   }
 
-  getCompany() {
+  getCompany() 
+  {
     return this.http.get(this.api_url + "/company")
   }
 
-  deleteCompany(data: any) {
+  deleteCompany(data: any) 
+  {
     return this.http.delete(this.api_url + "/company/" + data)
   }
 
-  getCompanyDeatails(companyId: any) {
+  getCompanyDeatails(companyId: any) 
+  {
     return this.http.get(this.api_url + "/company/" + companyId)
   }
 
-  addCompany(data: any) {
+  addCompany(data: any) 
+  {
     return this.http.post(this.api_url + "/company", data)
   }
 
-  updateCompany(data: any, companyId: any) {
+  updateCompany(data: any, companyId: any) 
+  {
     return this.http.put(this.api_url + "/company/" + companyId, data)
   }
-  medicineList() {
+
+  medicineList() 
+  {
     return this.http.get(this.api_url + '/medicine')
   }
 
-  deleteMedicine(data: any) {
+  deleteMedicine(data: any) 
+  {
     return this.http.delete(this.api_url + '/medicine/' + data)
   }
-  medicinedetails(id: any) {
+
+  medicinedetails(id: any) 
+  {
     return this.http.get(this.api_url + "/medicine/" + id)
 
   }
-  getMedicineDetails(id: any) {
+
+  getMedicineDetails(id: any) 
+  {
     return this.http.get(this.api_url + "/medicine/" + id)
   }
 
-  AddMedicine(info: any): Observable<any> {
+  AddMedicine(info: any): Observable<any> 
+  {
     return this.http.post(this.api_url + '/medicine', info)
   }
-  updatemedicine(data: any, medicineId: any) {
+
+  updatemedicine(data: any, medicineId: any)
+  {
     return this.http.put(this.api_url + "/medicine/" + medicineId, data)
   }
 
-  getCurrentUserDetails() {
+  getCurrentUserDetails() 
+  {
     return this.http.get(this.api_url + "/login")
   }
-  getSalesData(data: any, data1: any, sort: any): Observable<any> {
 
-    return this.http.get(this.api_url + "/sales/" + data + "/" + data1 + "/" + sort);
+  // getSalesData(data: any, data1: any, sort: any): Observable<any> 
+  // {
+  //   return this.http.get(this.api_url + "/sales/" + data + "/" + data1 + "/" + sort);
+  // }
+
+  getSalesData(data: any, data1: any, sortBy: any, sortDir:any): Observable<any> 
+  {
+    let queryParams = new HttpParams();
+    queryParams = queryParams.append("data", data);
+    queryParams = queryParams.append("data1", data1);
+    queryParams = queryParams.append("sortDir", sortDir);
+    queryParams = queryParams.append("sortBy", sortBy);
+    return this.http.get<any>(this.api_url + "/sales/page", { params: queryParams })
+  }
+ 
+
+
+
+
+  getSalesList()
+  {
+    return this.http.get(this.api_url + "/sales");
   }
 
-  download(): Observable<Blob> {
+  download(): Observable<Blob> 
+  {
     return this.http.get(this.api_url + "/sales/export", { responseType: 'blob' });
   }
 
-  filter(days: any): Observable<any> {
+  filter(days: any): Observable<any> 
+  {
     return this.http.get(this.api_url + "/sales/filter/" + days);
   }
-  getExpiredMedicine(){
+
+  getExpiredMedicine()
+  {
     return this.http.get(this.api_url+"/medicine/expired")
   }
+
+
+  search(search: any): Observable<any> 
+  {
+    let queryParams = new HttpParams();
+    queryParams = queryParams.append("search", search);
+    return this.http.get<any>(this.api_url + "/sales/search/", { params: queryParams })
+  }
+
 }

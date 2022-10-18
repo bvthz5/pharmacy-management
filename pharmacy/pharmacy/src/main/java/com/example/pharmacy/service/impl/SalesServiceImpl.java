@@ -1,18 +1,26 @@
 package com.example.pharmacy.service.impl;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
-// import org.apache.catalina.security.SecurityUtil;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.Order;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Service;
 
 import com.example.pharmacy.enitity.Sales;
@@ -31,14 +39,14 @@ public class SalesServiceImpl implements SalesService {
     private SalesRepository salesRepository;
     @Autowired
     private MedicineRepository medicineRepository;
-
+    
     @Override
     public Collection<SalesListView> list() {
 
         return salesRepository.findByUserUserIdAndStatus(SecurityUtil.getCurrentUserId(), Sales.Status.ACTIVE.value)
                 .stream().map(x -> new SalesListView(x)).collect(Collectors.toList());
 
-        // return null;
+        
     }
 
     @Override
@@ -87,21 +95,46 @@ public class SalesServiceImpl implements SalesService {
     }
 
     @Override
-    public Collection<SalesListView> findPaginated(Integer pageNo, Integer pageSize, String sortBy) {
-        Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by(sortBy).ascending());
+    public Collection<SalesListView> findPaginated(Integer pageNo, Integer pageSize,String sortDir, String sortBy) {
+        Pageable paging = PageRequest.of(pageNo, pageSize,Sort.Direction.fromString(sortDir), sortBy);
+        // Sort.by(sortBy).ascending()
         Page<SalesListView> pagedResult = salesRepository.findAllByUserUserId(SecurityUtil.getCurrentUserId(), paging);
         return pagedResult.toList();
     }
 
-    @Override
-    public Collection<SalesListView> findAllByDateBetween(Integer days) {
-        Calendar calendar = Calendar.getInstance();
-        Date today = calendar.getTime();
 
-        calendar.add(Calendar.DAY_OF_MONTH, -days);
-        Date beforeDays = calendar.getTime();
-        return salesRepository.findAllBysalesDateBetween(beforeDays, today);
+
+    @Override
+    public Collection<SalesListView> findAllByDateBetween(Date date) 
+    {
+        // Calendar calendar = Calendar.getInstance();
+        // Date today = calendar.getTime();
+
+        // calendar.add(Calendar.DAY_OF_MONTH, -days);
+        // Date beforeDays = calendar.getTime();
+        return salesRepository.findAllBysalesDate(date);
 
     }
 
+    // public Collection<Sales> listAll(String keyword) {
+    //     if (keyword != null) 
+    //     {
+    //         return salesRepository.search(keyword);
+    //     }
+    //     return salesRepository.findAll();
+    // }
+
+    @Override
+    public List<SalesListView> list(String search,Integer pageNo,Integer pageSize) {
+        System.out.println("search is"+ search);
+        Pageable paging = PageRequest.of(pageNo,pageSize);
+        return StreamSupport.stream(salesRepository
+                .searchKey(search,paging).spliterator(), false)
+                .map(item -> new SalesListView(item))
+                .collect(Collectors.toList());
+    }
 }
+
+    
+
+

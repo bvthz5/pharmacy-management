@@ -9,6 +9,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.example.pharmacy.form.SalesForm;
 
 @Entity
@@ -31,7 +34,9 @@ public class Sales {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer salesId;
     private Integer salesQuantity;
-    @Temporal(TemporalType.TIMESTAMP)
+
+    // @Temporal(TemporalType.TIMESTAMP)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date salesDate;
     private byte status;
     private Float totalAmount;

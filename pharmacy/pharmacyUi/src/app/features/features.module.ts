@@ -21,6 +21,8 @@ import { MedicineViewmodalComponent } from './medicine-viewmodal/medicine-viewmo
 import { ExpiredMedicineComponent } from './expired-medicine/expired-medicine.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { CategoryPipe } from './saleshistory/category.pipe';
+
 
 
 @NgModule({
@@ -37,7 +39,9 @@ import { ToastrModule } from 'ngx-toastr';
     CompanyDetainViewComponent,
     SaleshistoryComponent,
     MedicineViewmodalComponent,
-    ExpiredMedicineComponent
+    ExpiredMedicineComponent,
+    CategoryPipe,
+   
   ],
   imports: [
     CommonModule,
