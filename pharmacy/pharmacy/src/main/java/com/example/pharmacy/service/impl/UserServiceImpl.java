@@ -240,5 +240,11 @@ public class UserServiceImpl implements UserService {
 		return userRepository.countUsers();
 	}
 
+	@Override
+	public UserView detailView() {
+		return new UserView(
+				userRepository.findById(SecurityUtil.getCurrentUserId()).orElseThrow(NotFoundException::new));
+						
+	}
 
 }

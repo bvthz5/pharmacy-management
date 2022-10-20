@@ -93,4 +93,9 @@ public class LoginController {
 		return userService.userCount();
 	}
 
+    @GetMapping("/detail")
+	public UserView detailView() {
+		return userService.detailView();
+	}
+
 }

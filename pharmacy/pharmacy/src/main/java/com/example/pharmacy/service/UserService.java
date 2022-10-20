@@ -33,6 +33,8 @@ public interface UserService {
 
     long userCount();
 
+    UserView detailView();
+
   
 
 }
