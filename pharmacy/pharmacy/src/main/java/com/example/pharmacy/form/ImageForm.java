@@ -4,7 +4,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class ImageForm {
 
-    public MultipartFile profilePic;
+    private MultipartFile profilePic;
 
     public MultipartFile getProfilePic() {
         return profilePic;

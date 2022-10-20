@@ -6,6 +6,8 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -72,21 +74,33 @@ public class LoginController {
 
     @PutMapping("/changepswrd")
 	public UserView changePassword(@Valid @RequestBody ChangePasswordForm form) {
+
 		return userService.changePassword(form);
 	}
 
     // pro pic
 
     @PutMapping("/profilePic")
-    public User add(@ModelAttribute ImageForm form) throws Exception{
+    public UserView addimage(@ModelAttribute ImageForm form) throws Exception{
+        System.out.println(form.toString());
         System.out.println(form.getProfilePic().getOriginalFilename());
         return userService.uploadPic(form);
+
     }
 
-    @GetMapping("/getPic")
-	public HttpEntity<byte[]> getImg() {
-		return userService.getImg();
-	}
+    @GetMapping( "/getImage")
+    public HttpEntity<byte[]> downloadFile() {
+
+        byte[] file = userService.getFileData();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.IMAGE_JPEG);
+        headers.setContentLength(file.length);
+
+        return new HttpEntity<>(file, headers);
+
+    }
+
 
     @GetMapping("/count")
 	public long userCount() {

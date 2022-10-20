@@ -8,9 +8,11 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationProvider;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
@@ -28,6 +30,17 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     public WebSecurityConfiguration() {
         super(true);
     }
+  
+    // @Override
+    // protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    //     auth.inMemoryAuthentication()
+    //             .passwordEncoder(NoOpPasswordEncoder.getInstance())     
+    //                 .withUser("user").password("{noop}password1").roles("USER")
+    //             .and()
+    //                 .withUser("admin").password("{noop}password2").roles("ADMIN");
+    // }
+
+
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {

@@ -1,5 +1,7 @@
 package com.example.pharmacy.service;
 
+import java.io.IOException;
+
 import javax.validation.Valid;
 
 import org.springframework.http.HttpEntity;
@@ -27,13 +29,15 @@ public interface UserService {
 
     UserView changePassword(@Valid ChangePasswordForm form) throws NotFoundException;
 
-    User uploadPic(ImageForm form);
+    UserView uploadPic(ImageForm form) throws Exception;
 
-    HttpEntity<byte[]> getImg();
+    
 
     long userCount();
 
     UserView detailView();
+
+    byte[] getFileData();
 
   
 

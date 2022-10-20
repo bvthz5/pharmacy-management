@@ -1,8 +1,8 @@
 package com.example.pharmacy.form;
 
 public class ChangePasswordForm {
-    public String currentPassword;
-	public String newPassword;
+    private String currentPassword;
+	private String newPassword;
 	public String getCurrentPassword() {
 		return currentPassword;
 	}

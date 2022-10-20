@@ -33,8 +33,9 @@ public void setResetPasswrdToken(String resetPasswrdToken) {
     this.resetPasswrdToken = resetPasswrdToken;
 }
 
-public User(Integer userId, String email, String password, String type) {
+public User(Integer userId, String name, String email, String password, String type) {
     this.userId = userId;
+    this.name = name;
     this.email = email;
     this.password = password;
     this.type = type;
@@ -44,9 +45,20 @@ public User(Integer userId, String email, String password, String type) {
 
 public User() {
 }
-public User(Integer userId) {
+public User (Integer userId) {
     this.userId = userId;
 }
+
+public User (Integer userId,String image) {
+    this.userId = userId;
+    this.image = image;
+   
+} 
+public User update(Integer userId,String image) {
+    this.userId = userId;
+    this.image = image;
+    return this;
+} 
 
 public Integer getUserId() {
     return userId;
@@ -73,16 +85,28 @@ public void setType(String type) {
     this.type = type;
 }
 
-@Override
-public String toString() {
-    return "User [email=" + email + ", password=" + password + ", type=" + type + ", userId=" + userId + "]";
-}
+
+
 
 public String getImage() {
     return image;
 }
 
+
+
+@Override
+public String toString() {
+    return "User [userId=" + userId + ", name=" + name + ", email=" + email + ", password=" + password + ", type="
+            + type + ", resetPasswrdToken=" + resetPasswrdToken + ", image=" + image + "]";
+}
+
 public void setImage(String image) {
     this.image = image;
 }
+
+public User get() {
+    return this;
+}
+
+
 }

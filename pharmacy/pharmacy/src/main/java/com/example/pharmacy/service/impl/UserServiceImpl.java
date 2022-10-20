@@ -13,6 +13,7 @@ import java.time.Duration;
 import java.util.Date;
 
 import javax.mail.MessagingException;
+import javax.transaction.Transactional;
 
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +44,8 @@ import com.example.pharmacy.security.util.TokenGenerator.Token;
 import com.example.pharmacy.service.UserService;
 import com.example.pharmacy.view.LoginView;
 import com.example.pharmacy.view.UserView;
+
+import net.bytebuddy.utility.RandomString;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -182,57 +185,61 @@ public class UserServiceImpl implements UserService {
 	public UserView changePassword(ChangePasswordForm form) throws NotFoundException {
 		User user = userRepository.findByUserId(SecurityUtil.getCurrentUserId());
 
-		if (!passwordEncoder.matches(form.getCurrentPassword(), user.getPassword())) {
+		if (!form.getCurrentPassword().equals(user.getPassword())) {
 			throw new BadRequestException("Password Mismatch");
 		}
-		user.setPassword(passwordEncoder.encode(form.getNewPassword()));
+		user.setPassword(form.getNewPassword());
 		
 		return new UserView(userRepository.save(user));
 	}
 
+	
+	
 // ---------------------------------pro pic--------------------------------------------------------------
-    @Override
-	public User uploadPic(ImageForm form) {
-		User user = userRepository.findById(SecurityUtil.getCurrentUserId()).orElseThrow(NotFoundException::new);
+@Override
+    public UserView uploadPic(ImageForm form) throws IOException {
+        String uploadDir = "files/";
+        String fileName;
+        String randStr = RandomString.make(20);
+        fileName = new Date().getTime() + "_" + randStr + "."
+                + FilenameUtils.getExtension(form.getProfilePic().getOriginalFilename());
 
-		String fileName = user.getName() + user.getEmail() + user.getUserId() + user.getType() + "."
-				+ FilenameUtils.getExtension(form.getProfilePic().getOriginalFilename());
-		String path = "src/main/resources/Images";
+        Path uploadPath = Paths.get("src/main/resources/Images" + uploadDir);
 
-		Path uploadPath = Paths.get(path);
+        if (!Files.exists(uploadPath)) {
+            try {
+                Files.createDirectories(uploadPath);
+            } catch (IOException e) {
 
-		try {
-			InputStream inputStream = form.getProfilePic().getInputStream();
-			Path filePath = uploadPath.resolve(fileName);
-			Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		user.setImage(fileName);
-		
-		userRepository.save(user);
-		return user;
-	}
+                e.printStackTrace();
+            }
+        }
+        try (InputStream inputStream = form.getProfilePic().getInputStream()) {
+            Path filePath = uploadPath.resolve(fileName);
+            Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException ioe) { 
+            throw new IOException("Could not save file");
+        }
 
-	public byte[] getImgBin(String fileName) {
-		try {
-			return Files.readAllBytes(Paths.get("src/main/resources/Images" + fileName));
-		} catch (IOException e) {
-			throw new BadRequestException("File Not Found");
-		}
-	}
+        return new UserView(userRepository.save(userRepository.findByUserId((SecurityUtil.getCurrentUserId())).get().update(SecurityUtil.getCurrentUserId(), fileName)));
+                                               
+                                                                                                           
+        
+    }
 
-	// get pro picture
-	public HttpEntity<byte[]> getImg() {
+	// ------------get img---------------
 
-		User user = userRepository.findById(SecurityUtil.getCurrentUserId()).orElseThrow(NotFoundException::new);
-		String fileName = user.getImage();
-		byte[] file = getImgBin(fileName);
-		HttpHeaders headers = new HttpHeaders();
-		headers.setContentType(MediaType.IMAGE_JPEG);
-		headers.setContentLength(file.length);
-		return new HttpEntity<>(file, headers);
-	}
+	@Override
+    public byte[] getFileData() {
+        String url = userRepository.findById(SecurityUtil.getCurrentUserId()).orElseThrow(NotFoundException::new).getImage();
+
+        try {
+            return Files.readAllBytes(Paths.get("/home/binil/Documents/project/pharmacy-management/pharmacy/pharmacy/src/main/resources/Imagesfiles/"+url));
+        } catch (IOException e) {
+            throw new BadRequestException("File Not Found");
+        }
+
+    }
 
 
 	@Override
