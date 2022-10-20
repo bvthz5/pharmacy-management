@@ -7,6 +7,8 @@ import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -15,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.query.Param;
 import org.springframework.ui.Model;
@@ -31,11 +34,15 @@ import org.supercsv.io.CsvBeanWriter;
 import org.supercsv.io.ICsvBeanWriter;
 import org.supercsv.prefs.CsvPreference;
 
+import com.example.pharmacy.enitity.Pager;
 import com.example.pharmacy.enitity.Sales;
 import com.example.pharmacy.form.SalesForm;
+import com.example.pharmacy.repository.SalesRepository;
 import com.example.pharmacy.service.SalesService;
 import com.example.pharmacy.view.SalesDetailView;
 import com.example.pharmacy.view.SalesListView;
+
+import net.bytebuddy.implementation.bytecode.constant.DefaultValue;
 
 // import com.example.pharmacy.service.SalesService;
 
@@ -45,6 +52,9 @@ public class SalesController {
 
     @Autowired
     SalesService salesService;
+
+    @Autowired
+    SalesRepository salesRepository;
 
     @GetMapping
     public Collection<SalesListView> list(Principal p) {
@@ -109,6 +119,17 @@ public class SalesController {
     @RequestParam(value = "sortBy", required = false, defaultValue = "salesDate") String sortBy) {
         
         return salesService.findPaginated(pageNo, pageSize, sortDir,sortBy);
+    }
+
+    @GetMapping("/pager")
+    public Pager<SalesListView> getPager(
+    @RequestParam(value = "pageSize", required = false, defaultValue = "5") Integer pageSize,
+    @RequestParam(value = "numItems", required = false, defaultValue = "5") Integer numItems,
+    @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
+    @RequestParam(value = "type", required = false, defaultValue = "false") Boolean type,
+    @RequestParam(value = "sort", required = false, defaultValue = "salesDate") String sort) {
+
+        return salesService.findPager(pageSize, numItems , page, type, sort);
     }
 
     

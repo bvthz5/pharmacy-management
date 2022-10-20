@@ -2,17 +2,13 @@
 <br>
 <label for="header" style="font-size: 35px; color: rgb(11, 63, 54);margin-left: 60px;">Sales
     History</label>
-
-
-
-
 <br>
 <br>
 
 
 
 <div class="row">
-    <select class="form-select col-13 table-wrapper" style="width: 17vw; margin-bottom: 5px;"
+    <!-- <select class="form-select col-13 table-wrapper" style="width: 17vw; margin-bottom: 5px;"
         aria-label="Default select example" (change)="onSort($event)">
         <option [value]="1" selected>Sales Id</option>
         <option [value]="2">Sales Date</option>
@@ -22,7 +18,7 @@
     aria-label="Default select example" (change)="onSortDir($event)">
     <option [value]="1" selected>Ascending</option>
     <option [value]="2">Descending</option>
-    </select>
+    </select> -->
     <div class="container col">
         <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
             <div class="flex">
@@ -69,26 +65,18 @@
   </div> -->
 
 
-
-
-  
-
-
-
-
 <div class="table-wrapper">
-    <!-- <table matSort (matSortChange)="sortData($event)"> -->
         <table>
         <thead>
             <tr>
-                <!-- <th mat-sort-header="Sales_ID">Sales_ID</th> -->
-                <th scope="col">Sales_ID</th>
+                <th class="pointer" (click)="sort('salesId')">Sales_ID</th>
+                <!-- <th scope="col" sortable="name" (sort)="onSort($event)">User_Id</th> -->
                 <th scope="col">User_Id</th>
-                <th scope="col">Company</th>
-                <th scope="col">Medicine Name</th>
-                <th scope="col">Sales Quantity</th>
-                <th scope="col">Total Amount</th>
-                <th scope="col">Sales Date</th>
+                <th scope="col">Brand</th>
+                <th scope="col" (click)="sort('medicinename')">Medicine Name</th>
+                <th scope="col" (click)="sort('salesQuantity')">Sales Quantity</th>
+                <th scope="col" (click)="sort('totalAmount')">Total Amount</th>
+                <th scope="pointer"(click)="sort('salesDate')">Sales Date</th>
             </tr>
         </thead>
         <tbody>
@@ -102,7 +90,6 @@
                 <td>{{value.totalAmount}}</td>
                 <td>{{value.salesDate| date:"dd-MM-yyyy"}}</td>
             <tr>
-
         <tbody>
     </table>
 </div>
@@ -138,8 +125,3 @@
                 </div>
             </div>
         </div> -->
-<!-- 
-        <div class="paginationCont">
-            <dir-pagination-controls max-size="5" boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="templates/pagination_ctrls.html"></dir-pagination-controls>
-        </div> -->
-        

@@ -112,19 +112,15 @@ export class ApiService {
   //   return this.http.get(this.api_url + "/sales/" + data + "/" + data1 + "/" + sort);
   // }
 
-  getSalesData(data: any, data1: any, sortBy: any, sortDir:any): Observable<any> 
+  getSalesData(pageNo: any, pageSize: any, sortBy: any, sortDir:any): Observable<any> 
   {
     let queryParams = new HttpParams();
-    queryParams = queryParams.append("data", data);
-    queryParams = queryParams.append("data1", data1);
+    queryParams = queryParams.append("pageNo", pageNo);
+    queryParams = queryParams.append("pageSize", pageSize);
     queryParams = queryParams.append("sortDir", sortDir);
     queryParams = queryParams.append("sortBy", sortBy);
     return this.http.get<any>(this.api_url + "/sales/page", { params: queryParams })
   }
- 
-
-
-
 
   getSalesList()
   {

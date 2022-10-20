@@ -53,15 +53,8 @@ public class CompanyServiceImpl implements CompanyService {
     public void delete(Integer companyId) throws NotFoundException {
         medicineRepository.deleteMedicineByCompany(companyId);
         companyRepository.deleteCompany(companyId);
-       
-        
     }
 
-
-   
-
-
-
-
+    
     
 }

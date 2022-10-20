@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/common-lib/service/api.service';
-import {Sort} from '@angular/material/sort';
+import {MatSort,Sort} from '@angular/material/sort';
 
 @Component({
   selector: 'app-saleshistory',
@@ -11,37 +11,41 @@ import {Sort} from '@angular/material/sort';
 })
 export class SaleshistoryComponent implements OnInit {
 
-  constructor(private router : Router, private service : ApiService) { }
+
+
+  constructor(private router : Router, private service : ApiService) {       }
 
 
   salesdata:any;
   sortedData:string[]=[];
-  sortValue:any;
-  sortDir:any;
+  pageNo:any = "";
+  pageSize:any = "";
+  sortValue = "";
+  sortDir = "";
+  conditionVariable:any;
+  valuesOfUser:any;
+  days:any;
+  sales:any;
+  order:boolean = true;
+
   ngOnInit(): void
   {
-      this.getValueFromSalesApi(0,5,this.sortValue,this.sortDir);
+      this.getValueFromSalesApi(this.pageNo,this.pageSize,this.sortValue,this.sortDir);
       // this.service.getSalesList().subscribe((res:any) =>
       // {
       //   this.salesdata = res
       // })
+
   }
 
-
 // ================================================================================================>
-      conditionVariable:any;
-      valuesOfUser:any;
-      pageNo:any = 0;
-      pageSize:any = 5;
-      days:any;
-      sales:any
 
-      
       getValueFromSalesApi(pageNo: number, pageSize: number, sortValue:any, sortDir:any) 
       {
       this.service.getSalesData(pageNo, pageSize, sortValue, sortDir).subscribe((res: any) => {
-
-            console.log(res);
+            console.log(this.pageNo);
+            
+            // console.log(res);
             if (res == 0) 
             {
               this.conditionVariable = false
@@ -54,46 +58,73 @@ export class SaleshistoryComponent implements OnInit {
 
         }
 // ===========================================================================================>
-// ============================================================================================>
+
+sort(data:any)
+{
+
+  if(this.order == true)
+  {
+    this.sortValue = data;
+    this.sortDir = "ASC"
+    this.getValueFromSalesApi(this.pageNo,this.pageSize,this.sortValue,this.sortDir);
+    this.order = false;
+  }
   
-      onSort(sort:any)
-      {
-        console.log("=====>",sort.target.value);
-        if(sort.target.value==1){
-          this.sortValue="salesId"
-        }
-          else if(sort.target.value==2){
-            this.sortValue="salesDate"
-          }
-          else{
-            this.sortValue="totalAmount"
-          }
-    
-        this.getValueFromSalesApi(0,5,this.sortValue,this.sortDir)
-      }
+  else
+  {
+
+    this.sortValue = data;
+    this.sortDir = "DESC";
+    this.getValueFromSalesApi(this.pageNo,this.pageSize,this.sortValue,this.sortDir)
+    this.order = true;
+
+  }
+}
+
+// ============================================================================================>
       
-      onSortDir(sort:any)
-      {
-        console.log("=====>",sort.target.value);
-        if(sort.target.value==1)
-        {
-          this.sortDir="ASC"
-        }
-          else if(sort.target.value==2)
-          {
-            this.sortDir="DESC"
-          }
+      // onSort(sort:any)
+      // {
+        
+      //   console.log(sort.target.value);
+        
+      //   console.log("=====>",sort.target.value);
+      //   if(sort.target.value==1){
+      //     this.sortValue="salesId"
+      //   }
+      //     else if(sort.target.value==2){
+      //       this.sortValue="salesDate"
+      //     }
+      //     else{
+      //       this.sortValue="totalAmount"
+      //     }
+    
+      //   this.getValueFromSalesApi(this.pageNo,this.pageSize,this.sortValue,this.sortDir)
+      // }
+      
+      // onSortDir(sort:any)
+      // {
+      //   console.log("=====>",sort.target.value);
+      //   if(sort.target.value==1)
+      //   {
+      //     this.sortDir="ASC"
+      //   }
+      //     else if(sort.target.value==2)
+      //     {
+      //       this.sortDir="DESC"
+      //     }
 
     
-        this.getValueFromSalesApi(0,5,this.sortValue, this.sortDir)
-      }
-// ==================================================================================>
+      //   this.getValueFromSalesApi(this.pageNo,this.pageSize,this.sortValue, this.sortDir)
+      // }
+// ============================================================================================>
       nextClick() 
       {
         this.pageNo = this.pageNo + 1;
         this.getValueFromSalesApi(this.pageNo, this.pageSize,this.sortValue,this.sortDir)
     
       }
+
       previousClick() 
       {
         if (this.pageNo == 0)
@@ -102,7 +133,6 @@ export class SaleshistoryComponent implements OnInit {
         this.getValueFromSalesApi(this.pageNo, this.pageSize,this.sortValue,this.sortDir)
     
       }
-
 
       downloadFile()
       {

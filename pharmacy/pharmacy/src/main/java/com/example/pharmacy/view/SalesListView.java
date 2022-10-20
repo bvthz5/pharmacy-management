@@ -2,11 +2,12 @@ package com.example.pharmacy.view;
 
 import java.util.Date;
 
+import org.springframework.data.domain.Sort.Order;
+
 import com.example.pharmacy.enitity.Sales;
 
 public class SalesListView {
     
-
     private final int salesId;
     private final int medicineId;
     private final String medicinename;
@@ -34,18 +35,18 @@ public class SalesListView {
         this.userId=userId;
     }
 
-    public SalesListView(Sales sales) {
-        this.salesId = sales.getSalesId() ;
-        this.medicineId = sales.getMedicine().getMedicineId();
-        this.medicinename = sales.getMedicine().getMedicinename();
-        this.category = sales.getMedicine().getCategory();
-        this.brand = sales.getMedicine().getBrand();
-        this.production_date = sales.getMedicine().getProductionDate();
-        this.expiry_date = sales.getMedicine().getExpiryDate();
-        this.salesQuantity = sales.getSalesQuantity();
-        this.salesDate = sales.getSalesDate();
-        this.totalAmount = sales.getTotalAmount();
-        this.userId=sales.getUser().getUserId();
+    public SalesListView(Sales x) {
+        this.salesId = x.getSalesId() ;
+        this.medicineId = x.getMedicine().getMedicineId();
+        this.medicinename = x.getMedicine().getMedicinename();
+        this.category = x.getMedicine().getCategory();
+        this.brand = x.getMedicine().getBrand();
+        this.production_date = x.getMedicine().getProductionDate();
+        this.expiry_date = x.getMedicine().getExpiryDate();
+        this.salesQuantity = x.getSalesQuantity();
+        this.salesDate = x.getSalesDate();
+        this.totalAmount = x.getTotalAmount();
+        this.userId=x.getUser().getUserId();
     }
 
     public int getSalesId() {
