@@ -22,10 +22,22 @@
           <li class="nav-item">
             <a class="nav-link" routerLink="/expired" routerLinkActive="active" ariaCurrentWhenActive="page">Expired</a>
           </li>
-          
-        </ul>
-        <button class="btn btn-outline-success" type="submit" (click)="onLogout()">Logout</button>
 
-      </div>
-    </div>
-  </nav>
+        </ul>
+
+
+
+
+
+        <div class="btn-group">
+          <button class="btn btn-light" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="" id="asd" class="image" height="38" alt="" >
+
+            {{admin?.name}}
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end ">
+            <li><button class="dropdown-item" routerLink="/userpic" routerLinkActive="active" ariaCurrentWhenActive="page">Profile</button></li>
+
+            <li><button class="dropdown-item" type="submit" (click)="onLogout()">Logout</button></li>
+          </ul>
+        </div>

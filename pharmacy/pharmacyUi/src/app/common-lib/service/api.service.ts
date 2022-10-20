@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -108,24 +108,48 @@ export class ApiService {
   }
 
 // -----
-  // getJobCount(): Observable<any> {
-  //   return this.http.get(this.api_url+"/login/count");
-  // }
 
-  // getUserDetails(){
-  //   return this.http.get(this.api_url+"/users/detail");
-  // }
 
-  // changePswd(data:any):Observable<any>{
-  //   return this.http.put(this.api_url+"/login/changepswrd",data)
-  // }
+  getUserDetails(){
+    return this.http.get(this.api_url+"/login/detail");
+  }
 
-  // uploadImageManager(selectedFile:any):Observable<any>{
-  //   return this.http.put(this.api_url+"/login/profilePic",selectedFile);
-  // }
+  changePswd(data:any):Observable<any>{
+    return this.http.put(this.api_url+"/login/changepswrd",data)
+  }
 
-  // getProfilePic():Observable<any>{
-  //   return this.http.get(this.api_url+"/login/getPic",{ responseType: "blob" })
+  uploadImage(selectedFile:any):Observable<any>{
+    return this.http.put(this.api_url + "/login/profilePic",selectedFile);
+  }
 
-  // }
+  getProfilePic():Observable<any>{
+    return this.http.get(this.api_url + "/login/getImage",{ responseType: "blob" })
+
+  }
+  // ---spinner---
+
+  private count = 0;
+  private spinner$ = new BehaviorSubject<string>('');
+
+  getSpinnerObserver(): Observable<String> {
+    return this.spinner$.asObservable();
+  }
+
+  requestStarted() {
+    if (++this.count === 1) {
+      this.spinner$.next('start');
+    }
+  }
+
+  requestEnded() {
+    if (this.count === 0 || --this.count === 0) {
+      this.spinner$.next('stop');
+    }
+  }
+
+  resetSpinner() {
+    this.count = 0;
+    this.spinner$.next('stop');
+  }
+
 }

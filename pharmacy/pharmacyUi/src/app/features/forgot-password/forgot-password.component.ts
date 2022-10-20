@@ -35,6 +35,7 @@ export class ForgotPasswordComponent implements OnInit {
       this.service.resetPswrd(newPswd,this.resetToken).subscribe({
         next: (response: any) => {
           console.log(response);
+          
           alert("Password changed successfully");
           this.router.navigate(['login']);
         },

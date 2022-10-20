@@ -1,0 +1,164 @@
+<app-header></app-header>
+<body style="background-image: url(assets/build.jpg);background-repeat: no-repeat;background-size: cover;">
+
+  <!-- Page Container -->
+  <div class="w3-container w3-content" style="max-width: 1400px; margin-top: 2px">
+    <!-- The Grid -->
+    <div class="w3-row">
+      <!-- Left Column -->
+      <div class="w3-col m3">
+        <!--Admin  Profile -->
+        <div class="w3-card w3-round w3-white">
+          <div class="w3-container">
+            <h4 class="w3-center">My Profile</h4>
+            <table>
+              <tr style="width: 700px">
+                <div class="aaa">
+                  <img id="profile" width="250px" height="250px" src="/assets/images/profile.png" alt="/assets/images/profile.png"
+                    class="w3-center" class="aaa" class="w3-circle" />
+                </div>
+              </tr>
+              <hr>
+
+              <tr *ngIf="admin">
+                <p>
+                  <i class="bi bi-person-circle fa-fw w3-margin-right w3-text-theme"><svg
+                      xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(0, 145, 255)"
+                      class="bi bi-person-circle" viewBox="0 0 16 16">
+                      <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                      <path fill-rule="evenodd"
+                        d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+                    </svg></i>{{ admin.name }}
+                </p>
+
+                <p>
+                  <i class="bi bi-envelope-fillfa-fw w3-margin-right w3-text-theme"><svg
+                      xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(0, 145, 255)"
+                      class="bi bi-envelope-fill" viewBox="0 0 16 16">
+                      <path
+                        d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555ZM0 4.697v7.104l5.803-3.558L0 4.697ZM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757Zm3.436-.586L16 11.801V4.697l-5.803 3.546Z" />
+                    </svg></i>{{ admin.email }}
+                </p>
+                <p>
+                  <i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i>
+
+                  {{admin.type}}
+                </p>
+                </tr>
+                </table>
+
+
+                <div class="w3-card w3-round">
+                  <div class="w3-white">
+                    <br>
+                    <button class="w3-button w3-block w3-theme-l1 w3-left-align" (click)="picupload.click()">
+                      <i class="fa fa-calendar-check-o fa-fw w3-margin-right"></i> Change Profile Picture
+                    </button>
+                    <input #picupload type="file" hidden (change)="onFileChanged($event)">
+                    <div id="Demo1" class="w3-hide w3-container">
+                      <p>Some text..</p>
+                    </div>
+
+                    <button (click)="open(passwordmodal)" class="w3-button w3-block w3-theme-l1 w3-left-align">
+                      <i class="fa fa-circle-o-notch fa-fw w3-margin-right"></i>
+                      Change password
+                    </button>
+
+
+
+                    <button routerLink="/login" class="w3-button w3-block w3-theme-l1 w3-left-align">
+                      <i class="fa fa-sign-out -o-notch fa-fw w3-margin-right"></i>
+                      Back To Login
+                    </button>
+
+                  <br>
+                </div>
+              </div>
+              <br>
+              <!-- End Left Column -->
+            </div>
+
+
+
+
+            <!-- change password  modal  -->
+            <ng-template #passwordmodal let-modal>
+              <div class="modal-header">
+                <h4 class="modal-title" id="modal-basic-title">Update Profile</h4>
+                <button type="button" class="close" aria-label="Close" id="closeChangePswdModal"
+                  (click)="modal.dismiss('Cross click')" (click)="getDetails()">
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>u
+              <div class="modal-body">
+
+                <form [formGroup]="changePasswordForm" (ngSubmit)="changePassword()">
+
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="form3Example3">Current Password</label>
+                  <input type="Password" id="form3Example3" class="form-control form-control-lg"
+                    placeholder="Enter a valid Password" formControlName="currentPswd" required
+                    [ngClass]="{'is-invalid': changePasswordForm.controls['currentPswd'].touched&& changePasswordForm.controls['currentPswd'].errors}" />
+                    <label class="form-label" for="form5Example2">Current Password</label>
+                    <div *ngIf="changePasswordForm.controls['currentPswd'].touched">
+                      <div *ngIf="changePasswordForm.controls['currentPswd']?.errors?.['required']" class="text-danger"> Password
+                        Required</div>
+                      <div *ngIf="changePasswordForm.controls['currentPswd']?.errors?.['minlength']" class="text-danger"> Minimum 8
+                        characters required</div>
+                      <div *ngIf="changePasswordForm.controls['currentPswd']?.errors?.['pattern']" class="text-danger">Password
+                        should contain atleast<br>
+                        one uppercase,special character,number</div><br>
+                    </div>
+                  </div>
+                  <!-- password input -->
+                  <div class="form-outline mb-4">
+                      <label class="form-label" for="form3Example3">New Password</label>
+                    <input type="Password" id="form3Example3" class="form-control form-control-lg"
+                      placeholder="Enter a valid Password" formControlName="newPswd" required
+                      [ngClass]="{'is-invalid': changePasswordForm.controls['newPswd'].touched&& changePasswordForm.controls['newPswd'].errors}" />
+                    <label class="form-label" for="form5Example2">New Password</label>
+                    <div *ngIf="changePasswordForm.controls['newPswd'].touched">
+                      <div *ngIf="changePasswordForm.controls['newPswd']?.errors?.['required']" class="text-danger"> Password
+                        Required</div>
+                      <div *ngIf="changePasswordForm.controls['newPswd']?.errors?.['minlength']" class="text-danger"> Minimum 8
+                        characters required</div>
+                      <div *ngIf="changePasswordForm.controls['newPswd']?.errors?.['pattern']" class="text-danger">Password
+                        should contain atleast<br>
+                        one uppercase,special character,number</div><br>
+                    </div>
+                  </div>
+                  <!-- Confirm pswd input -->
+                  <div class="form-outline mb-3">
+                      <label class="form-label" for="form3Example4">Confirm Password</label>
+                    <input type="password" id="form3Example4" class="form-control form-control-lg"
+                      placeholder="Enter password"  formControlName="confirmPswd" required
+                      [ngClass]="{'is-invalid': changePasswordForm.controls['confirmPswd'].touched&& changePasswordForm.controls['confirmPswd'].errors}" />
+                    <label class="form-label" for="form5Example2">Confirm Password</label>
+                    <div
+                      *ngIf="(changePasswordForm.controls['confirmPswd'].touched||changePasswordForm.controls['confirmPswd'].dirty)"
+                      class="is-invalid">
+
+                      <div class="text-danger" *ngIf="changePasswordForm.controls['confirmPswd'].errors?.['required']">
+                        Re-enter Password.
+                      </div>
+
+                      <div class="text-danger"
+                        *ngIf="changePasswordForm.controls['newPswd'].value != changePasswordForm.controls['confirmPswd'].value">
+                        Password Should match
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="d-flex justify-content-between align-items-center">
+                  </div>
+
+                  <div class="text-center text-lg-start mt-4 pt-2">
+                    <button type="submit" class="btn btn-primary btn-lg"
+                      style="padding-left: 2.5rem; padding-right: 2.5rem;">Submit</button>
+                  </div>
+
+                </form>
+              </div>
+            </ng-template>
+
+

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { FeaturesRoutingModule } from './features-routing.module';
@@ -23,6 +23,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { UserProPicComponent } from './user-pro-pic/user-pro-pic.component';
+import { SpinnerComponent } from './spinner/spinner.component';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 
 
@@ -42,7 +44,8 @@ import { UserProPicComponent } from './user-pro-pic/user-pro-pic.component';
     MedicineViewmodalComponent,
     ExpiredMedicineComponent,
     ForgotPasswordComponent,
-    UserProPicComponent
+    UserProPicComponent,
+    SpinnerComponent
   ],
   imports: [
     CommonModule,
@@ -50,12 +53,14 @@ import { UserProPicComponent } from './user-pro-pic/user-pro-pic.component';
     ReactiveFormsModule,
     FormsModule,
     BrowserAnimationsModule,
+    MatProgressBarModule,
     ToastrModule.forRoot({
       timeOut: 1000,
       progressBar: true,
       progressAnimation: 'increasing',
       preventDuplicates: true
     })
+
 
   ],
   providers: [
