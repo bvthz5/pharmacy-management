@@ -67,7 +67,7 @@ public class CompanyServiceImpl implements CompanyService {
     // ----------------------------------------------------------------------------------------------
 
     @Override
-	public Pager<CompanyListView> lists(Integer page, Integer companyId, Integer limit, String sortBy,Boolean desc,String filter, String search) {
+	public Pager<CompanyListView> lists(Integer page, Integer limit, String sortBy,Boolean desc,String filter, String search) {
 
 		if (!companyRepository.findColumns().contains(sortBy)) {
 			sortBy = "company_id";
@@ -79,22 +79,22 @@ public class CompanyServiceImpl implements CompanyService {
 		
 		
 			ArrayList<Byte> status = new ArrayList<>();
-			if (filter.equals("0")) {
-				status.add(Company.Status.DELETED.value);
-			} else if (filter.equals("1")) {
-				status.add(Company.Status.ACTIVE.value);
-			} else {
+			// if (filter.equals("0")) {
+			// 	status.add(Company.Status.DELETED.value);
+			// } else if (filter.equals("1")) {
+			// 	status.add(Company.Status.ACTIVE.value);
+			// } else {
 				
 				status.add(Company.Status.DELETED.value);
 				status.add(Company.Status.ACTIVE.value);
 				
-			}
+			// }
 		
 
-		Page<Company> company = companyRepository.findAllByCompanyId(status,companyId, search,
+		Page<Company> company = companyRepository.findAllByCompanyId(status, search,
 				PageRequest.of(page - 1, limit, Sort.by(desc.booleanValue() ? Direction.DESC : Direction.ASC,
                         sortBy)));
-		Pager<CompanyListView> companyView = new Pager<CompanyListView>(limit, (int) company.getTotalElements(),
+		Pager<CompanyListView> companyView = new Pager<>(limit, (int) company.getTotalElements(),
 				page);
 
 		companyView

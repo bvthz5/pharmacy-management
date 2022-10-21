@@ -28,49 +28,46 @@ public class CompanyController {
     @Autowired
     private CompanyService companyService;
 
-    @GetMapping
-    public Collection<CompanyListView>list(Principal p){
-        return companyService.list();
-    }
+    // @GetMapping
+    // public Collection<CompanyListView> list(Principal p) {
+    //     return companyService.list();
+    // }
 
     @PostMapping
-    public CompanyDetailView add(@Valid @RequestBody CompanyForm form){
+    public CompanyDetailView add(@Valid @RequestBody CompanyForm form) {
         return companyService.add(form);
     }
 
     @GetMapping("/{companyId}")
-    public CompanyDetailView get(@PathVariable("companyId") Integer companyId){
+    public CompanyDetailView get(@PathVariable("companyId") Integer companyId) {
         return companyService.get(companyId);
     }
 
     @PutMapping("/{companyId}")
-    public CompanyDetailView update(@PathVariable("companyId") Integer companyId, @Valid @RequestBody CompanyForm form){
+    public CompanyDetailView update(@PathVariable("companyId") Integer companyId,
+            @Valid @RequestBody CompanyForm form) {
         return companyService.update(companyId, form);
-    } 
+    }
 
     @DeleteMapping("/{companyId}")
-    public void delete(@PathVariable("companyId") Integer companyId){
+    public void delete(@PathVariable("companyId") Integer companyId) {
         companyService.delete(companyId);
     }
 
-    @GetMapping("/{pageNo}/{limit}/{sortBy}/{desc}/{filter}/{search}")
-	public Pager<CompanyListView> lists(@RequestParam(name = "page", required = false, defaultValue = "1") Integer page, Integer companyId,
-			@RequestParam(name = "limit", required = false, defaultValue = "10") Integer limit,
-			@RequestParam(name = "sortBy", required = false, defaultValue = "company_id") String sortBy,
-			@RequestParam(name = "desc", required = false, defaultValue = "false") Boolean desc,
-			@RequestParam(name = "filter", required = false, defaultValue = "") String filter,
-			@RequestParam(name = "search", required = false, defaultValue = "") String search) {
-		return companyService.lists(page, companyId, limit, sortBy, desc, filter, search);
-	}
+    @GetMapping()
+    public Pager<CompanyListView> lists(@RequestParam(name = "page", required = false, defaultValue = "1") Integer page,
+        
+            @RequestParam(name = "limit", required = false, defaultValue = "10") Integer limit,
+            @RequestParam(name = "sortBy", required = false, defaultValue = "company_id") String sortBy,
+            @RequestParam(name = "desc", required = false, defaultValue = "false") Boolean desc,
+            @RequestParam(name = "filter", required = false, defaultValue = "0") String filter,
+            @RequestParam(name = "search", required = false, defaultValue = "") String search) {
+        return companyService.lists(page, limit, sortBy, desc, filter, search);
+    }
 
     @GetMapping("/count")
-	public long Count() {
-		return companyService.Count();
-	}
+    public long Count() {
+        return companyService.Count();
+    }
 
-    
-
-
-    
-    
 }

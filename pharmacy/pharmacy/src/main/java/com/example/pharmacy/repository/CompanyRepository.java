@@ -42,8 +42,8 @@ public interface CompanyRepository extends Repository<Company, Integer> {
 	ArrayList<String> findColumns();
 
 
-    @Query(value = "SELECT * FROM company  WHERE status IN ?1 AND (company_id LIKE %?2% OR name LIKE %?2% OR description LIKE %?2% OR phone LIKE %?2%, OR address  LIKE %?2%  )", nativeQuery = true)
-	Page<Company> findAllByCompanyId(ArrayList<Byte> status, Integer companyId, String search, Pageable page);
+    @Query(value = "SELECT * FROM company  WHERE status IN ?1 AND (company_id LIKE %?2% OR name LIKE %?2% OR description LIKE %?2% OR phone LIKE %?2%    OR address  LIKE %?2%  )", nativeQuery = true)
+	Page<Company> findAllByCompanyId(ArrayList<Byte> status, String search, Pageable page);
 
     @Query(value = "SELECT * FROM company WHERE status IN ?1 ", nativeQuery = true)
     long countCompany();

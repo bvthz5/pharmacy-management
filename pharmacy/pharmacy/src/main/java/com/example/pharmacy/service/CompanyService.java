@@ -20,7 +20,7 @@ public interface CompanyService {
 
     void delete(Integer companyId) throws NotFoundException;
 
-    Pager<CompanyListView> lists(Integer page, Integer companyId, Integer limit, String sortBy, Boolean desc, String filter,
+    Pager<CompanyListView> lists(Integer page, Integer limit, String sortBy, Boolean desc, String filter,
             String search);
 
     long Count();
