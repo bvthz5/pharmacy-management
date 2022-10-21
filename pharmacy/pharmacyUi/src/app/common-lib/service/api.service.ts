@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -15,7 +15,13 @@ export class ApiService {
 
   /**
    * Login user
+   *
    */
+
+  getToken(){
+    return localStorage.getItem('accessToken')
+  }
+
   loginUser(data: any) {
     return this.http.post(this.api_url + "/login", data)
   }
@@ -150,6 +156,10 @@ export class ApiService {
   resetSpinner() {
     this.count = 0;
     this.spinner$.next('stop');
+  }
+
+  getJobs(queryParam: HttpParams): Observable<any> {
+    return this.http.get(`${environment.api_url}/company`, { params: queryParam });
   }
 
 }

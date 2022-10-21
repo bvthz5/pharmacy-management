@@ -9,19 +9,31 @@ export class InterceptorInterceptor implements HttpInterceptor {
 
   constructor(private injector:Injector) {}
 
-  intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    let Service = this.injector.get(ApiService)
-    let token = localStorage.getItem("accessToken")
-    if (token) {
-      request = request.clone({
-        setHeaders: {
+  // intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
+  //   let Service = this.injector.get(ApiService)
+  //   let token = localStorage.getItem("accessToken")
+  //   if (token) {
+  //     request = request.clone({
+  //       setHeaders: {
 
-          'Authorization': 'Pharmacy ' + token
-        }
-      });
-    }
+  //         'Authorization': `Pharmacy ${Service.getToken()}`
+  //       }
+  //     });
+  //   }
+  //   Service.requestStarted();
+  //   return next.handle(request).pipe((delay(500)),
+  //   finalize(() => Service.requestEnded()));
+  // }
+  intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
+    let Service =this.injector.get(ApiService)
+    let token=request.clone({
+      setHeaders:{
+        Authorization :`Pharmacy ${Service.getToken()}`
+      }
+    })
     Service.requestStarted();
-    return next.handle(request).pipe(delay(1600),
-    finalize(() => Service.requestEnded()));
-  }
+    return next.handle(token).pipe(delay(500),
+      finalize(() => Service.requestEnded()));
+    }
 }
+
