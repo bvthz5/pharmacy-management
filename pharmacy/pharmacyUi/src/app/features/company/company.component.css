@@ -4,3 +4,7 @@
 .table-bordered{
   box-shadow: 5px 10px rgb(248,248,255);
 }
+.btn-light
+{
+ box-shadow: 5px 5px
+}

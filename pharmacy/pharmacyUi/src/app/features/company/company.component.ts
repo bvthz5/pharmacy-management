@@ -28,11 +28,11 @@ export class CompanyComponent implements OnInit {
 
   ngOnInit(): void {
 
-    // this.service.getCompany().subscribe((data:any)=>{
-    //   console.log(data)
-    //   this.companyData=data
+    this.service.getCompany().subscribe((data:any)=>{
+      console.log(data)
+      this.companyData=data
 
-    // })
+    })
     this.companyList()
 
   }
@@ -98,7 +98,7 @@ export class CompanyComponent implements OnInit {
   ComView(id: any) {
     this.service.getCompanyDeatails(id).subscribe({
       next: (response: any) => {
-
+        this.companyDeatils=response;
         console.log('Success', response);
 
       },
