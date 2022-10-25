@@ -102,7 +102,7 @@ public class MedicineServiceImpl implements MedicineService {
 
 
 
-    @Scheduled(cron = "* * * * * *")
+    // @Scheduled(cron = "* * * * * *")
     public void medicinealert()
     {
             
@@ -120,9 +120,9 @@ public class MedicineServiceImpl implements MedicineService {
             try {
                 MimeMessage mimeMessage = javaMailSender.createMimeMessage();
                 MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
-                helper.setFrom("devndn8900@gmail.com");
+                helper.setFrom("dawnregi1234@gmail.com");
                 // helper.setTo(user.getEmail());
-                helper.setTo("devndn8900@gmail.com");
+                helper.setTo("dawnregipanthalany@gmail.com");
                 helper.setSubject("Medicine Quantity Alert");
                 String content = "<h3>"+"Medicine Id : " + Id + "<br>Medicine : " + name + "<br>Is Running Out Of Stock --> Refill Immediately<br>"
                         
