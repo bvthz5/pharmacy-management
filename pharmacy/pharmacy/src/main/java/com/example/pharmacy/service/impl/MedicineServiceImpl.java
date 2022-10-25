@@ -102,31 +102,27 @@ public class MedicineServiceImpl implements MedicineService {
 
 
 
-    @Scheduled(cron = "* * * * * *")
+    // @Scheduled(cron = "* * * * * *")
     public void medicinealert()
-    {
-            
-        Collection<Medicine> list = medicineRepository.findByStatusAndQuantityLessThan(Medicine.Status.ACTIVE.value,10);
+    {            
+        Collection<Medicine> list = medicineRepository.findByStatusAndQuantityLessThan(Medicine.Status.ACTIVE.value,100);
         list.stream().forEach((item) -> {
             sendMail(item.getMedicineId(),item.getMedicinename());
         });
 
-        
-
     }
     public void sendMail(Integer Id, String name)
-        {
+    {
 
-            try {
+            try 
+            {
                 MimeMessage mimeMessage = javaMailSender.createMimeMessage();
                 MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
                 helper.setFrom("devndn8900@gmail.com");
                 // helper.setTo(user.getEmail());
                 helper.setTo("devndn8900@gmail.com");
                 helper.setSubject("Medicine Quantity Alert");
-                String content = "<h3>"+"Medicine Id : " + Id + "<br>Medicine : " + name + "<br>Is Running Out Of Stock --> Refill Immediately<br>"
-                        
-                        + "Thank you,<br>";
+                String content = "<h3>"+"Medicine Id : " + Id + "<br>Medicine : " + name + "<br>Is Running Out Of Stock --> Refill Immediately<br>";
                 helper.setText(content, true);
                 System.out.println(content);
                 System.out.println(mimeMessage);
@@ -138,9 +134,9 @@ public class MedicineServiceImpl implements MedicineService {
                     e.printStackTrace();
                 }
     
-            }
+    }
 
-        }
+}
         
                         
     
