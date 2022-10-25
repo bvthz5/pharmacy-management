@@ -4,7 +4,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -12,6 +15,7 @@ import javax.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -20,20 +24,22 @@ import com.example.pharmacy.enitity.User;
 import com.example.pharmacy.exception.NotFoundException;
 import com.example.pharmacy.form.MedicineForm;
 import com.example.pharmacy.repository.MedicineRepository;
+import com.example.pharmacy.repository.UserRepository;
+import com.example.pharmacy.security.util.SecurityUtil;
 import com.example.pharmacy.service.MedicineService;
 import com.example.pharmacy.view.MedicineDetailView;
 import com.example.pharmacy.view.MedicineListView;
 
 @Service
+@EnableScheduling
 public class MedicineServiceImpl implements MedicineService {
 
     @Autowired
     private MedicineRepository medicineRepository;
+
     @Autowired
     private JavaMailSender javaMailSender;
 
-    // @Autowired
-    // private User user;
 
     @Override
     public Collection<MedicineListView> list() {
@@ -94,29 +100,62 @@ public class MedicineServiceImpl implements MedicineService {
 
     }
 
-    @Scheduled(cron = "* * * * * *")
-    public void medicienalert()
-    {
-        
-    try {
-        MimeMessage mimeMessage = javaMailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
-        helper.setFrom("devndn8900@gmail.com");
-        // helper.setTo(user.getEmail());
-        helper.setTo("devndn8900@gmail.com");
-        helper.setSubject("<><><><><><><><><><><><><><><><><><><><>");
-        String content = "<h3>"
-                // + user.getEmail() + "</h3><br>"
-                + "Thank you,<br>";
-        helper.setText(content, true);
-        System.out.println(content);
-        System.out.println(mimeMessage);
-        javaMailSender.send(mimeMessage);
-
-    } catch (MessagingException e) {
-        e.printStackTrace();
-    }
-    }
     
 
-}
+    // @Scheduled(cron = "* * * * * *")
+    public void alertcall()
+    {
+        medicinealert();
+    }
+
+    
+    public void medicinealert()
+    {
+        List<MedicineListView> list = StreamSupport.stream(medicineRepository.findByStatusAndQuantityLessThan(Medicine.Status.ACTIVE.value,10).spliterator(), false)
+        .map(item -> {
+            
+            sendMail(item.getMedicinename());
+            MedicineListView view = new MedicineListView(null);
+            return view;
+        }).collect(Collectors.toList());
+
+        //Integer quantity = MedicineLi.getQuantity();                
+        
+        
+
+        
+
+    }
+
+    public void sendMail(String name)
+        {
+
+            try {
+                MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+                MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
+                helper.setFrom("devndn8900@gmail.com");
+                // helper.setTo(user.getEmail());
+                helper.setTo("devndn8900@gmail.com");
+                helper.setSubject("<><><><><><><><><><><><><><><><><><><><>");
+                String content = "<h3>"+name
+                        // + medicine.getEmail() + "</h3><br>"
+                        + "Thank you,<br>";
+                helper.setText(content, true);
+                System.out.println(content);
+                System.out.println(mimeMessage);
+                javaMailSender.send(mimeMessage);
+    
+            } 
+            catch (MessagingException e) 
+                {
+                    e.printStackTrace();
+                }
+    
+            }
+
+        }
+        
+                        
+    
+
+

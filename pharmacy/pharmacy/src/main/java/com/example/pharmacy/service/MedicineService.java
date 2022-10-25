@@ -2,10 +2,13 @@ package com.example.pharmacy.service;
 
 import java.util.Collection;
 
+import org.springframework.stereotype.Service;
+
 import com.example.pharmacy.exception.NotFoundException;
 import com.example.pharmacy.form.MedicineForm;
 import com.example.pharmacy.view.MedicineDetailView;
 import com.example.pharmacy.view.MedicineListView;
+
 
 public interface MedicineService {
 

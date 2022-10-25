@@ -12,6 +12,7 @@ import org.springframework.data.repository.Repository;
 import org.springframework.data.repository.query.Param;
 
 import com.example.pharmacy.enitity.Medicine;
+import com.example.pharmacy.view.MedicineListView;
 
 
 public interface MedicineRepository extends Repository<Medicine, Integer>{
@@ -36,11 +37,16 @@ public interface MedicineRepository extends Repository<Medicine, Integer>{
 
     // sCollection<MedicineListView> findByUserUserId(Integer userId);
 	
-	Optional<Medicine>findByMedicineId(Integer medicineId);
+	Collection<Medicine>findByMedicineId(Integer medicineId);
+
+	
     @Modifying
 	@Transactional
 	@Query(value = "update medicine set status=0 where company_id=:companyId",nativeQuery = true)
 	public void deleteMedicineByCompany(@Param("companyId")Integer companyId);
+
+	@Query(value = "select * from medicine where status = 1 and quantity < 500", nativeQuery = true)
+	Collection<Medicine> findByStatusAndQuantityLessThan(byte value, Integer quantity);
 
     
 }
