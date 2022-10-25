@@ -45,7 +45,7 @@ public interface MedicineRepository extends Repository<Medicine, Integer>{
 	@Query(value = "update medicine set status=0 where company_id=:companyId",nativeQuery = true)
 	public void deleteMedicineByCompany(@Param("companyId")Integer companyId);
 
-	@Query(value = "select * from medicine where status = 1 and quantity < 500", nativeQuery = true)
+	@Query(value = "select * from medicine where status = 1 and quantity < 100", nativeQuery = true)
 	Collection<Medicine> findByStatusAndQuantityLessThan(byte value, Integer quantity);
 
     

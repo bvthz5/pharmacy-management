@@ -114,7 +114,6 @@ public class MedicineServiceImpl implements MedicineService {
         
 
     }
-
     public void sendMail(Integer Id, String name)
         {
 
