@@ -100,34 +100,22 @@ public class MedicineServiceImpl implements MedicineService {
 
     }
 
-    
 
-    // @Scheduled(cron = "* * * * * *")
-    public void alertcall()
-    {
-        medicinealert();
-    }
 
-    
+    @Scheduled(cron = "* * * * * *")
     public void medicinealert()
     {
-        List<MedicineListView> list = StreamSupport.stream(medicineRepository.findByStatusAndQuantityLessThan(Medicine.Status.ACTIVE.value,10).spliterator(), false)
-        .map(item -> {
             
-            sendMail(item.getMedicinename());
-            MedicineListView view = new MedicineListView(null);
-            return view;
-        }).collect(Collectors.toList());
-
-        //Integer quantity = MedicineLi.getQuantity();                
-        
-        
+        Collection<Medicine> list = medicineRepository.findByStatusAndQuantityLessThan(Medicine.Status.ACTIVE.value,10);
+        list.stream().forEach((item) -> {
+            sendMail(item.getMedicineId(),item.getMedicinename());
+        });
 
         
 
     }
 
-    public void sendMail(String name)
+    public void sendMail(Integer Id, String name)
         {
 
             try {
@@ -136,9 +124,9 @@ public class MedicineServiceImpl implements MedicineService {
                 helper.setFrom("devndn8900@gmail.com");
                 // helper.setTo(user.getEmail());
                 helper.setTo("devndn8900@gmail.com");
-                helper.setSubject("<><><><><><><><><><><><><><><><><><><><>");
-                String content = "<h3>"+name
-                        // + medicine.getEmail() + "</h3><br>"
+                helper.setSubject("Medicine Quantity Alert");
+                String content = "<h3>"+"Medicine Id : " + Id + "<br>Medicine : " + name + "<br>Is Running Out Of Stock --> Refill Immediately<br>"
+                        
                         + "Thank you,<br>";
                 helper.setText(content, true);
                 System.out.println(content);
