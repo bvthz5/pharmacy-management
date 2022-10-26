@@ -1,5 +1,6 @@
 package com.example.pharmacy.service.impl;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
@@ -8,6 +9,8 @@ import java.util.List;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
+
+import java.text.ParseException;  
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -100,27 +103,85 @@ public class MedicineServiceImpl implements MedicineService {
 
     }
 
-
-
     // @Scheduled(cron = "* * * * * *")
-    public void medicinealert()
+    public void expiryalert()
     {            
-        Collection<Medicine> list = medicineRepository.findByStatusAndQuantityLessThan(Medicine.Status.ACTIVE.value,100);
+        Collection<Medicine> list = medicineRepository.findByStatus(Medicine.Status.ACTIVE.value);
         list.stream().forEach((item) -> {
-            sendMail(item.getMedicineId(),item.getMedicinename());
+            // SimpleDateFormat obj = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date date = item.getExpiryDate(); 
+            Date nowDate = new Date();  
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            String localtime = dateFormat.format(nowDate);
+        
+            try 
+            {
+                Date currentDate = dateFormat.parse(localtime);
+                long time_difference = date.getTime() - currentDate.getTime(); 
+
+                long days = (time_difference / (1000*60*60*24)) % 365; 
+                if(days < 10)
+                {
+                    sendMailforExpiry(item.getMedicineId(),item.getMedicinename(), days);
+                }
+
+
+            } 
+            catch (ParseException e) 
+            {
+                e.printStackTrace();
+            }
+            
         });
 
     }
-    public void sendMail(Integer Id, String name)
+    public void sendMailforExpiry(Integer Id, String name, Long days)
     {
 
             try 
             {
+                
                 MimeMessage mimeMessage = javaMailSender.createMimeMessage();
                 MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
-                helper.setFrom("dawnregi1234@gmail.com");
+                helper.setFrom("devndn8900@gmail.com");
                 // helper.setTo(user.getEmail());
-                helper.setTo("dawnregipanthalany@gmail.com");
+                helper.setTo("devndn8900@gmail.com");
+                helper.setSubject("Medicine Expiry Alert");
+                String content = "<h3>"+"Medicine Id : " + Id + "<br>Medicine : " + name + "<br>Will Expire in " + days +" days --> Stock Updation Required<br>";
+                helper.setText(content, true);
+                System.out.println(content);
+                System.out.println(mimeMessage);
+                javaMailSender.send(mimeMessage);
+    
+            } 
+            catch (MessagingException e) 
+                {
+                    e.printStackTrace();
+                }
+    
+    }
+
+    // @Scheduled(cron = "* * * * * *")
+    public void quantityalert()
+    {            
+        Collection<Medicine> list = medicineRepository.findByStatusAndQuantityLessThan(Medicine.Status.ACTIVE.value,100);
+        list.stream().forEach((item) -> {
+            sendMailforQuantity(item.getMedicineId(),item.getMedicinename());
+        });
+
+    }
+
+    public void sendMailforQuantity(Integer Id, String name)
+    {
+
+            try 
+            {
+                
+                MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+                MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
+                helper.setFrom("devndn8900@gmail.com");
+                // helper.setTo(user.getEmail());
+                helper.setTo("devndn8900@gmail.com");
                 helper.setSubject("Medicine Quantity Alert");
                 String content = "<h3>"+"Medicine Id : " + Id + "<br>Medicine : " + name + "<br>Is Running Out Of Stock --> Refill Immediately<br>";
                 helper.setText(content, true);
@@ -135,6 +196,8 @@ public class MedicineServiceImpl implements MedicineService {
                 }
     
     }
+
+
 
 }
         
