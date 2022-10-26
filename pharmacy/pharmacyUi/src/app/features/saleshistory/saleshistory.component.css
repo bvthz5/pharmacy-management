@@ -68,13 +68,13 @@ Table Styles
     background: #F8F8F8;
 }
 
-Responsive
+/* Responsive
  @media (max-width: 767px) {
     .fl-table {
         display: block;
         width: 100%;
     
-    }
+    } */
 
     .table-wrapper:before{
         content: "Scroll horizontally >";
@@ -142,7 +142,7 @@ Responsive
         background-color: #4CAF50; 
          color: white;   
        } 
- } 
+ 
 
 
 The side navigation menu
@@ -177,7 +177,7 @@ The side navigation menu
   display: flex;
   flex-direction: row;
   margin-left: 950px;
-  
+  /* justify-content: right; */
   width: 100%;
 }
 .nav{
@@ -221,4 +221,16 @@ The side navigation menu
   font-family: serif!important;
   font-size: x-large;
   margin-left: 70px;
+}
+table.dataTable thead .sorting:after,
+table.dataTable thead .sorting:before,
+table.dataTable thead .sorting_asc:after,
+table.dataTable thead .sorting_asc:before,
+table.dataTable thead .sorting_asc_disabled:after,
+table.dataTable thead .sorting_asc_disabled:before,
+table.dataTable thead .sorting_desc:after,
+table.dataTable thead .sorting_desc:before,
+table.dataTable thead .sorting_desc_disabled:after,
+table.dataTable thead .sorting_desc_disabled:before {
+  bottom: .5em;
 }
