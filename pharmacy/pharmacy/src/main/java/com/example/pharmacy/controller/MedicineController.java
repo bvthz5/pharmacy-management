@@ -7,8 +7,10 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.pharmacy.extra.Pager;
 import com.example.pharmacy.form.MedicineForm;
 import com.example.pharmacy.service.MedicineService;
 import com.example.pharmacy.view.MedicineDetailView;
@@ -66,6 +68,17 @@ public class MedicineController {
     }
 
 
+    @GetMapping("/pager")
+    public Pager<MedicineListView> lists(@RequestParam(name="page", required = false, defaultValue = "1") Integer page,
+    @RequestParam(name = "limit", required = false, defaultValue ="10") Integer limit,
+    @RequestParam(name="sortBy", required = false, defaultValue = "medicine_id") String sortBy,
+    @RequestParam(name = "desc", required = false, defaultValue = "false") Boolean desc,
+    @RequestParam(name = "filter", required = false, defaultValue = "0") String filter,
+    @RequestParam(name = "search", required = false, defaultValue = "") String search){
+        return medicineService.lists(page,limit,sortBy,desc,filter,search);
+    }
 
+
+   
     
 }

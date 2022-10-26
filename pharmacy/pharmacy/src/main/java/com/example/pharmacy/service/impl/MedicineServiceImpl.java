@@ -2,15 +2,21 @@ package com.example.pharmacy.service.impl;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.example.pharmacy.enitity.Medicine;
 import com.example.pharmacy.exception.NotFoundException;
+import com.example.pharmacy.extra.Pager;
 import com.example.pharmacy.form.MedicineForm;
 import com.example.pharmacy.repository.MedicineRepository;
 import com.example.pharmacy.service.MedicineService;
@@ -82,6 +88,43 @@ public class MedicineServiceImpl implements MedicineService {
 
     }
 
-    
 
-}
+  
+    @Override
+	public Pager<MedicineListView> lists(Integer page, Integer limit, String sortBy,Boolean desc,String filter, String search) {
+
+		if (!medicineRepository.findColumns().contains(sortBy)) {
+			sortBy = "company_id";
+		}
+
+		if (page <= 0) {
+			page = 1;
+		}
+		
+		
+			ArrayList<Byte> status = new ArrayList<>();
+			// if (filter.equals("0")) {
+			// 	status.add(Company.Status.DELETED.value);
+			// } else if (filter.equals("1")) {
+			// 	status.add(Company.Status.ACTIVE.value);
+			// } else {
+				
+				status.add(Medicine.Status.DELETED.value);
+				status.add(Medicine.Status.ACTIVE.value);
+				
+			// }
+		
+
+		Page<Medicine>medicine = medicineRepository.findAllByMedicineId(status, search,
+				PageRequest.of(page - 1, limit, Sort.by(desc.booleanValue() ? Direction.DESC : Direction.ASC,
+                        sortBy)));
+		Pager<MedicineListView> medicineView = new Pager<>(limit, (int) medicine.getTotalElements(),
+				page);
+
+		medicineView
+				.setResult(medicine.getContent().stream().map(MedicineDetailView::new).collect(Collectors.toList()));
+
+		return medicineView;
+	}
+
+	}

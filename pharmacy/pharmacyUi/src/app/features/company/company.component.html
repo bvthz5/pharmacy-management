@@ -44,12 +44,12 @@
                 <table class="table table-striped table-hover table-bordered" style="width: 100%;">
                     <thead>
                         <tr>
-                          <th scope="col">
+                          <!-- <th scope="col">
                             <span class="custom-checkbox">
                                 <input type="checkbox" id="selectAll" (change)="checkAll($event)" />
                                 <label for="selectAll"></label>
                             </span>
-                        </th>
+                        </th> -->
                             <th id="" (click)="setSort('company_id')">Company Id&nbsp; <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-sort-alpha-down" viewBox="0 0 16 16">
                               <path fill-rule="evenodd" d="M10.082 5.629 9.664 7H8.598l1.789-5.332h1.234L13.402 7h-1.12l-.419-1.371h-1.781zm1.57-.785L11 2.687h-.047l-.652 2.157h1.351z"/>
                               <path d="M12.96 14H9.028v-.691l2.579-3.72v-.054H9.098v-.867h3.785v.691l-2.567 3.72v.054h2.645V14zM4.5 2.5a.5.5 0 0 0-1 0v9.793l-1.146-1.147a.5.5 0 0 0-.708.708l2 1.999.007.007a.497.497 0 0 0 .7-.006l2-2a.5.5 0 0 0-.707-.708L4.5 12.293V2.5z"/>
@@ -81,19 +81,19 @@
                     </thead>
                     <tbody *ngIf="company">
                       <tr *ngIf="count == 0">
-                          <th class="text-center" id="NoRecordsFound" colspan="10">No Records Found</th>
+                          <th style="color: red;" class="text-center " id="NoRecordsFound" colspan="10"><b>No Records Found</b></th>
                       </tr>
 
 
                         <tr *ngFor="let val of company.result ">
 
-                        <td>
+                        <!-- <td>
                           <span class="custom-checkbox">
                               <input type="checkbox" id="checkbox{{company.companyId}}" value="{{ company.companyId}}"
                                   (change)="checkedUser($event)" />
                               <label for="checkbox{{ company.companyId}}"></label>
                           </span>
-                      </td>
+                      </td> -->
                             <td>{{val.companyId}}</td>
                             <td>{{val.name}}</td>
                             <td>{{val.phone}}</td>
@@ -105,17 +105,20 @@
                             </td>
 
                             <td>
-                              <button type="button" class="btn btn-success btns" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="ComView(val.companyId)"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-view-list" viewBox="0 0 16 16">
-                              <path d="M3 4.5h10a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2zm0 1a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1H3zM1 2a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13A.5.5 0 0 1 1 2zm0 12a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13A.5.5 0 0 1 1 14z"/>
-                            </svg>&nbsp;&nbsp; View</button>
-                                <Button *ngIf="userType=='admin'" class="btn btn-primary btns" routerLink="/addCompany/{{val.companyId}}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
-                                  <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z"/>
-                                </svg>&nbsp;&nbsp;Edit</Button>
-                                <Button *ngIf="userType=='admin'"class="btn btn-danger btns" (click)="Method(val.name,val.companyId) "><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                  <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                                  <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-                                </svg>&nbsp;&nbsp; Delete</Button>
+                              <button type="button"  *ngIf="val.status == 1" modal="#"  [disabled]="val.status==0?true:false"   class="btn btn-warning btns" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="ComView(val.companyId)" ><i class="bi bi-view-list"></i>&nbsp;&nbsp; View</button>
+
+                                <Button  *ngIf="userType=='admin'&& val.status==1" [disabled]="val.status==0?true:false"  class="btn btn-primary btns" routerLink="/addCompany/{{val.companyId}}"><i class="bi bi-pen"></i>&nbsp;&nbsp;Edit</Button>
+
+                                <Button *ngIf="userType=='admin'&& val.status == 1" [disabled]="val.status==0?true:false" class="btn btn-info btns" (click)="Method(val.name,val.companyId)" ><i class="bi bi-file-earmark-x-fill"></i>&nbsp;&nbsp;Innactive</Button>
+
+                                <button *ngIf="userType=='admin'&& val.status == 0"  class="btn btn-success btns"><i class="bi bi-check2-circle"></i>&nbsp;&nbsp;Activate</button>
+
+                                <button *ngIf="userType=='admin'&& val.status == 0"  class="btn btn-danger btns"><i class="bi bi-trash3-fill"></i>&nbsp;&nbsp;Delete</button>
+
+
+
                               </td>
+
 
 
                         </tr>
@@ -123,7 +126,7 @@
                 </table>
                 <div class="clearfix" *ngIf="company">
                   <div class="hint-text" >Showing <strong>{{company.itemStart}} to {{company.itemEnd}}</strong> out of
-                      <strong>{{company.numItems}}</strong> entries</div>
+                      <strong>{{company.numItems}}</strong>entries</div>
                   <ul class="pagination">
                       <li class="page-item " [class.disabled]="!company.hasPrevious"><button class="page-link"
                               (click)="prevPage()">Previous</button></li>

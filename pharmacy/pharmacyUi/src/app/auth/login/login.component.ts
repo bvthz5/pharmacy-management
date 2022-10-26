@@ -13,11 +13,14 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class LoginComponent implements OnInit {
 
  showSpinner: boolean = false;
+ showPassword:any
 
   constructor(private service: ApiService, private router :Router,public toastr:ToastrService,private modalService:NgbModal) { }
 
   ngOnInit(): void {
+
   }
+  
   loginForm: FormGroup = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)])
@@ -51,6 +54,7 @@ bv:any;
           localStorage.setItem("accessToken",res.accessToken.value),
           localStorage.setItem("refreshToken",res.refreshToken.value),
           localStorage.setItem("type",res.type)
+
 
           this.router.navigateByUrl("home")
 
@@ -90,6 +94,10 @@ bv:any;
   open(content: any) {
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' })
   }
+
+
+
+
 
 }
 

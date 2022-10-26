@@ -25,6 +25,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { UserProPicComponent } from './user-pro-pic/user-pro-pic.component';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 
 
@@ -55,6 +56,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     FormsModule,
     BrowserAnimationsModule,
     MatProgressBarModule,
+    InfiniteScrollModule,
     ToastrModule.forRoot({
       timeOut: 1000,
       progressBar: true,

@@ -1,11 +1,14 @@
 package com.example.pharmacy.repository;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
@@ -41,6 +44,13 @@ public interface MedicineRepository extends Repository<Medicine, Integer>{
 	@Transactional
 	@Query(value = "update medicine set status=0 where company_id=:companyId",nativeQuery = true)
 	public void deleteMedicineByCompany(@Param("companyId")Integer companyId);
+
+	@Query(value = "SELECT `COLUMN_NAME`  FROM `INFORMATION_SCHEMA`.`COLUMNS`  WHERE `TABLE_NAME`='medicine'", nativeQuery = true)
+	ArrayList<String> findColumns();
+
+	@Query(value = "SELECT * FROM medicine  WHERE status IN ?1 AND (medicine_id  LIKE %?2% OR medicinename LIKE %?2% OR category  LIKE %?2% OR brand LIKE %?2% production_date  OR expiry_date  LIKE %?2%  OR medicinename LIKE %?2% quantity  OR cost_price LIKE %?2%)", nativeQuery = true)
+	Page<Medicine> findAllByMedicineId(ArrayList<Byte> status, String search, Pageable page);
+
 
     
 }
