@@ -17,9 +17,12 @@ h2{
     color: white;
     padding: 30px 0;
 }
+.mat-sort-header-container {
+  align-items: center;
+}
 
 
-/* Table Styles */
+Table Styles
 
 .table-wrapper{
     
@@ -65,13 +68,14 @@ h2{
     background: #F8F8F8;
 }
 
-/* Responsive */
-
-@media (max-width: 767px) {
+/* Responsive
+ @media (max-width: 767px) {
     .fl-table {
         display: block;
         width: 100%;
-    }
+    
+    } */
+
     .table-wrapper:before{
         content: "Scroll horizontally >";
         display: block;
@@ -135,24 +139,24 @@ h2{
       }
       
       .button:hover {
-        background-color: #4CAF50; /* Green */
-        color: white;
-      }
-}
+        background-color: #4CAF50; 
+         color: white;   
+       } 
+ 
 
 
-/* The side navigation menu */
+The side navigation menu
 .sidenav {
-  height: 100%; /* 100% Full-height */
-  width: 0; /* 0 width - change this with JavaScript */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Stay on top */
-  top: 0; /* Stay at the top */
+  height: 100%; 
+  width: 0; 
+  position: fixed; 
+  z-index: 1; 
+  top: 0; 
   left: 0;
-  background-color: #111; /* Black*/
-  overflow-x: hidden; /* Disable horizontal scroll */
-  padding-top: 60px; /* Place content 60px from the top */
-  transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+  background-color: #111; 
+  overflow-x: hidden; 
+  padding-top: 60px; 
+  transition: 0.5s; 
 }
 
 
@@ -171,9 +175,9 @@ h2{
 } 
 .flex{
   display: flex;
-  /* flex-direction: row; */
-  /* margin-left: 950px; */
-  
+  flex-direction: row;
+  margin-left: 950px;
+  /* justify-content: right; */
   width: 100%;
 }
 .nav{
@@ -217,4 +221,16 @@ h2{
   font-family: serif!important;
   font-size: x-large;
   margin-left: 70px;
+}
+table.dataTable thead .sorting:after,
+table.dataTable thead .sorting:before,
+table.dataTable thead .sorting_asc:after,
+table.dataTable thead .sorting_asc:before,
+table.dataTable thead .sorting_asc_disabled:after,
+table.dataTable thead .sorting_asc_disabled:before,
+table.dataTable thead .sorting_desc:after,
+table.dataTable thead .sorting_desc:before,
+table.dataTable thead .sorting_desc_disabled:after,
+table.dataTable thead .sorting_desc_disabled:before {
+  bottom: .5em;
 }

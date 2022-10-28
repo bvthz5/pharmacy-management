@@ -198,4 +198,35 @@ export class CompanyComponent implements OnInit {
     console.log(this.checked);
   }
 
+
+  onActivate(companyId:any){
+    console.log("==============");
+
+    return this.service.activateCompany(companyId).subscribe({
+      next:(res:any)=>{
+        console.log(res);
+        window.location.reload();
+      },
+      error:(err:any)=>{
+        console.log(err);
+
+      }
+    })
+  }
+
+  ondeleted(companyId:any){
+    return this.service.deletedCompany(companyId).subscribe({
+      next:(res:any)=>{
+        console.log(res);
+        window.location.reload();
+
+      },
+      error:(err:any)=>{
+        console.log(err);
+
+      }
+
+    })
+  }
+
 }

@@ -1,0 +1,20 @@
+.moda{
+    margin: 20px;
+    /* background-color: red !important; */
+    
+}
+.close {
+    background-color: transparent;
+    border: none;
+}
+
+.close:hover {
+
+    border: 1px solid black
+}
+
+.btn{
+    width: 100%;
+    margin-bottom: 10px;
+    height: 50px;
+}

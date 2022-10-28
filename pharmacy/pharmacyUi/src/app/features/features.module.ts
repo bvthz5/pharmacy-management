@@ -17,7 +17,6 @@ import { AddEditMedicineComponent } from './add-edit-medicine/add-edit-medicine.
 import { MedicineViewComponent } from './medicine-view/medicine-view.component';
 import { CompanyDetainViewComponent } from './company-detain-view/company-detain-view.component';
 import { SaleshistoryComponent } from './saleshistory/saleshistory.component';
-import { MedicineViewmodalComponent } from './medicine-viewmodal/medicine-viewmodal.component';
 import { ExpiredMedicineComponent } from './expired-medicine/expired-medicine.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
@@ -26,6 +25,7 @@ import { UserProPicComponent } from './user-pro-pic/user-pro-pic.component';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { EditDetailsComponent } from './edit-details/edit-details.component';
 
 
 
@@ -43,11 +43,12 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     MedicineViewComponent,
     CompanyDetainViewComponent,
     SaleshistoryComponent,
-    MedicineViewmodalComponent,
     ExpiredMedicineComponent,
     ForgotPasswordComponent,
     UserProPicComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    EditDetailsComponent
+
   ],
   imports: [
     CommonModule,

@@ -7,6 +7,7 @@ import com.example.pharmacy.extra.Pager;
 import com.example.pharmacy.form.CompanyForm;
 import com.example.pharmacy.view.CompanyDetailView;
 import com.example.pharmacy.view.CompanyListView;
+import com.example.pharmacy.view.UserView;
 
 public interface CompanyService {
 
@@ -24,6 +25,10 @@ public interface CompanyService {
             String search);
 
     long Count();
+
+    public void activate(int companyId);
+
+    void ondelete(Integer companyId) throws NotFoundException;
 
     
 }

@@ -1,12 +1,35 @@
-#asd{
-  transition: transform 2s;
-  border-radius: 50%;
+.drop {
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    color: black;
+    height: 100%;
+    
+
 }
 
+.drop :hover {
+    background-color: rgb(212, 212, 212);
+    
+    color: green;
+    /* border: 1px solid green; */
+    border-radius: 5px;
+}
 
-/* #asd:hover{
-  -ms-transform: scale(1.5);
-  -webkit-transform: scale(1.5);
-  transform: scale(1.5);
-  cursor: pointer;
-} */
+.menu {
+    background-color: white !important;
+    
+}
+
+.menu:hover {
+    background-color: white !important;
+    border: none !important;
+    outline: none !important;
+    cursor: pointer;
+}
+
+.image{
+     width: 2vw; 
+    height: 2vw;
+    border-radius: 50%;
+}

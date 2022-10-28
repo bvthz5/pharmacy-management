@@ -111,9 +111,9 @@
 
                                 <Button *ngIf="userType=='admin'&& val.status == 1" [disabled]="val.status==0?true:false" class="btn btn-info btns" (click)="Method(val.name,val.companyId)" ><i class="bi bi-file-earmark-x-fill"></i>&nbsp;&nbsp;Innactive</Button>
 
-                                <button *ngIf="userType=='admin'&& val.status == 0"  class="btn btn-success btns"><i class="bi bi-check2-circle"></i>&nbsp;&nbsp;Activate</button>
+                                <button *ngIf="userType=='admin'&& val.status == 0"  class="btn btn-success btns" (click)="onActivate(val.companyId)"><i class="bi bi-check2-circle" ></i>&nbsp;&nbsp;Activate</button>
 
-                                <button *ngIf="userType=='admin'&& val.status == 0"  class="btn btn-danger btns"><i class="bi bi-trash3-fill"></i>&nbsp;&nbsp;Delete</button>
+                                <button *ngIf="userType=='admin'&& val.status == 0"  class="btn btn-danger btns" (click)="ondeleted(val.companyId)" ><i class="bi bi-trash3-fill"></i>&nbsp;&nbsp;Delete</button>
 
 
 

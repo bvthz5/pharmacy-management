@@ -45,11 +45,21 @@ public interface MedicineRepository extends Repository<Medicine, Integer>{
 	@Query(value = "update medicine set status=0 where company_id=:companyId",nativeQuery = true)
 	public void deleteMedicineByCompany(@Param("companyId")Integer companyId);
 
+	public void deleteByCompanyCompanyId(@Param("companyId")Integer companyId);
+
+	@Modifying
+	@Transactional
+	@Query(value = "update medicine set status=1 where company_id=:companyId",nativeQuery = true)
+	public void reactivateMedicineByCompany(@Param("companyId")Integer companyId);
+
 	@Query(value = "SELECT `COLUMN_NAME`  FROM `INFORMATION_SCHEMA`.`COLUMNS`  WHERE `TABLE_NAME`='medicine'", nativeQuery = true)
 	ArrayList<String> findColumns();
 
 	@Query(value = "SELECT * FROM medicine  WHERE status IN ?1 AND (medicine_id  LIKE %?2% OR medicinename LIKE %?2% OR category  LIKE %?2% OR brand LIKE %?2% production_date  OR expiry_date  LIKE %?2%  OR medicinename LIKE %?2% quantity  OR cost_price LIKE %?2%)", nativeQuery = true)
 	Page<Medicine> findAllByMedicineId(ArrayList<Byte> status, String search, Pageable page);
+
+	@Query(value = "select * from medicine where status =1", nativeQuery = true)
+    Collection<Medicine> findByStatus(byte value);
 
 
     

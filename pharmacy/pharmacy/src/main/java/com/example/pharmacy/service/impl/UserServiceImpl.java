@@ -33,6 +33,7 @@ import com.example.pharmacy.extra.EmailService;
 import com.example.pharmacy.form.ChangePasswordForm;
 import com.example.pharmacy.form.ImageForm;
 import com.example.pharmacy.form.LoginForm;
+import com.example.pharmacy.form.UserForm;
 import com.example.pharmacy.repository.UserRepository;
 import com.example.pharmacy.security.config.SecurityConfig;
 import com.example.pharmacy.security.util.InvalidTokenException;
@@ -254,4 +255,10 @@ public class UserServiceImpl implements UserService {
 						
 	}
 
+    @Override
+    public UserView updateDetails(UserForm form) {
+        Integer uid = SecurityUtil.getCurrentUserId();
+        User user = userRepository.findByUserId(uid).get();
+        return new UserView(userRepository.save(user.updates(form, uid)));
+    }
 }

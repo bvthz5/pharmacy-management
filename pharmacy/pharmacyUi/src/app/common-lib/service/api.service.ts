@@ -89,9 +89,19 @@ export class ApiService {
   getCurrentUserDetails() {
     return this.http.get(this.api_url + "/login")
   }
-  getSalesData(data: any, data1: any, sort: any): Observable<any> {
+  // getSalesData(data: any, data1: any, sort: any): Observable<any> {
 
-    return this.http.get(this.api_url + "/sales/" + data + "/" + data1 + "/" + sort);
+  //   return this.http.get(this.api_url + "/sales/" + data + "/" + data1 + "/" + sort);
+  // }
+
+  getSalesData(pageNo: any, pageSize: any, sortBy: any, sortDir:any): Observable<any>
+  {
+    let queryParams = new HttpParams();
+    queryParams = queryParams.append("pageNo", pageNo);
+    queryParams = queryParams.append("pageSize", pageSize);
+    queryParams = queryParams.append("sortDir", sortDir);
+    queryParams = queryParams.append("sortBy", sortBy);
+    return this.http.get<any>(this.api_url + "/sales/page", { params: queryParams })
   }
 
   download(): Observable<Blob> {
@@ -114,7 +124,9 @@ export class ApiService {
   }
 
 // -----
-
+getCompanyLIst(){
+  return this.http.get(this.api_url+"/company/getCompanyList");
+}
 
   getUserDetails(){
     return this.http.get(this.api_url+"/login/detail");
@@ -123,6 +135,7 @@ export class ApiService {
   changePswd(data:any):Observable<any>{
     return this.http.put(this.api_url+"/login/changepswrd",data)
   }
+
 
   uploadImage(selectedFile:any):Observable<any>{
     return this.http.put(this.api_url + "/login/profilePic",selectedFile);
@@ -162,4 +175,21 @@ export class ApiService {
     return this.http.get(`${environment.api_url}/company`, { params: queryParam });
   }
 
+  search(search: any): Observable<any>
+  {
+    let queryParams = new HttpParams();
+    queryParams = queryParams.append("search", search);
+    return this.http.get<any>(this.api_url + "/sales/search/", { params: queryParams })
+  }
+
+  updateUserDetails(data:any){
+    return this.http.put(this.api_url+"/login/updateDetails",data)
+  }
+
+  activateCompany(companyId:any){
+    return this.http.delete(this.api_url+"/company/activate/"+companyId)
+  }
+  deletedCompany(companyId: any){
+    return this.http.delete(this.api_url+"/company/delete/"+companyId)
+  }
 }

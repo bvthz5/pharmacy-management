@@ -13,6 +13,7 @@ import com.example.pharmacy.exception.NotFoundException;
 import com.example.pharmacy.form.ChangePasswordForm;
 import com.example.pharmacy.form.ImageForm;
 import com.example.pharmacy.form.LoginForm;
+import com.example.pharmacy.form.UserForm;
 import com.example.pharmacy.view.LoginView;
 import com.example.pharmacy.view.UserView;
 
@@ -22,6 +23,8 @@ public interface UserService {
     LoginView refresh(String refreshToken) throws BadRequestException;
 
     UserView currentUser();
+
+    UserView updateDetails(UserForm form);
 
     void forgotPassword(String token,String email);
 

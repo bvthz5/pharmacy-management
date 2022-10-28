@@ -23,6 +23,7 @@ import com.example.pharmacy.form.ChangePasswordForm;
 import com.example.pharmacy.form.ImageForm;
 import com.example.pharmacy.form.LoginForm;
 import com.example.pharmacy.form.ResetpasswordForm;
+import com.example.pharmacy.form.UserForm;
 import com.example.pharmacy.service.UserService;
 import com.example.pharmacy.view.LoginView;
 import com.example.pharmacy.view.UserView;
@@ -112,4 +113,8 @@ public class LoginController {
 		return userService.detailView();
 	}
 
+    @PutMapping("updateDetails")
+    public UserView updateDetails(@RequestBody UserForm form) {
+        return userService.updateDetails(form);
+    }
 }

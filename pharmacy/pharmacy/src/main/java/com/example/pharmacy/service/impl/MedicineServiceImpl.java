@@ -113,7 +113,7 @@ public class MedicineServiceImpl implements MedicineService {
 				status.add(Medicine.Status.ACTIVE.value);
 				
 			// }
-		
+	
 
 		Page<Medicine>medicine = medicineRepository.findAllByMedicineId(status, search,
 				PageRequest.of(page - 1, limit, Sort.by(desc.booleanValue() ? Direction.DESC : Direction.ASC,

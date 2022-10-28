@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/common-lib/service/api.service';
+import {MatSort,Sort} from '@angular/material/sort';
 
 @Component({
   selector: 'app-saleshistory',
@@ -10,35 +11,42 @@ import { ApiService } from 'src/app/common-lib/service/api.service';
 })
 export class SaleshistoryComponent implements OnInit {
 
-  constructor(private router : Router, private service : ApiService) { }
+
+
+  constructor(private router : Router, private service : ApiService) {       }
+
+
   salesdata:any;
-
-
-  addForm =new FormGroup({
-    days:new FormControl('',[Validators.required]),
-
-  })
-
+  sortedData:string[]=[];
+  pageNo:any = "";
+  pageSize:any = "";
+  sortValue = "";
+  sortDir = "";
+  conditionVariable:any;
+  valuesOfUser:any;
+  days:any;
+  sales:any;
+  order:boolean = true;
 
   ngOnInit(): void
   {
-      this.getValueFromSalesApi(0,5,this.sortValue);
+      this.getValueFromSalesApi(this.pageNo,this.pageSize,this.sortValue,this.sortDir);
+      // this.service.getSalesList().subscribe((res:any) =>
+      // {
+      //   this.salesdata = res
+      // })
+
   }
 
-      conditionVariable:any;
-      valuesOfUser:any;
-      pageNo:any = 0;
-      pageSize:any = 5;
-      days:any;
-      sales:any
+// ================================================================================================>
 
-      sortValue="salesId"
-      getValueFromSalesApi(pageNo: number, pageSize: number, sort:any) 
+      getValueFromSalesApi(pageNo: number, pageSize: number, sortValue:any, sortDir:any)
       {
-      this.service.getSalesData(pageNo, pageSize, sort).subscribe((res: any) => {
+      this.service.getSalesData(pageNo, pageSize, sortValue, sortDir ).subscribe((res: any) => {
+            console.log(this.pageNo);
 
-            console.log(res);
-            if (res == 0) 
+            // console.log(res);
+            if (res == 0)
             {
               this.conditionVariable = false
               return
@@ -49,43 +57,81 @@ export class SaleshistoryComponent implements OnInit {
           });
 
         }
-    
-      nextClick() 
+// ===========================================================================================>
+
+sort(data:any)
+{
+
+  if(this.order == true)
+  {
+    this.sortValue = data;
+    this.sortDir = "ASC"
+    this.getValueFromSalesApi(this.pageNo,this.pageSize,this.sortValue,this.sortDir);
+    this.order = false;
+  }
+
+  else
+  {
+
+    this.sortValue = data;
+    this.sortDir = "DESC";
+    this.getValueFromSalesApi(this.pageNo,this.pageSize,this.sortValue,this.sortDir)
+    this.order = true;
+
+  }
+}
+
+// ============================================================================================>
+
+      // onSort(sort:any)
+      // {
+
+      //   console.log(sort.target.value);
+
+      //   console.log("=====>",sort.target.value);
+      //   if(sort.target.value==1){
+      //     this.sortValue="salesId"
+      //   }
+      //     else if(sort.target.value==2){
+      //       this.sortValue="salesDate"
+      //     }
+      //     else{
+      //       this.sortValue="totalAmount"
+      //     }
+
+      //   this.getValueFromSalesApi(this.pageNo,this.pageSize,this.sortValue,this.sortDir)
+      // }
+
+      // onSortDir(sort:any)
+      // {
+      //   console.log("=====>",sort.target.value);
+      //   if(sort.target.value==1)
+      //   {
+      //     this.sortDir="ASC"
+      //   }
+      //     else if(sort.target.value==2)
+      //     {
+      //       this.sortDir="DESC"
+      //     }
+
+
+      //   this.getValueFromSalesApi(this.pageNo,this.pageSize,this.sortValue, this.sortDir)
+      // }
+// ============================================================================================>
+      nextClick()
       {
         this.pageNo = this.pageNo + 1;
-        this.getValueFromSalesApi(this.pageNo, this.pageSize,this.sortValue)
-    
+        this.getValueFromSalesApi(this.pageNo, this.pageSize,this.sortValue,this.sortDir)
+
       }
-      previousClick() 
+
+      previousClick()
       {
         if (this.pageNo == 0)
           return
         this.pageNo = this.pageNo - 1;
-        this.getValueFromSalesApi(this.pageNo, this.pageSize,this.sortValue)
-    
-      }
-      onSort(sort:any)
-      {
-        console.log("=====>",sort.target.value);
-        if(sort.target.value==1){
-          this.sortValue="salesId"}
-          else if(sort.target.value==2){
-            this.sortValue="salesDate"
-          }
-          else{
-            this.sortValue="totalAmount"
-          }
-        //  this.service.getSalesData().subscribe({
-        //   next:(res:any)=>{
-        //     console.log("Success===>",res);
-            
-        //   },
-        //   error:(err:any)=>{
-        //     console.log((err));
-            
-        //   }
-        //  })
-        this.getValueFromSalesApi(0,5,this.sortValue)
+        this.getValueFromSalesApi(this.pageNo, this.pageSize,this.sortValue,this.sortDir)
+
       }
 
       downloadFile()
@@ -98,39 +144,114 @@ export class SaleshistoryComponent implements OnInit {
                               a.href = window.URL.createObjectURL(res);
                               a.click();
 
-          
+
                           }
 
         });
-     
+
       }
-    //   onChangeDays(days:any) {
-    //     this.service.filter(days).subscribe(
-    //       (res:any)=>{
 
-    //         console.log(res);
-            
-    //       this.salesdata = res
-        
-    //     });
-      
+    addForm =new FormGroup({
 
-    // }
+        date:new FormControl('',[Validators.required]),
 
+      })
     onSubmit()
     {
+
         console.log(this.addForm.value)
-        this.service.filter(this.addForm.value.days).subscribe(res => {
+        this.service.search(this.addForm.value.date).subscribe(res => {
 
           this.salesdata = res
-          // alert("success")
+
           } );
-        // this.router.navigate(['itemlist'])
-        
+
+
     }
-  
+    searchForm =new FormGroup({
+
+      name:new FormControl('',[Validators.required]),
+
+    })
+    onSearch()
+    {
+      this.service.search(this.searchForm.value.name).subscribe(res => {
+        console.log(this.searchForm.value.name);
+        console.log(res);
+
+        this.salesdata = res
+
+      })
     }
 
+// ====================================================================================>
+//   sortData(pageNo:number , pageSize:number ,sort: Sort) {
+//     this.service.getSalesData(pageNo, pageSize, sort).subscribe((res: any) => {
+
+//       console.log(res);
+//     })
 
 
- 
+//     const data = this.salesdata.slice();
+//     if (!sort.active || sort.direction === '') {
+//       this.sortedData = data;
+//       return;
+//     }
+
+//     this.sortedData = data.sort((a: { salesId: string | number; salesQuantity: string | number; totalAmount: string | number; }, b: { salesId: string | number; salesQuantity: string | number; totalAmount: string | number; }) => {
+//       const isAsc = sort.direction === 'asc';
+//       switch (sort.active) {
+//         case 'salesId':
+//           return compare(a.salesId, b.salesId, isAsc);
+//         case 'salesQuantity':
+//           return compare(a.salesQuantity, b.salesQuantity, isAsc);
+//         case 'totalAmount':
+//           return compare(a.totalAmount, b.totalAmount, isAsc);
+//         default:
+//           return 0;
+//       }
+//     });
+//   }
+
+// }
+
+// function compare(a: number | string, b: number | string, isAsc: boolean) {
+//   return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
+// }
+// ===================================================================================>
+
+// ====================================================================================>
+// categoris!: ['Paracetamol'];
+  // salesdata: Array<any> = [];
+  // isDesc: boolean = false;
+  // column: string = 'CategoryName';
+
+  // searchText: any;
+  // public searchText: Sales['medicinename'];
+  // sort(property: string) {
+
+  //   this.service.getSalesList().subscribe((res:any) =>{
+
+
+  //   this.salesdata = res;
+  //   this.isDesc = !this.isDesc;
+  //   this.column = property;
+  //   let direction = this.isDesc ? 1 : -1;
+
+  //   this.salesdata.sort(function (a, b) {
+  //     if (a[property] < b[property]) {
+  //       return -1 * direction;
+  //     }
+  //     else if (a[property] > b[property]) {
+  //       return 1 * direction;
+  //     }
+  //     else {
+  //       return 0;
+  //     }
+  //   });
+  // })
+  // }
+  // =================================================================================>
+
+
+}

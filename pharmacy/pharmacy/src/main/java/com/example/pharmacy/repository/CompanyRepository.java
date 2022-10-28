@@ -14,6 +14,7 @@ import org.springframework.data.repository.Repository;
 import org.springframework.data.repository.query.Param;
 
 import com.example.pharmacy.enitity.Company;
+import com.example.pharmacy.view.CompanyDetailView;
 import com.example.pharmacy.view.CompanyListView;
 
 public interface CompanyRepository extends Repository<Company, Integer> {
@@ -28,6 +29,13 @@ public interface CompanyRepository extends Repository<Company, Integer> {
     @Transactional
 	@Query(value = "update company set status=0 where company_id=:companyId",nativeQuery = true)
 	public void deleteCompany(@Param("companyId")Integer companyId);
+
+    @Modifying
+    @Transactional
+	@Query(value = "update company  set status=1 where company_id=:companyId",nativeQuery = true)
+	public void activateCompany(@Param("companyId")Integer companyId);
+
+
 
     void deleteByCompanyId(Integer companyId);
 
@@ -47,6 +55,9 @@ public interface CompanyRepository extends Repository<Company, Integer> {
 
     @Query(value = "SELECT * FROM company WHERE status IN ?1 ", nativeQuery = true)
     long countCompany();
+
+    // @Query(value = "DELETE FROM company, medicine USING company INNER JOIN medicine ON company.compay_id = medicine.medicine_id", nativeQuery = true)
+    void deleteById(Integer companyId);
 
     
 }

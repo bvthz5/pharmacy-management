@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../../common-lib/service/api.service';
+import { ApiService } from 'src/app/common-lib/service/api.service';
 
 @Component({
   selector: 'app-header',
@@ -8,12 +8,11 @@ import { ApiService } from '../../common-lib/service/api.service';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private service:ApiService) { }
-  admin:any
+  constructor(private service :ApiService) { }
   userType: any = localStorage.getItem("type")
+
   ngOnInit(): void {
-this.getDetails();
-this.getprofilePicture();
+this.getprofilePicture()
   }
   onLogout() {
     localStorage.removeItem("accessToken")
@@ -21,33 +20,19 @@ this.getprofilePicture();
     window.location.reload()
 
   }
-  getDetails() {
-    this.service.getUserDetails().subscribe({
-      next: (response: any) => {
-        console.log(response);
-        if (response) {
-          this.admin = response;
-        }
-      },
-      error: (error: any) => { console.log(error) }
-    })
-  }
-
   getprofilePicture() {
     this.service.getProfilePic().subscribe({
       next: (response: any) => {
-        console.log("Image", response);
+        console.log("Imgage", response);
 
         (document.getElementById('asd'))?.setAttribute('src', URL.createObjectURL(
           new Blob([response], { type: response.type })
         ))
       },
-      error: (err:any) => {
+      error: (err) => {
         console.log(err)
       }
     })
-
-
-
-}
+    // console.log(this.imgurl);
+  }
 }

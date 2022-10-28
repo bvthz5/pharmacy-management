@@ -22,22 +22,21 @@
           <li class="nav-item">
             <a class="nav-link" routerLink="/expired" routerLinkActive="active" ariaCurrentWhenActive="page">Expired</a>
           </li>
-
         </ul>
 
-
-
-
-
-        <div class="btn-group">
-          <button class="btn btn-light" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="" id="asd" class="image" height="38" alt="" >
-
-            {{admin?.name}}
+        <!-- <button class="btn btn-outline-success" type="submit" (click)="onLogout()">Logout</button> -->
+        <div class="dropdown drop  ">
+          <button class="btn btn-secondary dropdown-toggle drop " type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="https://www.bootdey.com/img/Content/avatar/avatar7.png" id="asd" class="image">
           </button>
-          <ul class="dropdown-menu dropdown-menu-end ">
-            <li><button class="dropdown-item" routerLink="/userpic" routerLinkActive="active" ariaCurrentWhenActive="page">Profile</button></li>
+          <ul class="dropdown-menu dropdown-menu-end menu">
+            <li><a class="dropdown-item menu" routerLink="/userpic">Profile</a></li>
 
-            <li><button class="dropdown-item" type="submit" (click)="onLogout()">Logout</button></li>
+            <li><a class="dropdown-item menu"  (click)="onLogout()">Logout</a></li>
+
+
           </ul>
         </div>
+      </div>
+    </div>
+  </nav>

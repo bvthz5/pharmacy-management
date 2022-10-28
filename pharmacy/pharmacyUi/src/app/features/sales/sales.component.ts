@@ -57,9 +57,9 @@ export class SalesComponent implements OnInit {
       return   new Date(a.expiry_date).getTime()-date.getTime();
     });
 
-    
+
     console.log("=====>",this.sortedBrand);
-    this.salesForm.controls["brand"].reset()
+    this.salesForm.controls["brand"].setValue("")
     this.availableQuantity = ""
   }
 

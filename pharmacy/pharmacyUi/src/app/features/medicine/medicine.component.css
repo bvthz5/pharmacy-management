@@ -1,6 +1,8 @@
 .btns{
     margin-right: 10px;
-    max-width: 70px;
+    max-width: 70px !important;
+    min-width: 70px !important;
+    /* height: 60px !important; */
 }
 .error{
     color: red !important;

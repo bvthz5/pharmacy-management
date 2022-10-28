@@ -21,6 +21,7 @@ import com.example.pharmacy.form.CompanyForm;
 import com.example.pharmacy.service.CompanyService;
 import com.example.pharmacy.view.CompanyDetailView;
 import com.example.pharmacy.view.CompanyListView;
+import com.example.pharmacy.view.UserView;
 
 @RestController
 @RequestMapping("/company")
@@ -28,10 +29,10 @@ public class CompanyController {
     @Autowired
     private CompanyService companyService;
 
-    // @GetMapping
-    // public Collection<CompanyListView> list(Principal p) {
-    //     return companyService.list();
-    // }
+    @GetMapping("/getCompanyList")
+    public Collection<CompanyListView> list(Principal p) {
+        return companyService.list();
+    }
 
     @PostMapping
     public CompanyDetailView add(@Valid @RequestBody CompanyForm form) {
@@ -70,4 +71,15 @@ public class CompanyController {
         return companyService.Count();
     }
 
+    @DeleteMapping("/activate/{companyId}")
+    public void activate(@PathVariable("companyId") Integer companyId){
+         companyService.activate(companyId);
+    }
+
+    @DeleteMapping("/delete/{companyId}")
+    public void ondelete(@PathVariable("companyId") Integer companyId){
+        companyService.ondelete(companyId);
+    }
+
+    
 }
