@@ -235,7 +235,7 @@ public class UserServiceImpl implements UserService {
         String url = userRepository.findById(SecurityUtil.getCurrentUserId()).orElseThrow(NotFoundException::new).getImage();
 
         try {
-            return Files.readAllBytes(Paths.get("/home/binil/Documents/project/pharmacy-management/pharmacy/pharmacy/src/main/resources/Imagesfiles/"+url));
+            return Files.readAllBytes(Paths.get("src/main/resources/Imagesfiles/"+url));
         } catch (IOException e) {
             throw new BadRequestException("File Not Found");
         }
