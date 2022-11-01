@@ -42,14 +42,14 @@ public interface MedicineRepository extends Repository<Medicine, Integer>{
 	Optional<Medicine>findByMedicineId(Integer medicineId);
     @Modifying
 	@Transactional
-	@Query(value = "update medicine set status=0 where company_id=:companyId",nativeQuery = true)
+	@Query(value = "update medicine set status=3 where company_id=:companyId and status!=0",nativeQuery = true)
 	public void deleteMedicineByCompany(@Param("companyId")Integer companyId);
 
 	public void deleteByCompanyCompanyId(@Param("companyId")Integer companyId);
 
 	@Modifying
 	@Transactional
-	@Query(value = "update medicine set status=1 where company_id=:companyId",nativeQuery = true)
+	@Query(value = "update medicine set status=1 where company_id=:companyId and status=3",nativeQuery = true)
 	public void reactivateMedicineByCompany(@Param("companyId")Integer companyId);
 
 	@Query(value = "SELECT `COLUMN_NAME`  FROM `INFORMATION_SCHEMA`.`COLUMNS`  WHERE `TABLE_NAME`='medicine'", nativeQuery = true)
