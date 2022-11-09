@@ -49,6 +49,10 @@ export class ApiService {
     return this.http.get(this.api_url + "/company")
   }
 
+  getMedicine() {
+    return this.http.get(this.api_url + "/medicine")
+  }
+
   deleteCompany(data: any) {
     return this.http.delete(this.api_url + "/company/" + data)
   }

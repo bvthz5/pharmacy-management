@@ -27,7 +27,7 @@ export class MedicineComponent implements OnInit {
     });
 
   }
- 
+
   medView(medId: any) {
     this.service.getMedicineDetails(medId).subscribe({
       next: (response: any) => {

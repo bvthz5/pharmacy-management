@@ -62,5 +62,15 @@ public interface MedicineRepository extends Repository<Medicine, Integer>{
     Collection<Medicine> findByStatus(byte value);
 
 
+
+	@Query(value = "select * from medicine where status = 1 and quantity < 100", nativeQuery = true)
+
+    Collection<Medicine> findByStatusAndQuantityLessThan(byte value, Integer quantity);
+
+
+
+
+   
+
     
 }

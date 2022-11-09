@@ -105,11 +105,11 @@
                             </td>
 
                             <td>
-                              <button type="button"  *ngIf="val.status == 1" modal="#"  [disabled]="val.status==0?true:false"   class="btn btn-warning btns" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="ComView(val.companyId)" ><i class="bi bi-view-list"></i>&nbsp;&nbsp; View</button>
+                              <button type="button"  *ngIf="val.status == 1" modal="#"  [disabled]="val.status==0?true:false"   class="btn btn-info btns" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="ComView(val.companyId)" ><i class="bi bi-view-list"></i>&nbsp;&nbsp; View</button>
 
                                 <Button  *ngIf="userType=='admin'&& val.status==1" [disabled]="val.status==0?true:false"  class="btn btn-primary btns" routerLink="/addCompany/{{val.companyId}}"><i class="bi bi-pen"></i>&nbsp;&nbsp;Edit</Button>
 
-                                <Button *ngIf="userType=='admin'&& val.status == 1" [disabled]="val.status==0?true:false" class="btn btn-info btns" (click)="Method(val.name,val.companyId)" ><i class="bi bi-file-earmark-x-fill"></i>&nbsp;&nbsp;Innactive</Button>
+                                <Button *ngIf="userType=='admin'&& val.status == 1" [disabled]="val.status==0?true:false" class="btn btn-warning btns" (click)="Method(val.name,val.companyId)" ><i class="bi bi-file-earmark-x-fill"></i>&nbsp;&nbsp;Innactive</Button>
 
                                 <button *ngIf="userType=='admin'&& val.status == 0"  class="btn btn-success btns" (click)="onActivate(val.companyId)"><i class="bi bi-check2-circle" ></i>&nbsp;&nbsp;Activate</button>
 
