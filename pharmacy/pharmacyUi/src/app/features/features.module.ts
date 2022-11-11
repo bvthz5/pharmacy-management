@@ -30,6 +30,7 @@ import { EditDetailsComponent } from './edit-details/edit-details.component';
 
 
 
+
 @NgModule({
   declarations: [
     DashboardComponent,

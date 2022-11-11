@@ -87,4 +87,22 @@ export class MedicineComponent implements OnInit {
     }
   }
 
+  // throttle = 300;
+  // scrollDistance = 1;
+  // scrollUpDistance = 2;
+  // page: number = 1
+  // limit: number = 5;
+
+  // onScrollDown() {
+  //   if (this.limit) {
+  //     return;
+  //   }
+  //   this.page += 1;
+  //   this.listUsers();
+  // }
+
+  // onUp() {
+  //   console.log('Up');
+  // }
+
 }

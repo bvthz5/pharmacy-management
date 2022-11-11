@@ -40,7 +40,7 @@ export class CompanyComponent implements OnInit {
   onDelete(data: any) {
     this.service.deleteCompany(data).subscribe({
       next: (res: any) => {
-        alert("Deleted Successfully")
+        alert("Innactive Successfully")
         window.location.reload();
         console.log(res)
         this.companyList();
@@ -58,7 +58,7 @@ export class CompanyComponent implements OnInit {
 
 
 
-    if (window.confirm("Are You Sure To Delete :" + data)) {
+    if (window.confirm("Are You Sure To Innactivate :" + data)) {
 
 
       console.log("Implement delete functionality here");

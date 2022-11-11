@@ -41,7 +41,7 @@ public class MedicineServiceImpl implements MedicineService {
     
     @Override
     public Collection<MedicineListView> list() {
-    
+     
         Date date = new Date();
         return medicineRepository.findByStatusAndQuantityGreaterThanAndExpiryDateGreaterThan(Medicine.Status.ACTIVE.value,0,date)
                 .stream().map(x -> new MedicineListView(x)).collect(Collectors.toList());
@@ -140,7 +140,7 @@ public class MedicineServiceImpl implements MedicineService {
 
     // -------------------
 
-    // @Scheduled(cron = "* * * * * *")
+    @Scheduled(cron = "* * * * * *")
 
     public void expiryalert()
 
@@ -262,7 +262,7 @@ public class MedicineServiceImpl implements MedicineService {
 
 
 
-    @Scheduled(cron = "* * * * * *")
+    @Scheduled(cron = "* * * * * * ")
 
     public void quantityalert()
 
